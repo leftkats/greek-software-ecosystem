@@ -2085,3 +2085,139 @@
     - Athens
   linkedin_company_id: prosperty
   work_policy: hybrid
+- name: Ferryscanner
+  url: https://www.ferryscanner.com/
+  sectors:
+    - Travel Arrangements
+    - Travel
+  careers_url: https://jobs.workable.com/company/66eae79d0924f127a215f809/jobs-at-ferryscanner
+  locations:
+    - Athens
+  linkedin_company_id: ferryscanner
+  work_policy: hybrid
+- name: Epikast
+  url: http://www.epikast.com/
+  sectors:
+    - Biopharmaceutical
+  careers_url: https://epikast.com/careers/
+  locations:
+    - Athens
+  linkedin_company_id: epikast
+  work_policy: hybrid
+- name: REBORRN
+  url: https://www.reborrn.com/
+  sectors:
+    - IT Services
+    - IT Consulting
+  careers_url: https://www.reborrn.com/career
+  locations:
+    - Athens
+  linkedin_company_id: reborrn
+- name: Procureship
+  url: https://www.procureship.com/
+  sectors:
+    - IT Services
+    - IT Consulting
+  careers_url: https://procureship.com/careers
+  locations:
+    - Athens
+  linkedin_company_id: procureship
+  work_policy: hybrid
+- name: Wealthyhood
+  url: https://wealthyhood.com/
+  sectors:
+    - Fintech
+    - Investment
+  careers_url: https://apply.workable.com/wealthyhood/
+  locations:
+    - Athens
+  linkedin_company_id: wealthyhood-invest
+  work_policy: hybrid
+- name: Common Prefix
+  url: https://www.commonprefix.com/
+  sectors:
+    - Blockchain
+  locations:
+    - Athens
+  linkedin_company_id: commonprefix
+  work_policy: hybrid
+- name: Pod Network
+  url: https://pod.network/
+  sectors:
+    - Fintech
+    - Blockchain & Web3
+  locations:
+    - Athens
+  linkedin_company_id: pod-dot-network
+  work_policy: remote
+- name: Vimachem - IIoT Pharma 4.0 AI Platform
+  url: https://www.vimachem.com
+  sectors:
+    - Biotechnology
+  careers_url: https://www.vimachem.com/company/careers/
+  linkedin_company_id: vimachem
+  work_policy: remote
+- name: Natech Banking Solutions
+  url: http://www.natechbanking.com/
+  sectors:
+    - Fintech
+    - Banking Software
+  careers_url: https://apply.workable.com/natech/#jobs
+  locations:
+    - Ioannina
+  linkedin_company_id: natechbankingsolutions
+- name: Capture One
+  url: https://www.captureone.com
+  sectors:
+    - Photography
+  careers_url: https://apply.workable.com/captureone/
+  locations:
+    - Athens
+  linkedin_company_id: capture-one
+  work_policy: hybrid
+- name: Instacar
+  url: https://www.instacar.gr/
+  sectors:
+    - Car as a Service
+    - Mobility
+  careers_url: https://apply.workable.com/instacar-sa/
+  locations:
+    - Athens
+  linkedin_company_id: instakar
+  work_policy: hybrid
+- name: Gracely
+  url: https://gracely.io/
+  sectors:
+    - Church Management Software
+  careers_url: https://gracely.io/jobs/
+  locations:
+    - Athens
+  linkedin_company_id: gracely
+  work_policy: on-site
+- name: Douleutaras
+  url: https://www.douleutaras.gr/
+  sectors:
+    - Marketplace
+    - Home Services
+  careers_url: https://www.douleutaras.gr/career/
+  locations:
+    - Athens
+  linkedin_company_id: douleutaras
+  work_policy: hybrid
+- name: VODA.ai
+  url: https://www.voda.ai/
+  sectors:
+    - Asset Management
+  careers_url: https://careers.voda.ai/
+  linkedin_company_id: voda-ai
+  work_policy: remote
+- name: FlexCar
+  url: https://flexcar.gr/el-gr/
+  sectors:
+    - Leasing
+    - Mobility
+  careers_url: https://apply.workable.com/flexcarcareers/
+  locations:
+    - Athens
+  linkedin_company_id: driveflexcar
+  work_policy: on-site
