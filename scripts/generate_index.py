@@ -7,7 +7,6 @@ from jinja2 import Environment, FileSystemLoader
 YAML_PATH = "data/companies.yaml"
 OUTPUT_PATH = "index.html"
 ITEMS_PER_PAGE = 50
-POLICIES = ["Remote", "Hybrid", "On-site"]
 env = Environment(loader=FileSystemLoader("templates"))
 
 
@@ -38,6 +37,8 @@ try:
         # Assign random policy if missing as requested
         if not c.get("work_policy"):
             c["work_policy"] = "N/A"
+        else:
+            c["work_policy"] = str(c["work_policy"]).strip()
         for s in c.get("sectors", []):
             all_sectors.add(s)
 

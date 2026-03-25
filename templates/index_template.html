@@ -69,6 +69,20 @@
         .show {
             display: block !important;
         }
+
+        .policy-filter {
+            opacity: 0.55;
+            transition: opacity 150ms ease, box-shadow 150ms ease;
+        }
+
+        .policy-filter.active-filter {
+            opacity: 1;
+            box-shadow: inset 0 0 0 1px currentColor;
+        }
+
+        body.has-policy-filters .policy-filter:not(.active-filter) {
+            opacity: 0.25;
+        }
     </style>
 </head>
 
@@ -184,7 +198,84 @@
         let currentPage = 1;
         const itemsPerPage = {{ items_per_page }};
         let activeSector = 'all';
-        let activePolicy = 'all';
+        let activePolicies = [];
+
+        function normalizePolicy(policy) {
+            const raw = (policy ?? '').toString().trim().toLowerCase();
+            if (!raw) return '';
+            if (raw === 'n/a' || raw === 'na' || raw === 'none') return 'n/a';
+            if (raw === 'remote') return 'remote';
+            if (raw === 'hybrid') return 'hybrid';
+            if (raw === 'on-site' || raw === 'onsite' || raw === 'on site') return 'on-site';
+            return raw;
+        }
+
+        function setActivePolicies(next) {
+            const deduped = Array.from(new Set((next ?? []).map(normalizePolicy).filter(Boolean)));
+            activePolicies = deduped;
+            document.body.classList.toggle('has-policy-filters', activePolicies.length > 0);
+            updatePolicyFilterUI();
+        }
+
+        function updatePolicyFilterUI() {
+            document.querySelectorAll('.policy-filter').forEach(btn => {
+                const policy = normalizePolicy(btn.dataset.policy);
+                const isActive = activePolicies.includes(policy);
+                btn.classList.toggle('active-filter', isActive);
+                btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
+        }
+
+        function togglePolicyFilter(policy) {
+            const normalized = normalizePolicy(policy);
+            if (!normalized || normalized === 'n/a') return;
+
+            if (activePolicies.includes(normalized)) {
+                setActivePolicies(activePolicies.filter(p => p !== normalized));
+            } else {
+                setActivePolicies([...activePolicies, normalized]);
+            }
+
+            currentPage = 1;
+            updatePagination();
+        }
+
+        function initPolicyFilters() {
+            document.querySelectorAll('.company-row').forEach(row => {
+                const policy = normalizePolicy(row.dataset.policy);
+                if (policy !== 'remote' && policy !== 'hybrid' && policy !== 'on-site') return;
+
+                const badge = row.querySelector('.flex-1 .flex.items-center.gap-2 .brutalist-border');
+                if (!badge) return;
+
+                const iconName = policy === 'remote'
+                    ? 'home_work'
+                    : (policy === 'hybrid' ? 'swap_horiz' : 'apartment');
+
+                const label = policy === 'on-site' ? 'On-site' : (policy.charAt(0).toUpperCase() + policy.slice(1));
+
+                badge.innerHTML = `
+                    <button type="button"
+                        class="policy-filter inline-flex items-center gap-1 px-1"
+                        data-policy="${policy}"
+                        aria-pressed="false"
+                        title="Filter by ${label}"
+                    >
+                        <span class="material-symbols-outlined text-[14px] leading-none">${iconName}</span>
+                        <span class="uppercase">${label}</span>
+                    </button>
+                `;
+
+                const btn = badge.querySelector('button.policy-filter');
+                if (btn) btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    togglePolicyFilter(btn.dataset.policy);
+                });
+            });
+
+            setActivePolicies(activePolicies);
+        }
 
         function toggleDropdown(id) {
             const drop = document.getElementById(id);
@@ -196,11 +287,8 @@
         function setFilter(type, value) {
             if (type === 'sector') {
                 activeSector = value;
-                document.getElementById('currentSector').innerText = (value === 'all') ? 'All Sectors' : value;
-            }
-            if (type === 'policy') {
-                activePolicy = value;
-                document.getElementById('currentPolicy').innerText = (value === 'all') ? 'Work Policy' : value;
+                const sectorLabel = document.getElementById('currentSector');
+                if (sectorLabel) sectorLabel.innerText = (value === 'all') ? 'All Sectors' : value;
             }
             document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('show'));
             currentPage = 1;
@@ -214,7 +302,8 @@
             const filtered = allRows.filter(row => {
                 const matchesText = (row.dataset.name + ' ' + row.dataset.sectors).toLowerCase().includes(query);
                 const matchesSector = (activeSector === 'all' || row.dataset.sectors.toLowerCase().includes(activeSector.toLowerCase()));
-                const matchesPolicy = (activePolicy === 'all' || row.dataset.policy.toLowerCase() === activePolicy.toLowerCase());
+                const rowPolicy = normalizePolicy(row.dataset.policy);
+                const matchesPolicy = (activePolicies.length === 0 || activePolicies.includes(rowPolicy));
                 return matchesText && matchesSector && matchesPolicy;
             });
 
@@ -239,6 +328,7 @@
             }
         }
 
+        initPolicyFilters();
         updatePagination();
     </script>
 </body>
