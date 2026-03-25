@@ -22,6 +22,24 @@ def get_policy_style(policy):
     return "bg-gray-100 text-gray-800"
 
 
+def normalize_url(value):
+    if value is None:
+        return None
+    s = str(value).strip()
+    if not s or s.lower() == "none":
+        return None
+    return s
+
+
+def normalize_sector(value):
+    if value is None:
+        return None
+    s = str(value).strip()
+    if not s:
+        return None
+    return " ".join(s.split())
+
+
 # --- Load and Prepare Data ---
 try:
     with open(YAML_PATH, "r", encoding="utf-8") as f:
@@ -39,6 +57,32 @@ try:
             c["work_policy"] = "N/A"
         else:
             c["work_policy"] = str(c["work_policy"]).strip()
+
+        careers_url = normalize_url(c.get("careers_url"))
+        company_url = normalize_url(c.get("url"))
+        c["careers_url"] = careers_url
+        c["url"] = company_url
+        c["site_url"] = company_url or "#"
+        c["career_url"] = careers_url or company_url or "#"
+
+        raw_sectors = c.get("sectors", []) or []
+        normalized = []
+        for s in raw_sectors:
+            ns = normalize_sector(s)
+            if ns:
+                normalized.append(ns)
+
+        seen = set()
+        deduped = []
+        for s in normalized:
+            k = s.casefold()
+            if k in seen:
+                continue
+            seen.add(k)
+            deduped.append(s)
+        deduped.sort(key=lambda x: x.casefold())
+        c["sectors"] = deduped
+
         for s in c.get("sectors", []):
             all_sectors.add(s)
 

@@ -83,6 +83,30 @@
         body.has-policy-filters .policy-filter:not(.active-filter) {
             opacity: 0.25;
         }
+
+        .sector-filter {
+            opacity: 0.55;
+            transition: opacity 150ms ease, box-shadow 150ms ease;
+        }
+
+        .sector-filter.active-filter {
+            opacity: 1;
+            box-shadow: inset 0 0 0 1px currentColor;
+        }
+
+        body.has-sector-filters .sector-filter:not(.active-filter) {
+            opacity: 0.25;
+        }
+
+        .company-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .company-link:hover {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
     </style>
 </head>
 
@@ -135,10 +159,13 @@
         {% for company in companies %}
         <div class="company-row flex p-4 brutalist-border border-t-0 border-l-0 border-r-0 bg-white dark:bg-background-dark"
             data-name="{{ company.name }}" data-policy="{{ company.work_policy }}"
-            data-sectors="{{ company.sectors|join(' ') }}">
+            data-sectors="{{ company.sectors|join(' ') }}"
+            data-sectors-list="{{ company.sectors|join('||') }}">
             <div class="flex-1 space-y-2">
                 <div class="flex items-center gap-2">
-                    <h2 class="text-xl font-extrabold uppercase leading-none">{{ company.name }}</h2>
+                    <a href="{{ company.site_url }}" target="_blank" rel="noopener noreferrer" class="company-link">
+                        <h2 class="text-xl font-extrabold uppercase leading-none">{{ company.name }}</h2>
+                    </a>
                     <span
                         class="text-[10px] brutalist-border px-1 font-bold uppercase {{ get_style(company.work_policy) }}">
                         {{ company.work_policy }}
@@ -146,15 +173,19 @@
                 </div>
                 <div class="flex flex-wrap gap-1">
                     {% for sector in company.sectors %}
-                    <span class="text-[10px] mono-text uppercase border border-gray-300 dark:border-gray-700 px-1">{{
-                        sector }}</span>
+                    <button type="button"
+                        class="sector-filter text-[10px] mono-text uppercase border border-gray-300 dark:border-gray-700 px-1"
+                        data-sector="{{ sector }}" aria-pressed="false" title="Filter by {{ sector }}">
+                        {{ sector }}
+                    </button>
                     {% endfor %}
                 </div>
             </div>
             <div class="flex items-center justify-end">
-                <a class="brutalist-border p-3 flex items-center justify-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
-                    href="{{ company.careers_url }}" target="_blank">
+                <a class="brutalist-border px-3 py-3 flex items-center justify-center gap-2 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+                    href="{{ company.career_url }}" target="_blank" rel="noopener noreferrer">
                     <span class="material-symbols-outlined">arrow_outward</span>
+                    <span class="text-[10px] font-bold mono-text uppercase">Career</span>
                 </a>
             </div>
         </div>
@@ -197,8 +228,40 @@
     <script>
         let currentPage = 1;
         const itemsPerPage = {{ items_per_page }};
-        let activeSector = 'all';
+        let activeSectors = [];
         let activePolicies = [];
+
+        function normalizeSector(sector) {
+            return (sector ?? '').toString().trim().toLowerCase();
+        }
+
+        function setActiveSectors(next) {
+            const deduped = Array.from(new Set((next ?? []).map(normalizeSector).filter(Boolean)));
+            activeSectors = deduped;
+            document.body.classList.toggle('has-sector-filters', activeSectors.length > 0);
+            updateSectorFilterUI();
+        }
+
+        function updateSectorFilterUI() {
+            document.querySelectorAll('.sector-filter').forEach(btn => {
+                const sector = normalizeSector(btn.dataset.sector);
+                const isActive = activeSectors.includes(sector);
+                btn.classList.toggle('active-filter', isActive);
+                btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
+        }
+
+        function toggleSectorFilter(sector) {
+            const normalized = normalizeSector(sector);
+            if (!normalized) return;
+            if (activeSectors.includes(normalized)) {
+                setActiveSectors(activeSectors.filter(s => s !== normalized));
+            } else {
+                setActiveSectors([...activeSectors, normalized]);
+            }
+            currentPage = 1;
+            updatePagination();
+        }
 
         function normalizePolicy(policy) {
             const raw = (policy ?? '').toString().trim().toLowerCase();
@@ -286,9 +349,7 @@
 
         function setFilter(type, value) {
             if (type === 'sector') {
-                activeSector = value;
-                const sectorLabel = document.getElementById('currentSector');
-                if (sectorLabel) sectorLabel.innerText = (value === 'all') ? 'All Sectors' : value;
+                setActiveSectors(value === 'all' ? [] : [value]);
             }
             document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('show'));
             currentPage = 1;
@@ -301,7 +362,11 @@
 
             const filtered = allRows.filter(row => {
                 const matchesText = (row.dataset.name + ' ' + row.dataset.sectors).toLowerCase().includes(query);
-                const matchesSector = (activeSector === 'all' || row.dataset.sectors.toLowerCase().includes(activeSector.toLowerCase()));
+                const sectorsList = (row.dataset.sectorsList || '')
+                    .split('||')
+                    .map(normalizeSector)
+                    .filter(Boolean);
+                const matchesSector = (activeSectors.length === 0 || sectorsList.some(s => activeSectors.includes(s)));
                 const rowPolicy = normalizePolicy(row.dataset.policy);
                 const matchesPolicy = (activePolicies.length === 0 || activePolicies.includes(rowPolicy));
                 return matchesText && matchesSector && matchesPolicy;
@@ -328,6 +393,15 @@
             }
         }
 
+        document.querySelectorAll('.sector-filter').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleSectorFilter(btn.dataset.sector);
+            });
+        });
+
+        setActiveSectors(activeSectors);
         initPolicyFilters();
         updatePagination();
     </script>
