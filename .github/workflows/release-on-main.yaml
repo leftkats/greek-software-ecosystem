@@ -43,8 +43,6 @@ jobs:
           PREV="$(git describe --tags --match 'v*' --abbrev=0 2>/dev/null || true)"
 
           {
-            echo "## Live directory"
-            echo ""
             echo "**[Browse the curated list](${SITE})**"
             echo ""
             echo "---"
