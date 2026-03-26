@@ -137,7 +137,8 @@
     - IT Services
   careers_url: https://www.capgemini.com/careers/
   linkedin_company_id: capgemini
-  locations: Thessaloniki
+  locations:
+    - Thessaloniki
   work_policy: On-site
 - name: DataScouting
   url: https://datascouting.com/
