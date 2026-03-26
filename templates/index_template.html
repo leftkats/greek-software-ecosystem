@@ -121,11 +121,116 @@
             text-decoration: underline;
             text-underline-offset: 2px;
         }
+
+        @keyframes workable-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .workable-spinner {
+            width: 10px;
+            height: 10px;
+            border: 2px solid currentColor;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: workable-spin 0.75s linear infinite;
+            display: inline-block;
+            flex-shrink: 0;
+            opacity: 0.65;
+        }
+
+        .company-row-has-openings {
+            background-color: #ecfdf5;
+            border-left: 4px solid #059669;
+        }
+
+        .dark .company-row-has-openings {
+            background-color: rgba(6, 78, 59, 0.28);
+            border-left-color: #34d399;
+        }
+
+        .company-career-link-has-roles {
+            border-color: #059669;
+        }
+
+        .dark .company-career-link-has-roles {
+            border-color: #34d399;
+        }
+
+        .location-icon-svg {
+            display: block;
+            flex-shrink: 0;
+            opacity: 0.72;
+        }
+
+        .location-group-box:hover .location-icon-svg,
+        .location-group-box:focus-within .location-icon-svg {
+            opacity: 0.95;
+        }
+
+        .location-filter-inline {
+            border: none;
+            background: transparent;
+            padding: 0;
+            margin: 0;
+            font: inherit;
+            text-transform: inherit;
+            letter-spacing: inherit;
+            cursor: pointer;
+            text-underline-offset: 2px;
+        }
+
+        .location-filter-inline:hover {
+            text-decoration: underline;
+        }
+
+        .stat-header-policy,
+        .stat-workable-hiring {
+            border: none;
+            background: transparent;
+            padding: 0;
+            margin: 0;
+            font: inherit;
+            text-transform: inherit;
+            letter-spacing: inherit;
+            cursor: pointer;
+            text-underline-offset: 2px;
+            transition: color 120ms ease, opacity 120ms ease;
+        }
+
+        .stat-header-policy:disabled,
+        .stat-workable-hiring:disabled {
+            cursor: not-allowed;
+            opacity: 0.45;
+        }
+
+        .stat-header-policy:focus-visible,
+        .stat-workable-hiring:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 2px;
+        }
+
+        .stat-header-active {
+            text-decoration: underline;
+            opacity: 1;
+        }
     </style>
 </head>
 
 <body
     class="bg-background-light dark:bg-background-dark text-[#111318] dark:text-white flex flex-col min-h-screen transition-colors duration-200">
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" class="absolute overflow-hidden -m-px p-0 border-0"
+        style="clip: rect(0,0,0,0); width: 1px; height: 1px;" aria-hidden="true" focusable="false">
+        <defs>
+            <symbol id="loc-pin" viewBox="0 0 16 16" fill="none">
+                <path stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"
+                    d="M8 13.85 L4.42 6.72 C3.62 5.18 5.05 3.65 8 3.65 C10.95 3.65 12.38 5.18 11.58 6.72 L8 13.85 z" />
+                <circle cx="8" cy="6.15" r="1.05" fill="currentColor" stroke="none" />
+            </symbol>
+        </defs>
+    </svg>
 
     <div
         class="bg-black text-white px-4 py-3 brutalist-border border-x-0 border-t-0 flex items-start gap-3 relative z-[60]">
@@ -157,10 +262,43 @@
         <h1 class="text-4xl font-extrabold tracking-tighter uppercase mb-4">Awesome Greek<br>Tech Jobs</h1>
         <p class="text-xs font-bold mono-text max-w-xs">[A curated list of companies that hire for tech jobs in Greece]
         </p>
-        <div class="mt-3 text-[10px] mono-text uppercase font-bold opacity-70">
-            Companies {{ stats.total_companies }} · Remote {{ stats.policy_counts.get('remote', 0) }} · Hybrid {{
-            stats.policy_counts.get('hybrid', 0) }} · On-site {{ stats.policy_counts.get('on-site', 0) }} · N/A {{
-            stats.policy_counts.get('n/a', 0) }}
+        <div class="mt-3 space-y-2 max-w-2xl" role="region" aria-label="Site statistics">
+            <p
+                class="text-[10px] mono-text uppercase font-bold text-neutral-600 dark:text-neutral-400 leading-relaxed flex flex-wrap gap-x-1.5 gap-y-1 items-baseline">
+                <span>Companies {{ stats.total_companies }}</span><span class="text-neutral-400 dark:text-neutral-600 select-none"
+                    aria-hidden="true">·</span>
+                <button type="button" class="stat-header-policy text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                    data-policy="remote" aria-pressed="false" title="Show only remote companies">Remote {{
+                    stats.policy_counts.get('remote', 0) }}</button><span class="text-neutral-400 dark:text-neutral-600 select-none"
+                    aria-hidden="true">·</span>
+                <button type="button" class="stat-header-policy text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                    data-policy="hybrid" aria-pressed="false" title="Show only hybrid companies">Hybrid {{
+                    stats.policy_counts.get('hybrid', 0) }}</button><span class="text-neutral-400 dark:text-neutral-600 select-none"
+                    aria-hidden="true">·</span>
+                <button type="button" class="stat-header-policy text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                    data-policy="on-site" aria-pressed="false" title="Show only on-site companies">On-site {{
+                    stats.policy_counts.get('on-site', 0) }}</button><span class="text-neutral-400 dark:text-neutral-600 select-none"
+                    aria-hidden="true">·</span>
+                <button type="button" class="stat-header-policy text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                    data-policy="n/a" aria-pressed="false" title="Show only N/A policy companies">N/A {{
+                    stats.policy_counts.get('n/a', 0) }}</button>
+                {% if stats.workable_companies_count %}<span class="text-neutral-400 dark:text-neutral-600 select-none"
+                    aria-hidden="true">·</span>
+                <button type="button" id="statWorkableHiringBtn"
+                    class="stat-workable-hiring whitespace-nowrap text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                    aria-pressed="false" disabled
+                    title="Show only companies with open Workable roles in Greece">Workable <span id="workableLiveTotal"
+                        class="tabular-nums text-emerald-700 dark:text-emerald-400">…</span> roles (GR)</button>
+                {% endif %}
+            </p>
+            {% if stats.workable_companies_count %}
+            <p class="text-[10px] leading-relaxed text-neutral-400 dark:text-neutral-500 font-normal normal-case tracking-tight"
+                id="workableLiveSummary" role="status" aria-live="polite">
+                <span id="workableLiveExplainer">These numbers use Workable’s public job-count API when the site is
+                    generated (CI), then are embedded in this HTML — your browser does not call Workable.</span><span
+                    id="workableLiveSubline" class="text-neutral-500 dark:text-neutral-400"></span>
+            </p>
+            {% endif %}
         </div>
     </header>
 
@@ -182,7 +320,8 @@
             data-sectors-list="{{ company.sectors|join('||') }}"
             data-locations="{{ company.locations|join(' ') }}"
             data-locations-list="{{ company.locations|join('||') }}"
-            data-linkedin="{{ company.linkedin_company_id or '' }}">
+            data-linkedin="{{ company.linkedin_company_id or '' }}"
+            {% if company.workable_slug %}data-workable-slug="{{ company.workable_slug }}"{% endif %}>
             <div class="flex-1 space-y-2">
                 <div class="flex items-center gap-2">
                     <a href="{{ company.site_url }}" target="_blank" rel="noopener noreferrer" class="company-link">
@@ -193,34 +332,52 @@
                         {{ company.work_policy }}
                     </span>
                 </div>
-                <div class="flex flex-wrap gap-1">
-                    {% for sector in company.sectors %}
-                    <button type="button"
-                        class="sector-filter text-[10px] mono-text uppercase border border-gray-300 dark:border-gray-700 px-1"
-                        data-sector="{{ sector }}" aria-pressed="false" title="Filter by {{ sector }}">
-                        {{ sector }}
-                    </button>
-                    {% endfor %}
+                <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5">
+                    <div class="flex flex-wrap gap-1 items-center">
+                        {% for sector in company.sectors %}
+                        <button type="button"
+                            class="sector-filter text-[10px] mono-text uppercase border border-gray-300 dark:border-gray-700 px-1.5 py-0.5"
+                            data-sector="{{ sector }}" aria-pressed="false" title="Filter by {{ sector }}">
+                            {{ sector }}
+                        </button>
+                        {% endfor %}
+                    </div>
+                    {% if company.locations %}
+                    <span class="hidden sm:block self-stretch w-px min-h-[1rem] bg-gray-300 dark:bg-gray-600 shrink-0 opacity-80"
+                        aria-hidden="true"></span>
+                    <div class="location-group-box inline-flex items-baseline gap-1.5 max-w-full border border-gray-300 dark:border-gray-700 px-2 py-1"
+                        role="group" aria-label="Office locations">
+                        <svg class="location-icon-svg translate-y-px" width="12" height="12" aria-hidden="true"
+                            focusable="false">
+                            <use href="#loc-pin" />
+                        </svg>
+                        <span class="inline-flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5 text-[10px] mono-text uppercase leading-snug">
+                            {% for loc in company.locations %}
+                            {% if not loop.first %}<span class="text-gray-400 dark:text-gray-500 select-none"
+                                aria-hidden="true">·</span>{% endif %}
+                            <button type="button"
+                                class="location-filter location-filter-inline text-[10px] mono-text uppercase"
+                                data-location="{{ loc }}" aria-pressed="false" title="Filter by {{ loc }}">
+                                {{ loc }}
+                            </button>
+                            {% endfor %}
+                        </span>
+                    </div>
+                    {% endif %}
                 </div>
-
-                {% if company.locations %}
-                <div class="flex flex-wrap gap-1 pt-1">
-                    {% for loc in company.locations %}
-                    <button type="button"
-                        class="location-filter text-[10px] mono-text uppercase border border-gray-300 dark:border-gray-700 px-1"
-                        data-location="{{ loc }}" aria-pressed="false" title="Filter by {{ loc }}">
-                        {{ loc }}
-                    </button>
-                    {% endfor %}
-                </div>
-                {% endif %}
             </div>
             <div class="flex items-center justify-end">
                 <div class="flex items-center gap-2">
-                    <a class="brutalist-border px-3 py-3 flex items-center justify-center gap-2 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+                    {% if company.workable_slug %}
+                    <span class="workable-job-badge brutalist-border px-2 py-2 min-w-[7rem] flex items-center justify-center text-center"
+                        role="status" aria-live="polite">
+                        <span class="workable-job-badge-text text-[9px] font-bold mono-text uppercase opacity-50">…</span>
+                    </span>
+                    {% endif %}
+                    <a class="company-career-link brutalist-border px-3 py-3 flex items-center justify-center gap-2 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
                         href="{{ company.career_url }}" target="_blank" rel="noopener noreferrer">
                         <span class="material-symbols-outlined">arrow_outward</span>
-                        <span class="text-[10px] font-bold mono-text uppercase">Career</span>
+                        <span class="career-btn-label text-[10px] font-bold mono-text uppercase">Career</span>
                     </a>
 
                     {% if company.linkedin_company_id %}
@@ -269,12 +426,14 @@
         </a>
     </div>
 
+    <script type="application/json" id="workable-job-snapshot">{{ workable_snapshot_json | safe }}</script>
     <script>
         let currentPage = 1;
         const itemsPerPage = {{ items_per_page }};
         let activeSectors = [];
         let activeLocations = [];
         let activePolicies = [];
+        let filterWorkableHiringOnly = false;
 
         function normalizeSector(sector) {
             return (sector ?? '').toString().trim().toLowerCase();
@@ -368,7 +527,7 @@
 
         function togglePolicyFilter(policy) {
             const normalized = normalizePolicy(policy);
-            if (!normalized || normalized === 'n/a') return;
+            if (!normalized) return;
 
             if (activePolicies.includes(normalized)) {
                 setActivePolicies(activePolicies.filter(p => p !== normalized));
@@ -378,6 +537,7 @@
 
             currentPage = 1;
             updatePagination();
+            syncUrlFromState();
         }
 
         function initPolicyFilters() {
@@ -433,6 +593,43 @@
             updatePagination();
         }
 
+        function workableOpeningsSortKey(row) {
+            if (!row.dataset.workableSlug) return -1;
+            const raw = row.dataset.workableOpenings;
+            if (raw === undefined || raw === '') return -1;
+            const n = parseInt(raw, 10);
+            return Number.isFinite(n) ? n : -1;
+        }
+
+        function sortRowsByWorkableOpenings(rows) {
+            rows.sort((a, b) => {
+                const kb = workableOpeningsSortKey(b);
+                const ka = workableOpeningsSortKey(a);
+                if (kb !== ka) return kb - ka;
+                return (a.dataset.name || '').localeCompare(b.dataset.name || '', undefined, { sensitivity: 'base' });
+            });
+            return rows;
+        }
+
+        function updateStatHeaderTriggersUI() {
+            document.querySelectorAll('.stat-header-policy[data-policy]').forEach((btn) => {
+                const pol = normalizePolicy(btn.dataset.policy);
+                const on = activePolicies.includes(pol);
+                btn.classList.toggle('stat-header-active', on);
+                btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+            });
+            const wBtn = document.getElementById('statWorkableHiringBtn');
+            if (wBtn) {
+                if (wBtn.disabled) {
+                    wBtn.classList.remove('stat-header-active');
+                    wBtn.setAttribute('aria-pressed', 'false');
+                } else {
+                    wBtn.classList.toggle('stat-header-active', filterWorkableHiringOnly);
+                    wBtn.setAttribute('aria-pressed', filterWorkableHiringOnly ? 'true' : 'false');
+                }
+            }
+        }
+
         function updatePagination() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const allRows = Array.from(document.querySelectorAll('.company-row'));
@@ -456,8 +653,11 @@
                 const matchesLocation = (activeLocations.length === 0 || locationsList.some(l => activeLocations.includes(l)));
                 const rowPolicy = normalizePolicy(row.dataset.policy);
                 const matchesPolicy = (activePolicies.length === 0 || activePolicies.includes(rowPolicy));
-                return matchesText && matchesSector && matchesLocation && matchesPolicy;
+                const matchesWorkableHiring = !filterWorkableHiringOnly || workableOpeningsSortKey(row) > 0;
+                return matchesText && matchesSector && matchesLocation && matchesPolicy && matchesWorkableHiring;
             });
+
+            sortRowsByWorkableOpenings(filtered);
 
             const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
             allRows.forEach(row => row.classList.add('hidden-row'));
@@ -469,6 +669,7 @@
             document.getElementById('prevBtn').disabled = (currentPage === 1);
             document.getElementById('nextBtn').disabled = (currentPage === totalPages);
             document.getElementById('paginationControls').style.display = totalPages > 1 ? 'flex' : 'none';
+            updateStatHeaderTriggersUI();
         }
 
         function handleSearch() { currentPage = 1; updatePagination(); }
@@ -484,6 +685,8 @@
             else params.delete('sec');
             if (activeLocations.length) params.set('loc', activeLocations.join(','));
             else params.delete('loc');
+            if (filterWorkableHiringOnly) params.set('hire', '1');
+            else params.delete('hire');
             const next = `${window.location.pathname}?${params.toString()}`;
             window.history.replaceState({}, '', next);
         }
@@ -496,6 +699,8 @@
             const pol = (params.get('pol') || '').split(',').map(s => s.trim()).filter(Boolean);
             const sec = (params.get('sec') || '').split(',').map(s => s.trim()).filter(Boolean);
             const loc = (params.get('loc') || '').split(',').map(s => s.trim()).filter(Boolean);
+
+            filterWorkableHiringOnly = params.get('hire') === '1';
 
             setActivePolicies(pol);
             setActiveSectors(sec);
@@ -532,9 +737,168 @@
             syncUrlFromState();
         });
 
+        document.querySelectorAll('.stat-header-policy[data-policy]').forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                togglePolicyFilter(btn.dataset.policy);
+            });
+        });
+
+        const statWorkableHiringBtn = document.getElementById('statWorkableHiringBtn');
+        if (statWorkableHiringBtn) {
+            statWorkableHiringBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (statWorkableHiringBtn.disabled) return;
+                filterWorkableHiringOnly = !filterWorkableHiringOnly;
+                currentPage = 1;
+                updatePagination();
+                syncUrlFromState();
+            });
+        }
+
+        function initWorkableJobCounts() {
+            const wBtn = document.getElementById('statWorkableHiringBtn');
+            const rows = Array.from(document.querySelectorAll('.company-row[data-workable-slug]'));
+            if (!rows.length) {
+                if (wBtn) {
+                    wBtn.disabled = true;
+                    filterWorkableHiringOnly = false;
+                }
+                return;
+            }
+
+            const snapEl = document.getElementById('workable-job-snapshot');
+            let snapshot = null;
+            if (snapEl && snapEl.textContent.trim()) {
+                try {
+                    snapshot = JSON.parse(snapEl.textContent);
+                } catch (_) {
+                    snapshot = null;
+                }
+            }
+
+            const accounts = snapshot && typeof snapshot.accounts === 'object' && snapshot.accounts !== null
+                ? snapshot.accounts
+                : {};
+            const generatedAt = snapshot && snapshot.generated_at ? String(snapshot.generated_at) : '';
+
+            function formatSnapshotTime(iso) {
+                if (!iso) return null;
+                try {
+                    const d = new Date(iso);
+                    if (Number.isNaN(d.getTime())) return iso;
+                    const dateStr = d.toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                        timeZone: 'UTC',
+                    });
+                    const timeStr = d.toLocaleTimeString('en-GB', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false,
+                        timeZone: 'UTC',
+                    });
+                    return `${dateStr}, ${timeStr} UTC`;
+                } catch (_) {
+                    return iso;
+                }
+            }
+
+            const totalEl = document.getElementById('workableLiveTotal');
+            const sublineEl = document.getElementById('workableLiveSubline');
+            const explainerEl = document.getElementById('workableLiveExplainer');
+            const WORKABLE_EXPLAINER_DEFAULT =
+                'These numbers use Workable’s public job-count API when the site is generated (CI), then are embedded in this HTML — your browser does not call Workable.';
+
+            let aggregateOpen = 0;
+            let numericRows = 0;
+
+            rows.forEach((row) => {
+                const slug = (row.dataset.workableSlug || '').trim();
+                const badge = row.querySelector('.workable-job-badge');
+                const careerLink = row.querySelector('a.company-career-link');
+                const careerLabel = careerLink && careerLink.querySelector('.career-btn-label');
+                if (!slug) return;
+
+                if (!Object.prototype.hasOwnProperty.call(accounts, slug)) {
+                    if (badge) badge.remove();
+                    return;
+                }
+
+                const n = accounts[slug];
+                if (typeof n !== 'number' || !Number.isFinite(n)) {
+                    if (badge) badge.remove();
+                    return;
+                }
+
+                row.dataset.workableOpenings = String(n);
+                numericRows += 1;
+                aggregateOpen += n;
+
+                if (n === 0) {
+                    if (badge) {
+                        badge.innerHTML = '<span class="text-[9px] font-bold mono-text uppercase opacity-60">No openings (GR)</span>';
+                    }
+                    return;
+                }
+
+                row.classList.add('company-row-has-openings');
+                if (badge) badge.remove();
+
+                if (careerLink && careerLabel) {
+                    const roleLabel = n === 1 ? '1 open role' : `${n} open roles`;
+                    careerLabel.textContent = roleLabel;
+                    careerLabel.classList.add('text-emerald-800', 'dark:text-emerald-300');
+                    careerLink.classList.add('company-career-link-has-roles');
+                    careerLink.setAttribute('title', `View ${n === 1 ? 'this role' : 'these roles'} on Workable (Greece)`);
+                    careerLink.setAttribute('aria-label', `${roleLabel} — open Workable careers page`);
+                }
+            });
+
+            if (totalEl) {
+                if (numericRows === 0) {
+                    totalEl.textContent = '—';
+                    totalEl.classList.remove('text-emerald-700', 'dark:text-emerald-400');
+                } else {
+                    totalEl.textContent = String(aggregateOpen);
+                    if (aggregateOpen > 0) {
+                        totalEl.classList.add('text-emerald-700', 'dark:text-emerald-400');
+                    } else {
+                        totalEl.classList.remove('text-emerald-700', 'dark:text-emerald-400');
+                    }
+                }
+            }
+
+            if (wBtn) {
+                wBtn.disabled = numericRows === 0;
+                if (wBtn.disabled) {
+                    filterWorkableHiringOnly = false;
+                }
+            }
+
+            if (sublineEl && explainerEl) {
+                if (!generatedAt && numericRows === 0) {
+                    explainerEl.innerHTML =
+                        'No snapshot found. Run <code class="mono-text text-[10px]">uv run python -m scripts.fetch_workable_counts</code> then <code class="mono-text text-[10px]">uv run python -m scripts.generate_index</code>, or wait for CI.';
+                    sublineEl.textContent = '';
+                } else if (generatedAt && numericRows === 0) {
+                    explainerEl.textContent =
+                        'Snapshot exists but no usable Workable counts were stored for this build. Re-run the fetch step in CI or locally.';
+                    sublineEl.textContent = '';
+                } else {
+                    explainerEl.textContent = WORKABLE_EXPLAINER_DEFAULT;
+                    const when = formatSnapshotTime(generatedAt);
+                    sublineEl.textContent = when ? ` · Data snapshot: ${when}` : '';
+                }
+            }
+        }
+
         applyStateFromUrl();
         setActiveSectors(activeSectors);
         setActiveLocations(activeLocations);
+        initWorkableJobCounts();
+        syncUrlFromState();
         initPolicyFilters();
         updatePagination();
     </script>

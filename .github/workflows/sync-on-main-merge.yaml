@@ -4,9 +4,16 @@ on:
   push:
     branches:
       - main
+  schedule:
+    # Daily 05:00 UTC — refresh Workable Greece incountry counts + regenerate index.html
+    - cron: "0 5 * * *"
 
 permissions:
   contents: write
+
+concurrency:
+  group: sync-main-${{ github.repository }}
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -23,18 +30,28 @@ jobs:
         run: uv sync --frozen
 
       - name: Sync Content
+        env:
+          EVENT_NAME: ${{ github.event_name }}
         run: |
-          uv run python -m scripts.generate_readme
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "push" ]; then
+            uv run python -m scripts.generate_readme
+          fi
+          uv run python -m scripts.fetch_workable_counts
           uv run python -m scripts.generate_index
 
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-          git add readme.md index.html
+          git add readme.md index.html data/workable_counts.yaml
 
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "chore(📚): auto-update docs with fresh content [skip ci]"
+            if [ "$EVENT_NAME" = "schedule" ]; then
+              git commit -m "chore: refresh Workable job counts (scheduled 05:00 UTC) [skip ci]"
+            else
+              git commit -m "chore(📚): auto-update docs with fresh content [skip ci]"
+            fi
             git push origin main
           fi
