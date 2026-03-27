@@ -99,20 +99,22 @@ def generate() -> None:
     lines.append(f"{readme_data['description'].strip()}\n")
     lines.append("")
 
-    lines.append("## At a Glance\n")
-    lines.append("| Metric | |")
-    lines.append("| :--- | :--- |")
-    lines.append(f"| **Companies** | {total} curated teams |")
-    lines.append(
-        f"| **Top Hub** | {top_loc} ({top_n} offices) |"
-    )
-    lines.append(
-        "| **Remote / Hybrid / On-site** "
-        f"| {remote} / {hybrid} / {onsite} |"
-    )
+    sec_str = ""
     if top_sectors:
-        sec = " · ".join(f"{s} ({n})" for s, n in top_sectors)
-        lines.append(f"| **Top Sectors** | {sec} |")
+        parts = [f"**{s}** ({n})" for s, n in top_sectors]
+        sec_str = (
+            f" The most common sectors are {', '.join(parts)}."
+        )
+
+    lines.append(
+        f"Currently tracking **{total}** companies, "
+        f"with **{top_loc}** as the leading hub "
+        f"({top_n} offices). "
+        f"**{remote}** teams are fully remote, "
+        f"**{hybrid}** hybrid, and "
+        f"**{onsite}** on-site."
+        f"{sec_str}\n"
+    )
     lines.append("")
 
     lines.append("---\n")

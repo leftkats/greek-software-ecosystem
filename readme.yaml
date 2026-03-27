@@ -1,25 +1,54 @@
 title: "awesome-greek-tech-jobs"
-description: "This a comprehensive map of companies that hire for tech jobs in Greece.
-    It highlights their focus sectors, careers pages, and LinkedIn profiles, while
-    explicitly including details on work policies (Remote, Hybrid, On-site)
-    and office locations. This repository is designed to help professionals
-    explore opportunities and connect with organizations across the Greek tech ecosystem. \n\n
+tagline: "The open-source map of tech hiring in Greece"
+description: >
+  A curated, community-maintained directory of companies hiring for
+  tech roles in Greece — with sectors, work policies, career pages,
+  and live Workable job-count snapshots.
 
-    [**Explore the Live Directory**](https://leftkats.github.io/awesome-greek-tech-jobs/) curated with ❤️ for the community.
-    "
-disclaimer: "This project is a **community-driven initiative** aimed at providing a centralized resource for tech job seekers interested in the Greek market. \n\n
-  **Please note:**\n
-  * **Non-Affiliation:** This project is independent and is not affiliated with, sponsored by, or endorsed by any of the companies listed. All company names and website links are the property of their respective owners.\n
-  * **Accuracy:** Information is gathered from public sources like LinkedIn and corporate career pages. While I strive for accuracy, company policies change frequently. Always verify details on the official company website.\n
-  * **Contributions:** If you notice any inaccuracies or have suggestions for additions, please feel free to contribute via pull requests.\n
-  * **Liability:** As per the [MIT License](LICENSE), this information is provided as is without warranty of any kind.\n"
+live_url: "https://leftkats.github.io/awesome-greek-tech-jobs/"
+repo: "leftkats/awesome-greek-tech-jobs"
+
+disclaimer: >
+  This project is for **community and educational purposes only**.
+  All data is aggregated from publicly available sources (company
+  websites, LinkedIn, Workable's public API).  Job counts shown are
+  **cached snapshots** generated once daily and **do not represent
+  a real-time official database**.
+
+
+  **Please note:**
+
+  * **Non-Affiliation:** This project is independent and is not affiliated
+    with, sponsored by, or endorsed by any of the companies listed.
+    All company names and links are the property of their respective owners.
+
+  * **Public Data Only:** Job counts are retrieved from Workable's
+    unauthenticated, publicly accessible API endpoints.  No private
+    data, scraping behind login walls, or terms-of-service circumvention
+    is involved.
+
+  * **Accuracy:** Information is gathered from public sources.  Company
+    policies and openings change frequently — always verify on the
+    official company website.
+
+  * **Contributions:** Spotted an error?  PRs and issues are welcome.
+
+  * **Liability:** As per the [MIT License](LICENSE), this information
+    is provided "as is" without warranty of any kind.
+
 footer:
-  description: "A huge thanks to the community for helping improve this project to grow!!"
+  description: "Built with ❤️ by the community. PRs welcome!"
   notes:
     - title: "Remote vs. Hybrid"
       content: "Many Athens-based companies are moving to 1-2 days in office."
     - title: "Salary Insight"
-      content: "Remote roles for international companies (via B2B) usually pay higher than local Greek contracts.
-        Be careful with trade-offs when private health coverage is provided by the latter."
+      content: >
+        Remote roles for international companies (via B2B) usually pay
+        higher than local Greek contracts.  Weigh the trade-offs when
+        the latter includes private health coverage.
     - title: "Interview Prep"
       content: "Focus on System Design for Senior roles and LeetCode (Medium) for mid-level."
+    - title: "Job Counts"
+      content: >
+        Workable counts are fetched daily via CI from the public API and
+        may be inaccurate due to timing, geography filters, or API behavior.
