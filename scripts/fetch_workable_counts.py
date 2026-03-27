@@ -30,7 +30,11 @@ _RETRY_TOTAL = 5
 _RETRY_BACKOFF_FACTOR = 1.5
 _RETRY_STATUS_FORCELIST = (429, 500, 502, 503, 504)
 
-_JOBS_COUNT_QUERY = urllib.parse.urlencode({"location": "Greece"})
+_JOBS_COUNT_QUERY = urllib.parse.urlencode({
+    "location": "Greece",
+    "country": "GR",
+    "location_country_code": "GR",
+})
 _BASE = "https://apply.workable.com/api/v1/accounts/{slug}/jobs/count"
 
 _USER_AGENT = (
@@ -46,7 +50,7 @@ def _build_session() -> requests.Session:
         {
             "User-Agent": _USER_AGENT,
             "Accept": "application/json",
-            "Accept-Language": "en-GB,en;q=0.9,el;q=0.8",
+            "Accept-Language": "el-GR,el;q=0.9,en;q=0.8",
         }
     )
     retry = Retry(

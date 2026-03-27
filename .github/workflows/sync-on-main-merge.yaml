@@ -34,24 +34,35 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
+
           if [ "$EVENT_NAME" = "push" ]; then
             uv run python -m scripts.generate_readme
-          fi
-          uv run python -m scripts.fetch_workable_counts
-          uv run python -m scripts.generate_index
+            uv run python -m scripts.generate_index
 
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git add readme.md index.html
 
-          git add readme.md index.html data/workable_counts.yaml
-
-          if git diff --staged --quiet; then
-            echo "No changes to commit."
-          else
-            if [ "$EVENT_NAME" = "schedule" ]; then
-              git commit -m "chore: refresh Workable job counts (scheduled 05:00 UTC) [skip ci]"
+            if git diff --staged --quiet; then
+              echo "No changes to commit."
             else
               git commit -m "chore(📚): auto-update docs with fresh content [skip ci]"
+              git push origin main
             fi
-            git push origin main
+          fi
+
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            uv run python -m scripts.fetch_workable_counts
+            uv run python -m scripts.generate_index
+
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git add index.html data/workable_counts.yaml
+
+            if git diff --staged --quiet; then
+              echo "No changes to commit."
+            else
+              git commit -m "chore: refresh Workable job counts (scheduled 05:00 UTC) [skip ci]"
+              git push origin main
+            fi
           fi
