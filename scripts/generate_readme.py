@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections import Counter
+from pathlib import Path
 
 import yaml
 
@@ -16,6 +17,16 @@ def generate() -> None:
 
     with open("data/queries.yaml", "r", encoding="utf-8") as f:
         queries_data = yaml.safe_load(f)
+
+    workable_counts_path = Path("data/workable_counts.yaml")
+    open_roles = 0
+    if workable_counts_path.exists():
+        with workable_counts_path.open("r", encoding="utf-8") as f:
+            workable_data = yaml.safe_load(f) or {}
+        if isinstance(workable_data, dict):
+            maybe_total = workable_data.get("total_open")
+            if isinstance(maybe_total, int):
+                open_roles = maybe_total
 
     all_companies = sorted(
         companies_data, key=lambda x: x["name"].lower()
@@ -84,7 +95,10 @@ def generate() -> None:
         "-green?style=for-the-badge) "
         "![Hybrid]"
         f"(https://img.shields.io/badge/Hybrid-{hybrid}"
-        "-yellow?style=for-the-badge)"
+        "-yellow?style=for-the-badge) "
+        "![Open Roles]"
+        f"(https://img.shields.io/badge/Open%20Roles-{open_roles}"
+        "-orange?style=for-the-badge)"
     )
     lines.append(badge)
     lines.append("")
@@ -140,6 +154,8 @@ def generate() -> None:
         lines.append("## Tips & Notes\n")
         for n in notes:
             title = n["title"]
+            if title.strip().lower() == "job counts":
+                title = "Job Counts (Experimental)"
             body = n["content"].strip()
             lines.append(f"- **{title}:** {body}")
         lines.append("")

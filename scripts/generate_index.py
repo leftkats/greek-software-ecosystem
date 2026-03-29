@@ -16,7 +16,7 @@ Run
 * ``uv run python -m scripts.generate_index --fetch-workable`` — fetch then render.
 
 CI: ``.github/workflows/sync-on-main-merge.yaml`` runs fetch + generate on push to
-``main`` and daily at 05:00 UTC; commits ``data/workable_counts.yaml`` and
+``main`` and weekly (Monday 05:00 UTC); commits ``data/workable_counts.yaml`` and
 ``index.html``. Paths align with ``scripts.fetch_workable_counts``.
 """
 

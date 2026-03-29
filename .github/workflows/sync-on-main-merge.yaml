@@ -5,8 +5,8 @@ on:
     branches:
       - main
   schedule:
-    # Daily 05:00 UTC — refresh Workable Greece incountry counts + regenerate index.html
-    - cron: "0 5 * * *"
+    # Weekly Monday 05:00 UTC — refresh Workable Greece counts + regenerate index.html
+    - cron: "0 5 * * 1"
   workflow_dispatch:
 
 permissions:
@@ -63,7 +63,7 @@ jobs:
             if git diff --staged --quiet; then
               echo "No changes to commit."
             else
-              git commit -m "chore: refresh Workable job counts (scheduled 05:00 UTC) [skip ci]"
+              git commit -m "chore: refresh Workable job counts (weekly schedule) [skip ci]"
               git push origin main
             fi
           fi

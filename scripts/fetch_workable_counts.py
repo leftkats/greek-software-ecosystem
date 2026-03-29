@@ -1,15 +1,18 @@
-"""Fetch open-job counts from Workable using /count endpoints only.
+"""Fetch open-job counts from Workable public endpoints.
 
-Tries a small set of ``/count`` URL variants per slug and uses the first
-usable response. If all variants fail, stores ``0`` for that slug so the whole
-list is always completed in one run.
+Primary source is ``/count`` (fast). If ``/count`` appears geo-biased (for
+example ``total > 0`` but ``incountry = 0``) or otherwise unusable, this
+script falls back to Workable's public v3 jobs endpoint filtered by
+``location.countryCode = GR``.
 """
 
 from __future__ import annotations
 
 import sys
 import time
+import os
 from pathlib import Path
+from urllib.robotparser import RobotFileParser
 
 import requests
 import yaml
@@ -32,12 +35,25 @@ _COUNT_URL_CANDIDATES = (
     "https://apply.workable.com/api/v1/accounts/{slug}/jobs/count?country=Greece",
     "https://apply.workable.com/api/v1/accounts/{slug}/jobs/count?country=GR",
 )
+_V3_JOBS_URL = "https://apply.workable.com/api/v3/accounts/{slug}/jobs"
+_V3_GR_LOCATION_FILTER = {"location": [{"countryCode": "GR"}]}
+_ROBOTS_TXT_URL = "https://www.workable.com/robots.txt"
+_ROBOTS_ENDPOINT_PROBES = (
+    "https://apply.workable.com/api/v1/accounts/example/jobs/count",
+    "https://apply.workable.com/api/v3/accounts/example/jobs",
+)
 
 _USER_AGENT = (
     "awesome-greek-tech-jobs/1.0 "
     "(+https://github.com/leftkats/awesome-greek-tech-jobs; "
     "python-requests; Greece job board snapshot)"
 )
+_VERBOSE = os.getenv("WORKABLE_VERBOSE", "").strip().lower() in {
+    "1",
+    "true",
+    "yes",
+    "on",
+}
 
 
 def _build_session() -> requests.Session:
@@ -65,70 +81,164 @@ def _build_session() -> requests.Session:
     return session
 
 
+def _debug(msg: str) -> None:
+    if _VERBOSE:
+        print(msg, file=sys.stderr)
+
+
+def _ensure_robots_allows_fetch(session: requests.Session) -> None:
+    """Fail fast if workable.com robots.txt disallows endpoint probes."""
+    try:
+        resp = session.get(_ROBOTS_TXT_URL, timeout=TIMEOUT_SEC)
+    except requests.RequestException as e:
+        raise RuntimeError(f"robots.txt fetch failed: {e}") from e
+
+    if resp.status_code != 200:
+        raise RuntimeError(
+            f"robots.txt fetch returned HTTP {resp.status_code}"
+        )
+
+    rp = RobotFileParser()
+    rp.parse(resp.text.splitlines())
+    for endpoint_url in _ROBOTS_ENDPOINT_PROBES:
+        if not rp.can_fetch(_USER_AGENT, endpoint_url):
+            raise RuntimeError(
+                "robots.txt disallows endpoint probe: "
+                f"{endpoint_url}"
+            )
+    print(f"robots.txt check passed ({_ROBOTS_TXT_URL})")
+
+
 def _fetch_count_from_count_endpoints(
     session: requests.Session, slug: str, idx: int = 0, total: int = 0
-) -> int | None:
+) -> tuple[int | None, int | None, bool]:
     """Try /count variants first; skip geo-mismatched results and continue."""
-    prefix = f"[{idx}/{total}] {slug}"
     headers = {
         "Origin": "https://apply.workable.com",
         "Referer": f"https://apply.workable.com/{slug}/",
     }
+    last_status: int | None = None
+    saw_geo_mismatch = False
 
     for candidate in _COUNT_URL_CANDIDATES:
         url = candidate.format(slug=slug)
         try:
             resp = session.get(url, headers=headers, timeout=TIMEOUT_SEC)
         except requests.RequestException as e:
-            print(f"{prefix}: /count FAILED ({url}) → {e}", file=sys.stderr)
+            _debug(f"/count request failed for {slug} ({url}) -> {e}")
             continue
 
+        last_status = resp.status_code
         if resp.status_code != 200:
-            print(
-                f"{prefix}: /count HTTP {resp.status_code} ({url}) → {resp.text[:200]}".strip(),
-                file=sys.stderr,
+            _debug(
+                f"/count HTTP {resp.status_code} for {slug} ({url}) -> "
+                f"{resp.text[:200]}".strip()
             )
             continue
 
         try:
             data = resp.json()
         except ValueError:
-            print(f"{prefix}: /count invalid JSON ({url})", file=sys.stderr)
+            _debug(f"/count invalid JSON for {slug} ({url})")
             continue
 
         raw_total = data.get("total")
         raw_incountry = data.get("incountry")
         if not isinstance(raw_total, int) or not isinstance(raw_incountry, int):
-            print(f"{prefix}: /count missing keys ({url})", file=sys.stderr)
+            _debug(f"/count missing keys for {slug} ({url})")
             continue
 
         # If there are jobs but requester-geo "incountry" is 0, this endpoint is
-        # likely not reflecting Greece. Continue to the next /count candidate.
+        # likely not reflecting Greece for CI; mark and continue.
         if raw_total > 0 and raw_incountry == 0:
-            print(
-                f"{prefix}: /count geo mismatch ({url}) total={raw_total} incountry=0; trying next"
+            saw_geo_mismatch = True
+            _debug(
+                f"/count geo mismatch for {slug} ({url}) total={raw_total} "
+                "incountry=0"
             )
             continue
 
-        print(f"{prefix}: /count hit ({url}) → {raw_incountry}/{raw_total}")
-        return raw_incountry
+        return raw_incountry, resp.status_code, False
 
-    return None
+    return None, last_status, saw_geo_mismatch
+
+
+def _fetch_count_from_v3_gr_location(
+    session: requests.Session, slug: str
+) -> tuple[int | None, int | None]:
+    """Fallback using public v3 endpoint with explicit Greece location filter."""
+    url = _V3_JOBS_URL.format(slug=slug)
+    headers = {
+        "Origin": "https://apply.workable.com",
+        "Referer": f"https://apply.workable.com/{slug}/",
+        "Content-Type": "application/json",
+    }
+    try:
+        resp = session.post(
+            url,
+            headers=headers,
+            json=_V3_GR_LOCATION_FILTER,
+            timeout=TIMEOUT_SEC,
+        )
+    except requests.RequestException as e:
+        _debug(f"/v3 request failed for {slug} ({url}) -> {e}")
+        return None, None
+
+    if resp.status_code != 200:
+        _debug(
+            f"/v3 HTTP {resp.status_code} for {slug} ({url}) -> "
+            f"{resp.text[:200]}".strip()
+        )
+        return None, resp.status_code
+
+    try:
+        data = resp.json()
+    except ValueError:
+        _debug(f"/v3 invalid JSON for {slug} ({url})")
+        return None, resp.status_code
+
+    raw_total = data.get("total")
+    if not isinstance(raw_total, int):
+        _debug(f"/v3 missing total for {slug} ({url})")
+        return None, resp.status_code
+    return raw_total, resp.status_code
 
 
 def fetch_count(
     session: requests.Session, slug: str, idx: int = 0, total: int = 0
 ) -> int:
-    """Fetch count from /count endpoints only; return 0 on failure."""
+    """Fetch Greece count, using /count first then v3 GR fallback."""
     prefix = f"[{idx}/{total}] {slug}"
-    count_value = _fetch_count_from_count_endpoints(session, slug, idx=idx, total=total)
+    count_value, count_status, saw_geo_mismatch = _fetch_count_from_count_endpoints(
+        session, slug, idx=idx, total=total
+    )
     if isinstance(count_value, int):
+        print(f"{prefix}: /count HTTP {count_status or 200} -> {count_value}")
         return count_value
-    print(f"{prefix}: all /count endpoints failed; using 0", file=sys.stderr)
+
+    v3_value, v3_status = _fetch_count_from_v3_gr_location(session, slug)
+    if isinstance(v3_value, int):
+        source = "/v3(location=GR)"
+        if saw_geo_mismatch:
+            source = "/v3(location=GR) fallback-from-geo-mismatch"
+        print(f"{prefix}: {source} HTTP {v3_status or 200} -> {v3_value}")
+        return v3_value
+
+    print(
+        f"{prefix}: /count HTTP {count_status or 'ERR'}, "
+        f"/v3 HTTP {v3_status or 'ERR'} -> 0"
+    )
     return 0
 
 
 def main() -> int:
+    session = _build_session()
+    try:
+        _ensure_robots_allows_fetch(session)
+    except RuntimeError as e:
+        print(f"Workable fetch aborted: {e}", file=sys.stderr)
+        return 2
+
     with YAML_PATH.open(encoding="utf-8") as f:
         companies = yaml.safe_load(f)
 
@@ -140,7 +250,6 @@ def main() -> int:
             seen.add(slug)
             slugs.append(slug)
 
-    session = _build_session()
     accounts: dict[str, int] = {}
 
     print(f"Fetching {len(slugs)} Workable accounts…")
@@ -152,7 +261,7 @@ def main() -> int:
     total_open = sum(accounts.values())
     out = {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "metric": "incountry_greece",
+        "metric": "greece_country_code_gr",
         "accounts": accounts,
         "total_open": total_open,
     }
@@ -160,8 +269,8 @@ def main() -> int:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with OUTPUT_PATH.open("w", encoding="utf-8") as f:
         f.write(
-            "# Workable Greece incountry counts from /count endpoints (generated by "
-            "scripts/fetch_workable_counts)\n"
+            "# Workable Greece counts from public /count + /v3 jobs endpoints "
+            "(generated by scripts/fetch_workable_counts)\n"
         )
         yaml.dump(
             out,

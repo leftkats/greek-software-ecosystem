@@ -12,7 +12,7 @@ disclaimer: >
   This project is for **community and educational purposes only**.
   All data is aggregated from publicly available sources (company
   websites, LinkedIn, Workable's public API).  Job counts shown are
-  **cached snapshots** generated once daily and **do not represent
+  **cached snapshots** generated weekly and **do not represent
   a real-time official database**.
 
 
@@ -50,5 +50,5 @@ footer:
       content: "Focus on System Design for Senior roles and LeetCode (Medium) for mid-level."
     - title: "Job Counts"
       content: >
-        Workable counts are fetched daily via CI from the public API and
+        Workable counts are fetched weekly via CI from the public API and
         may be inaccurate due to timing, geography filters, or API behavior.

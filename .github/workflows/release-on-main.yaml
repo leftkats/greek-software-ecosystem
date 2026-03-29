@@ -14,9 +14,10 @@ concurrency:
 
 jobs:
   release:
-    # Skip automated doc-sync commits (avoid a release on every bot push).
+    # Release only when a main-branch commit message explicitly includes "release".
     if: >
-      ${{ !contains(github.event.head_commit.message, '[skip ci]') &&
+      ${{ contains(github.event.head_commit.message, 'release') &&
+          !contains(github.event.head_commit.message, '[skip ci]') &&
           !contains(github.event.head_commit.message, '[no release]') }}
     runs-on: ubuntu-latest
     steps:
@@ -34,15 +35,25 @@ jobs:
           sudo install -m755 "git-cliff-${GIT_CLIFF_VERSION}/git-cliff" /usr/local/bin/git-cliff
           git-cliff --version
 
-      - name: Random release title & version tag
+      - name: Mountain release title & semver tag
         id: meta
         run: |
-          A=(Swift Calm Bold Bright Cedar Clever Coral Cosmic Crystal Curious Daring Ember Golden Ivory Jade Lunar Marble Noble Olive Pearl Quiet Rapid Ruby Silent Silver Solar Steady Swift Velvet Violet)
-          N=(Badger Beaver Brook Canyon Comet Delta Dolphin Eagle Falcon Harbor Heron Island Lighthouse Maple Meadow Otter Pine River Sage Summit Valley Willow)
-          i=$((RANDOM % ${#A[@]}))
-          j=$((RANDOM % ${#N[@]}))
-          TAG="v$(date -u +%Y.%m.%d).${GITHUB_RUN_NUMBER}"
-          echo "name=${A[i]} ${N[j]}" >> "$GITHUB_OUTPUT"
+          set -euo pipefail
+          NEXT="$(git-cliff --bumped-version --config cliff.toml)"
+          TAG="${NEXT#v}"
+          TAG="v${TAG}"
+
+          PEAKS=(
+            "Everest" "K2" "Kangchenjunga" "Lhotse" "Makalu" "Cho Oyu"
+            "Dhaulagiri" "Manaslu" "Nanga Parbat" "Annapurna" "Denali"
+            "Aconcagua" "Kilimanjaro" "Elbrus" "Vinson" "Puncak Jaya"
+            "Mont Blanc" "Matterhorn" "Olympus" "Triglav"
+          )
+          HASH="$(printf '%s' "${GITHUB_SHA}${TAG}" | cksum | cut -d' ' -f1)"
+          IDX=$((HASH % ${#PEAKS[@]}))
+          NAME="${PEAKS[$IDX]} Peak"
+
+          echo "name=${NAME}" >> "$GITHUB_OUTPUT"
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
 
       - name: Build release notes
@@ -62,5 +73,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "${{ steps.meta.outputs.tag }}" \
-            --title "${{ steps.meta.outputs.name }} · ${{ steps.meta.outputs.tag }}" \
+            --title "${{ steps.meta.outputs.name }} ${{ steps.meta.outputs.tag }}" \
             --notes-file release_notes.md
