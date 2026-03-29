@@ -219,12 +219,21 @@
         </header>
 
         <section class="max-w-6xl mx-auto px-4 pb-4">
-            <div class="relative">
-                <span
-                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">search</span>
-                <input id="searchInput"
-                    class="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                    placeholder="Search by company, sector, location, or policy..." type="text">
+            <div class="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-center">
+                <div class="relative">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">search</span>
+                    <input id="searchInput"
+                        class="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        placeholder="Search by company, sector, location, or policy..." type="text">
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="sortOpenRolesBtn" type="button"
+                        class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/70 text-xs font-mono uppercase px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800"
+                        aria-pressed="false" title="Sort companies by open Workable roles">
+                        Sort Open Roles: High-Low
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -365,6 +374,8 @@
         let activeLocations = [];
         let activePolicies = [];
         let filterWorkableHiringOnly = false;
+        let activeSort = 'open_desc';
+        const ALLOWED_SORTS = new Set(['open_desc', 'open_asc']);
 
         function normalizeSector(sector) {
             return (sector ?? '').toString().trim().toLowerCase();
@@ -516,14 +527,50 @@
             return Number.isFinite(n) ? n : -1;
         }
 
-        function sortRowsByWorkableOpenings(rows) {
+        function compareByName(a, b) {
+            return (a.dataset.name || '').localeCompare(
+                b.dataset.name || '',
+                undefined,
+                { sensitivity: 'base' }
+            );
+        }
+
+        function sortRows(rows) {
             rows.sort((a, b) => {
-                const kb = workableOpeningsSortKey(b);
                 const ka = workableOpeningsSortKey(a);
+                const kb = workableOpeningsSortKey(b);
+
+                if (activeSort === 'open_asc') {
+                    const aMissing = ka < 0;
+                    const bMissing = kb < 0;
+                    if (aMissing && bMissing) return compareByName(a, b);
+                    if (aMissing) return 1;
+                    if (bMissing) return -1;
+                    if (ka !== kb) return ka - kb;
+                    return compareByName(a, b);
+                }
+
+                const aMissing = ka < 0;
+                const bMissing = kb < 0;
+                if (aMissing && bMissing) return compareByName(a, b);
+                if (aMissing) return 1;
+                if (bMissing) return -1;
                 if (kb !== ka) return kb - ka;
-                return (a.dataset.name || '').localeCompare(b.dataset.name || '', undefined, { sensitivity: 'base' });
+                return compareByName(a, b);
             });
             return rows;
+        }
+
+        function updateOpenRolesSortButtonUI() {
+            const btn = document.getElementById('sortOpenRolesBtn');
+            if (!btn) return;
+            const isOpenRolesSort = activeSort === 'open_desc' || activeSort === 'open_asc';
+            btn.setAttribute('aria-pressed', isOpenRolesSort ? 'true' : 'false');
+            if (activeSort === 'open_asc') {
+                btn.textContent = 'Sort Open Roles: Low-High';
+            } else {
+                btn.textContent = 'Sort Open Roles: High-Low';
+            }
         }
 
         function updateStatHeaderTriggersUI() {
@@ -548,6 +595,7 @@
         function updatePagination() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const allRows = Array.from(document.querySelectorAll('.company-row'));
+            const companyListEl = document.getElementById('companyList');
 
             const filtered = allRows.filter(row => {
                 const matchesText = (
@@ -572,7 +620,17 @@
                 return matchesText && matchesSector && matchesLocation && matchesPolicy && matchesWorkableHiring;
             });
 
-            sortRowsByWorkableOpenings(filtered);
+            sortRows(filtered);
+
+            // Apply the computed sort order to actual DOM nodes so users see it.
+            const filteredSet = new Set(filtered);
+            const nonFiltered = allRows.filter(row => !filteredSet.has(row));
+            if (companyListEl) {
+                const fragment = document.createDocumentFragment();
+                filtered.forEach(row => fragment.appendChild(row));
+                nonFiltered.forEach(row => fragment.appendChild(row));
+                companyListEl.appendChild(fragment);
+            }
 
             const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
             allRows.forEach(row => row.classList.add('hidden-row'));
@@ -584,6 +642,7 @@
             document.getElementById('prevBtn').disabled = (currentPage === 1);
             document.getElementById('nextBtn').disabled = (currentPage === totalPages);
             document.getElementById('paginationControls').style.display = totalPages > 1 ? 'flex' : 'none';
+            updateOpenRolesSortButtonUI();
             updateStatHeaderTriggersUI();
         }
 
@@ -601,6 +660,8 @@
             else params.delete('loc');
             if (filterWorkableHiringOnly) params.set('hire', '1');
             else params.delete('hire');
+            if (activeSort && ALLOWED_SORTS.has(activeSort)) params.set('sort', activeSort);
+            else params.delete('sort');
             const next = `${window.location.pathname}?${params.toString()}`;
             window.history.replaceState({}, '', next);
         }
@@ -613,8 +674,12 @@
             const pol = (params.get('pol') || '').split(',').map(s => s.trim()).filter(Boolean);
             const sec = (params.get('sec') || '').split(',').map(s => s.trim()).filter(Boolean);
             const loc = (params.get('loc') || '').split(',').map(s => s.trim()).filter(Boolean);
+            const sort = (params.get('sort') || '').trim();
 
             filterWorkableHiringOnly = params.get('hire') === '1';
+            if (ALLOWED_SORTS.has(sort)) {
+                activeSort = sort;
+            }
 
             setActivePolicies(pol);
             setActiveSectors(sec);
@@ -640,6 +705,17 @@
         });
 
         document.getElementById('searchInput').addEventListener('input', () => {
+            currentPage = 1;
+            updatePagination();
+            syncUrlFromState();
+        });
+
+        document.getElementById('sortOpenRolesBtn').addEventListener('click', () => {
+            if (activeSort === 'open_desc') {
+                activeSort = 'open_asc';
+            } else {
+                activeSort = 'open_desc';
+            }
             currentPage = 1;
             updatePagination();
             syncUrlFromState();

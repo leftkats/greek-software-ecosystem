@@ -54,11 +54,12 @@ jobs:
 
           if [ "$EVENT_NAME" = "schedule" ] || [ "$EVENT_NAME" = "workflow_dispatch" ]; then
             uv run python -m scripts.fetch_workable_counts
+            uv run python -m scripts.generate_readme
             uv run python -m scripts.generate_index
 
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
             git config --local user.name "github-actions[bot]"
-            git add index.html data/workable_counts.yaml
+            git add readme.md engineering-hubs.md index.html data/workable_counts.yaml
 
             if git diff --staged --quiet; then
               echo "No changes to commit."
