@@ -53,6 +53,12 @@ The full table lives in **[engineering-hubs.md](engineering-hubs.md)** — sorta
 - [LinkedIn: Software Engineer in Greece](https://www.linkedin.com/jobs/search/?keywords=Software%20Engineer&location=Greece)
 - [Startup Pirate: Learn what matters in Greek tech and startups](https://startuppirate.gr/)
 - [Wellfound: Tech Jobs in Athens, Greece](https://wellfound.com/location/athens-greece)
+- [Indeed Greece: IT jobs in Athens](https://gr.indeed.com/q-it-l-%CE%91%CE%B8%CE%AE%CE%BD%CE%B1-%CE%B8%CE%AD%CF%83%CE%B5%CE%B9%CF%82-%CE%B5%CF%81%CE%B3%CE%B1%CF%83%CE%AF%CE%B1%CF%82.html?vjk=b93f8fe12c26c296)
+- [NewJobs: Data Engineer jobs in Athens](https://www.newjobs.gr/search?location=Athens&query=data+engineer&selectedJobId=834236f6-5804-49f9-89cc-ba9761f67661)
+- [Randstad: IT jobs remote all over Greece](https://www.randstad.gr/en/jobs/s-information-technology/attica/remote-all-over-greece/)
+- [Glassdoor: Data Engineer jobs in Greece](https://www.glassdoor.com/Job/greece-data-engineer-jobs-SRCH_IL.0,6_IN100_KO7,20.htm)
+- [Elevate Greece: Startup job positions](https://elevategreece.gov.gr/el/theseis-ergasias/)
+- [Jobs in Greece: Data Scientist jobs](https://www.jobs-greece.gr/JobAds/Data-Scientist-Jobs/all/EN/jobs-in-greece)
 
 ---
 
