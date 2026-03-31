@@ -13,3 +13,15 @@ queries:
     url: https://startuppirate.gr/
   - name: "Wellfound: Tech Jobs in Athens, Greece"
     url: https://wellfound.com/location/athens-greece
+  - name: "Indeed Greece: IT jobs in Athens"
+    url: https://gr.indeed.com/q-it-l-%CE%91%CE%B8%CE%AE%CE%BD%CE%B1-%CE%B8%CE%AD%CF%83%CE%B5%CE%B9%CF%82-%CE%B5%CF%81%CE%B3%CE%B1%CF%83%CE%AF%CE%B1%CF%82.html?vjk=b93f8fe12c26c296
+  - name: "NewJobs: Data Engineer jobs in Athens"
+    url: https://www.newjobs.gr/search?location=Athens&query=data+engineer&selectedJobId=834236f6-5804-49f9-89cc-ba9761f67661
+  - name: "Randstad: IT jobs remote all over Greece"
+    url: https://www.randstad.gr/en/jobs/s-information-technology/attica/remote-all-over-greece/
+  - name: "Glassdoor: Data Engineer jobs in Greece"
+    url: https://www.glassdoor.com/Job/greece-data-engineer-jobs-SRCH_IL.0,6_IN100_KO7,20.htm
+  - name: "Elevate Greece: Startup job positions"
+    url: https://elevategreece.gov.gr/el/theseis-ergasias/
+  - name: "Jobs in Greece: Data Scientist jobs"
+    url: https://www.jobs-greece.gr/JobAds/Data-Scientist-Jobs/all/EN/jobs-in-greece
