@@ -6,7 +6,35 @@
     <script src="assets/js/gtag-init.js"></script>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Awesome Greek Tech Jobs</title>
+    <title>Awesome Greek Tech Jobs | Greece tech jobs & careers</title>
+    <meta name="description" content="A curated, community-maintained directory of companies hiring for tech roles in Greece — with sectors, work policies, career pages, and live Workable job-count snapshots." />
+    <meta name="keywords" content="Greece tech jobs, software engineer Greece, IT careers Athens, remote work Greece, tech startups Greece, developer jobs Greece, engineering jobs Thessaloniki, tech hiring Greece" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="canonical" href="https://leftkats.github.io/awesome-greek-tech-jobs/" />
+    <link rel="icon" href="assets/vectorized.svg" type="image/svg+xml" />
+    <link rel="alternate" hreflang="en" href="https://leftkats.github.io/awesome-greek-tech-jobs/" />
+    <link rel="alternate" hreflang="x-default" href="https://leftkats.github.io/awesome-greek-tech-jobs/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://leftkats.github.io/awesome-greek-tech-jobs/" />
+    <meta property="og:title" content="Awesome Greek Tech Jobs | Greece tech jobs & careers" />
+    <meta property="og:description" content="A curated, community-maintained directory of companies hiring for tech roles in Greece — with sectors, work policies, career pages, and live Workable job-count snapshots." />
+    <meta property="og:image" content="https://leftkats.github.io/awesome-greek-tech-jobs/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Awesome Greek Tech Jobs — preview image" />
+    <meta property="og:site_name" content="Awesome Greek Tech Jobs" />
+    <meta property="og:locale" content="en_GB" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Awesome Greek Tech Jobs | Greece tech jobs & careers" />
+    <meta name="twitter:description" content="A curated, community-maintained directory of companies hiring for tech roles in Greece — with sectors, work policies, career pages, and live Workable job-count snapshots." />
+    <meta name="twitter:image" content="https://leftkats.github.io/awesome-greek-tech-jobs/assets/og-image.png" />
+
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://leftkats.github.io/awesome-greek-tech-jobs/#website", "url": "https://leftkats.github.io/awesome-greek-tech-jobs/", "name": "Awesome Greek Tech Jobs", "description": "A curated, community-maintained directory of companies hiring for tech roles in Greece — with sectors, work policies, career pages, and live Workable job-count snapshots.", "inLanguage": "en-GB", "publisher": {"@id": "https://leftkats.github.io/awesome-greek-tech-jobs/#organization"}, "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": "https://leftkats.github.io/awesome-greek-tech-jobs/?q={search_term_string}"}, "query-input": "required name=search_term_string"}}, {"@type": "Organization", "@id": "https://leftkats.github.io/awesome-greek-tech-jobs/#organization", "name": "Awesome Greek Tech Jobs", "url": "https://leftkats.github.io/awesome-greek-tech-jobs/", "sameAs": ["https://github.com/leftkats/awesome-greek-tech-jobs"]}, {"@type": "WebPage", "@id": "https://leftkats.github.io/awesome-greek-tech-jobs/", "url": "https://leftkats.github.io/awesome-greek-tech-jobs/", "name": "Awesome Greek Tech Jobs | Greece tech jobs & careers", "description": "A curated, community-maintained directory of companies hiring for tech roles in Greece — with sectors, work policies, career pages, and live Workable job-count snapshots.", "isPartOf": {"@id": "https://leftkats.github.io/awesome-greek-tech-jobs/#website"}, "about": {"@type": "Thing", "name": "Technology employment and hiring in Greece"}}, {"@type": "CollectionPage", "@id": "https://leftkats.github.io/awesome-greek-tech-jobs/#directory", "name": "Tech companies hiring in Greece", "isPartOf": {"@id": "https://leftkats.github.io/awesome-greek-tech-jobs/"}, "numberOfItems": 248}]}</script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap"
@@ -18,6 +46,9 @@
 </head>
 
 <body class="bg-surface dark:bg-surface-dark text-slate-900 dark:text-slate-100 min-h-screen antialiased">
+    <a href="#companyList"
+        class="absolute left-0 top-0 z-[100] -translate-y-full focus:translate-y-0 bg-cyan-600 text-white text-sm font-medium px-4 py-2.5 rounded-br-xl shadow-lg outline-none ring-2 ring-offset-2 ring-cyan-400 ring-offset-slate-900">Skip
+        to company directory</a>
     <div class="absolute inset-0 pointer-events-none">
         <div class="mx-auto max-w-6xl">
             <div class="h-60 bg-gradient-to-b from-cyan-100/70 to-transparent dark:from-cyan-500/10"></div>
@@ -31,7 +62,7 @@
             Remote/Location policies are currently under construction and may not reflect real-time changes.
         </div>
 
-        <nav
+        <nav aria-label="Primary"
             class="sticky top-0 z-30 backdrop-blur bg-white/85 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800">
             <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
                 <div class="flex items-center gap-2">
@@ -56,7 +87,7 @@
         <header class="max-w-6xl mx-auto px-4 pt-8 pb-6">
             <div
                 class="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark p-6 sm:p-8">
-                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Find tech companies hiring in Greece</h1>
+                <h1 id="page-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight">Find tech companies hiring in Greece</h1>
                 <p class="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-3xl">
                     Curated company directory with search, filters, and Workable role snapshots.
                 </p>
@@ -109,12 +140,12 @@
             </div>
         </header>
 
-        <section class="max-w-6xl mx-auto px-4 pb-4">
+        <section class="max-w-6xl mx-auto px-4 pb-4" aria-labelledby="page-heading">
             <div class="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-center">
                 <div class="relative">
                     <span
                         class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">search</span>
-                    <input id="searchInput"
+                    <input id="searchInput" aria-label="Search companies by name, sector, location, or policy"
                         class="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
                         placeholder="Search by company, sector, location, or policy..." type="text">
                 </div>
