@@ -32,7 +32,7 @@
 A vibrant, community-maintained map of employers hiring for technology roles in Greece — sectors, work policies, career portals, and weekly Workable hiring snapshots so you can explore with confidence.
 
 
-Currently tracking **250** companies, with **Athens** as the leading hub (168 offices). **50** teams are fully remote, **122** hybrid, and **32** on-site. The most common sectors are **IT Services** (50), **AI** (34), **Software Development** (29), **Consulting** (23), **IT Consulting** (21).
+Currently tracking **250** companies, with **Athens** as the leading hub (169 offices). **50** teams are fully remote, **122** hybrid, and **32** on-site. The most common sectors are **IT Services** (51), **AI** (34), **Software Development** (31), **Consulting** (24), **IT Consulting** (21).
 
 
 ---
