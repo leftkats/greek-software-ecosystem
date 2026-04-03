@@ -2,6 +2,33 @@
     display: none !important;
 }
 
+.agtj-filter-panel {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(148 163 184 / 0.7) transparent;
+}
+
+.agtj-filter-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.agtj-filter-panel::-webkit-scrollbar-thumb {
+    background-color: rgb(148 163 184 / 0.6);
+    border-radius: 999px;
+}
+
+.dark .agtj-filter-panel {
+    scrollbar-color: rgb(71 85 105 / 0.8) transparent;
+}
+
+.dark .agtj-filter-panel::-webkit-scrollbar-thumb {
+    background-color: rgb(71 85 105 / 0.7);
+}
+
+.policy-filter:focus-visible {
+    outline: 2px solid rgb(6 182 212);
+    outline-offset: 2px;
+}
+
 .policy-filter,
 .sector-filter,
 .company-location-tag,

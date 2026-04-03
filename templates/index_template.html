@@ -71,12 +71,12 @@
                 </div>
                 <div class="flex items-center gap-1">
                     <button type="button" id="themeToggleBtn"
-                        class="w-11 h-11 rounded-xl inline-flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800"
+                        class="w-11 h-11 rounded-xl inline-flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950"
                         title="Toggle dark mode" aria-label="Toggle dark mode">
-                        <span class="material-symbols-outlined">contrast</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">contrast</span>
                     </button>
                     <a href="https://github.com/leftkats/awesome-greek-tech-jobs"
-                        class="w-11 h-11 rounded-xl inline-flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800"
+                        class="w-11 h-11 rounded-xl inline-flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950"
                         title="Open GitHub repository">
                         <span class="material-symbols-outlined">code</span>
                     </a>
@@ -87,11 +87,11 @@
         <header class="max-w-6xl mx-auto px-4 pt-8 pb-6">
             <div
                 class="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark p-6 sm:p-8">
-                <h1 id="page-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight">Discover who’s hiring
-                    in technology across Greece</h1>
-                <p class="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-3xl">
-                    Search, filter, and explore employers in one place, work style, career links, and weekly Workable
-                    open role counts for some of the companies.
+                <h1 id="page-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                    Discover who is hiring in technology across Greece</h1>
+                <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
+                    Search and filter employers by industry, location, sector, and work style. Career links and Workable
+                    role counts (where available) are refreshed on a regular schedule—not live job boards.
                 </p>
 
                 <div class="mt-4 space-y-2" role="region" aria-label="Site statistics">
@@ -142,33 +142,38 @@
             </div>
         </header>
 
-        <section class="max-w-6xl mx-auto px-4 pb-4" aria-labelledby="page-heading">
-            <div class="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-center">
-                <div class="relative">
-                    <span
-                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">search</span>
-                    <input id="searchInput" aria-label="Search companies by name, sector, industry, location, or policy"
-                        class="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                        placeholder="Search by company, sector, industry, location, or policy..." type="text">
-                </div>
-                <div class="flex items-center gap-2">
-                    <button id="sortOpenRolesBtn" type="button"
-                        class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/70 text-xs font-mono uppercase px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800"
-                        aria-pressed="false" title="Sort companies by open Workable roles">
-                        Sort Open Roles: High-Low
-                    </button>
-                </div>
-            </div>
+        <section class="max-w-6xl mx-auto px-4 pb-5" aria-labelledby="directory-toolbar-heading">
+            <h2 id="directory-toolbar-heading" class="sr-only">Search and filter companies</h2>
             <div
-                class="mt-2 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark p-3 sm:p-4 space-y-2">
-                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-snug">
-                    <span class="font-medium text-slate-600 dark:text-slate-300">Tip:</span>
-                    open a row to tick several choices. Leave none ticked to show all companies.
-                </p>
-                <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-stretch sm:gap-2">
+                class="rounded-2xl border border-slate-200/90 dark:border-slate-700/90 bg-white/95 dark:bg-slate-900/75 shadow-soft dark:shadow-soft-dark p-4 sm:p-5 space-y-4">
+                <div class="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
+                    <div class="relative">
+                        <span
+                            class="material-symbols-outlined pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xl">search</span>
+                        <input id="searchInput"
+                            aria-label="Search companies by name, sector, industry, location, or policy"
+                            class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900/80 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-sm transition-shadow focus:outline-none focus:ring-2 focus:ring-cyan-500/80 focus:border-cyan-500/50 dark:focus:border-cyan-500/40"
+                            placeholder="Search companies, sectors, industries, locations…" type="search"
+                            autocomplete="off" spellcheck="false">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="sortOpenRolesBtn" type="button"
+                            class="w-full sm:w-auto rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50/80 dark:bg-slate-800/50 text-xs font-mono uppercase tracking-wide px-4 py-3 sm:py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+                            aria-pressed="false" title="Sort companies by open Workable roles">
+                            Sort Open Roles: High-Low
+                        </button>
+                    </div>
+                </div>
+                <div class="h-px bg-slate-200/90 dark:bg-slate-700/80" role="presentation" aria-hidden="true"></div>
+                <div class="space-y-3">
+                    <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        <span class="font-semibold text-slate-600 dark:text-slate-300">Filters</span>
+                        — open Industry or Location to select several options. Leave all unchecked to show every company.
+                    </p>
+                    <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-stretch sm:gap-2">
                     <div id="industryFilterWrap" class="relative min-w-0 flex-1 sm:min-w-[12rem]">
                         <button type="button" id="industryFilterToggle"
-                            class="relative w-full flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/80 pl-10 pr-10 py-2 text-left text-sm text-slate-900 dark:text-slate-100 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/80 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            class="relative w-full min-h-[2.75rem] flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900/80 pl-10 pr-10 py-2 text-left text-sm text-slate-900 dark:text-slate-100 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                             aria-expanded="false" aria-haspopup="listbox"
                             aria-controls="industryFilterPanel" title="Open industry filter">
                             <span
@@ -183,7 +188,7 @@
                                 class="material-symbols-outlined pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 text-xl transition-transform duration-150">expand_more</span>
                         </button>
                         <div id="industryFilterPanel"
-                            class="agtj-filter-panel hidden absolute left-0 right-0 z-50 mt-1 max-h-56 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 py-1 shadow-lg"
+                            class="agtj-filter-panel hidden absolute left-0 right-0 z-50 mt-1.5 max-h-60 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 py-1.5 shadow-xl ring-1 ring-black/5 dark:ring-white/10"
                             role="listbox" aria-multiselectable="true">
                             {% for ind in industries_for_dropdown %}
                             <label
@@ -197,7 +202,7 @@
                     </div>
                     <div id="locationFilterWrap" class="relative min-w-0 flex-1 sm:min-w-[12rem]">
                         <button type="button" id="locationFilterToggle"
-                            class="relative w-full flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/80 pl-10 pr-10 py-2 text-left text-sm text-slate-900 dark:text-slate-100 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/80 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            class="relative w-full min-h-[2.75rem] flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900/80 pl-10 pr-10 py-2 text-left text-sm text-slate-900 dark:text-slate-100 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                             aria-expanded="false" aria-haspopup="listbox"
                             aria-controls="locationFilterPanel" title="Open location filter">
                             <span
@@ -212,7 +217,7 @@
                                 class="material-symbols-outlined pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 text-xl transition-transform duration-150">expand_more</span>
                         </button>
                         <div id="locationFilterPanel"
-                            class="agtj-filter-panel hidden absolute left-0 right-0 z-50 mt-1 max-h-56 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 py-1 shadow-lg"
+                            class="agtj-filter-panel hidden absolute left-0 right-0 z-50 mt-1.5 max-h-60 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 py-1.5 shadow-xl ring-1 ring-black/5 dark:ring-white/10"
                             role="listbox" aria-multiselectable="true">
                             {% for loc in locations %}
                             <label
@@ -224,21 +229,22 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="flex sm:items-end sm:shrink-0">
+                    <div class="flex sm:items-stretch sm:shrink-0">
                         <button type="button" id="clearDropdownFiltersBtn"
-                            class="w-full sm:w-auto rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/80 text-xs font-mono uppercase px-3 py-2.5 sm:py-2 hover:bg-slate-100 dark:hover:bg-slate-800"
+                            class="w-full sm:w-auto min-h-[2.75rem] sm:min-h-0 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50/90 dark:bg-slate-800/60 text-xs font-mono uppercase tracking-wide px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                             title="Clear industry and location selections only">
                             Clear industry &amp; location
                         </button>
                     </div>
                 </div>
+                </div>
             </div>
         </section>
 
-        <main class="max-w-6xl mx-auto px-4 pb-8 space-y-3" id="companyList">
+        <main class="max-w-6xl mx-auto px-4 pb-8 space-y-3" id="companyList" aria-label="Company directory">
             {% for company in companies %}
             <article
-                class="company-row rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark p-4 sm:p-5 flex flex-col gap-4"
+                class="company-row group relative rounded-2xl border border-slate-200/90 dark:border-slate-700/90 bg-white/95 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark p-4 sm:p-5 flex flex-col gap-4 transition-[box-shadow,border-color] duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600"
                 data-name="{{ company.name }}" data-policy="{{ company.work_policy }}"
                 data-sectors="{{ company.sectors|join(' ') }}" data-sectors-list="{{ company.sectors|join('||') }}"
                 data-industries="{{ company.industries|join(' ') }}"
@@ -251,33 +257,41 @@
                     <div class="min-w-0">
                         <div class="flex items-center flex-wrap gap-2">
                             <a href="{{ company.site_url }}" target="_blank" rel="noopener noreferrer"
-                                class="company-link">
-                                <h2 class="text-xl sm:text-2xl font-bold tracking-tight break-words">{{ company.name }}
-                                </h2>
+                                class="company-link rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
+                                <h2
+                                    class="text-xl sm:text-2xl font-bold tracking-tight break-words text-slate-900 dark:text-slate-50 transition-colors group-hover:text-cyan-700 dark:group-hover:text-cyan-400">
+                                    {{ company.name }}</h2>
                             </a>
                             <span
                                 class="policy-badge-slot text-[11px] font-mono px-2 py-1 rounded-full {{ get_style(company.work_policy) }}">
                                 {{ company.work_policy }}
                             </span>
                         </div>
-                        <div class="mt-3 flex flex-wrap gap-2">
+                        <div class="mt-4">
+                            <p
+                                class="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
+                                Sectors</p>
+                            <div class="flex flex-wrap gap-1.5">
                             {% for sector in company.sectors %}
                             <button type="button"
-                                class="sector-filter text-[11px] sm:text-xs font-mono uppercase border border-slate-300 dark:border-slate-700 rounded-full px-2.5 py-1.5"
+                                class="sector-filter text-[11px] sm:text-xs font-mono uppercase border border-slate-200 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/30 rounded-full px-2.5 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                                 data-sector="{{ sector }}" aria-pressed="false" title="Filter by {{ sector }}">
                                 {{ sector }}
                             </button>
                             {% endfor %}
+                            </div>
                         </div>
                         {% if company.office_locations %}
-                        <div class="mt-3 flex flex-wrap items-center gap-2">
-                            <span class="text-xs text-slate-500 dark:text-slate-400 inline-flex items-center gap-1">
-                                <span class="material-symbols-outlined text-sm">location_on</span>
-                            </span>
-                            <span class="inline-flex flex-wrap gap-1 items-center" role="list">
+                        <div class="mt-4 flex flex-wrap items-start gap-2">
+                            <p
+                                class="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 shrink-0 pt-0.5 inline-flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm opacity-80" aria-hidden="true">location_on</span>
+                                Offices
+                            </p>
+                            <span class="inline-flex flex-wrap gap-1.5 items-center flex-1 min-w-0" role="list">
                                 {% for loc in company.office_locations %}
                                 <button type="button" role="listitem"
-                                    class="company-location-tag text-[11px] sm:text-xs font-mono uppercase border border-slate-300 dark:border-slate-700 rounded-full px-2.5 py-1.5"
+                                    class="company-location-tag text-[11px] sm:text-xs font-mono uppercase border border-slate-200 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/30 rounded-full px-2.5 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                                     data-location="{{ loc }}" aria-pressed="false"
                                     title="Filter directory by {{ loc }}">
                                     {{ loc }}
@@ -288,24 +302,24 @@
                         {% endif %}
                     </div>
 
-                    <div class="flex flex-wrap items-center gap-2 sm:justify-end">
+                    <div class="flex flex-wrap items-center gap-2 sm:justify-end sm:pt-0.5">
                         {% if company.workable_slug %}
                         <span
-                            class="workable-job-badge border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 min-w-[8.25rem] text-center"
+                            class="workable-job-badge border border-slate-200 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/20 rounded-xl px-3 py-2 min-w-[8.25rem] text-center"
                             role="status" aria-live="polite">
                             <span
                                 class="workable-job-badge-text text-[11px] sm:text-xs font-mono uppercase opacity-60">...</span>
                         </span>
                         {% endif %}
-                        <a class="company-career-link border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2.5 inline-flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800"
+                        <a class="company-career-link border border-slate-200 dark:border-slate-600 rounded-xl px-3 py-2.5 inline-flex items-center gap-2 bg-white/80 dark:bg-slate-900/40 hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                             href="{{ company.career_url }}" target="_blank" rel="noopener noreferrer">
-                            <span class="material-symbols-outlined text-base">arrow_outward</span>
-                            <span class="career-btn-label text-[11px] sm:text-xs font-mono uppercase">Careers</span>
+                            <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span>
+                            <span class="career-btn-label text-[11px] sm:text-xs font-mono uppercase tracking-wide">Careers</span>
                         </a>
                         {% if company.linkedin_company_id %}
-                        <a class="border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2.5 inline-flex items-center hover:bg-slate-100 dark:hover:bg-slate-800"
+                        <a class="border border-slate-200 dark:border-slate-600 rounded-xl px-3 py-2.5 inline-flex items-center bg-white/80 dark:bg-slate-900/40 hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                             href="https://www.linkedin.com/company/{{ company.linkedin_company_id }}/" target="_blank"
-                            rel="noopener noreferrer" title="Open LinkedIn">
+                            rel="noopener noreferrer" title="Open LinkedIn profile">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                 focusable="false">
                                 <path
@@ -324,15 +338,15 @@
                 class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark p-5 sm:p-6 flex flex-col gap-5">
                 <div class="flex items-center justify-center gap-2" id="paginationControls">
                     <button type="button" id="prevBtn"
-                        class="rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2 text-xs font-mono uppercase hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40">
+                        class="min-h-[2.75rem] sm:min-h-0 rounded-xl border border-slate-200 dark:border-slate-600 px-4 py-2 text-xs font-mono uppercase tracking-wide hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:pointer-events-none focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
                         Prev
                     </button>
                     <div id="pageIndicator"
-                        class="rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-4 py-2 text-xs font-mono uppercase">
+                        class="min-h-[2.75rem] sm:min-h-0 inline-flex items-center rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-4 py-2 text-xs font-mono uppercase tracking-wide tabular-nums">
                         01
                     </div>
                     <button type="button" id="nextBtn"
-                        class="rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2 text-xs font-mono uppercase hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40">
+                        class="min-h-[2.75rem] sm:min-h-0 rounded-xl border border-slate-200 dark:border-slate-600 px-4 py-2 text-xs font-mono uppercase tracking-wide hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:pointer-events-none focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
                         Next
                     </button>
                 </div>
