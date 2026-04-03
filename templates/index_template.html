@@ -95,11 +95,12 @@
         <header class="max-w-6xl mx-auto px-4 pt-8 pb-6">
             <div
                 class="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark p-6 sm:p-8">
-                <h1 id="page-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                <h1 id="page-heading"
+                    class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
                     Discover who is hiring in technology across Greece</h1>
                 <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
                     Search and filter employers by industry, location, sector, and work style. Career links and Workable
-                    role counts (where available) are refreshed on a regular schedule—not live job boards.
+                    role counts (where available) are refreshed on a weekly schedule.
                 </p>
 
                 <div class="mt-4 space-y-2" role="region" aria-label="Site statistics">
@@ -176,75 +177,78 @@
                 <div class="space-y-3">
                     <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                         <span class="font-semibold text-slate-600 dark:text-slate-300">Filters</span>
-                        — open Industry or Location to select several options. Leave all unchecked to show every company.
+                        — open Industry or Location to select several options. Leave all unchecked to show every
+                        company.
                     </p>
                     <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-stretch sm:gap-2">
-                    <div id="industryFilterWrap" class="relative min-w-0 flex-1 sm:min-w-[12rem]">
-                        <button type="button" id="industryFilterToggle"
-                            class="relative w-full min-h-[2.75rem] flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900/80 pl-10 pr-10 py-2 text-left text-sm text-slate-900 dark:text-slate-100 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
-                            aria-expanded="false" aria-haspopup="listbox"
-                            aria-controls="industryFilterPanel" title="Open industry filter">
-                            <span
-                                class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-lg">category</span>
-                            <span class="min-w-0 flex-1">
+                        <div id="industryFilterWrap" class="relative min-w-0 flex-1 sm:min-w-[12rem]">
+                            <button type="button" id="industryFilterToggle"
+                                class="relative w-full min-h-[2.75rem] flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900/80 pl-10 pr-10 py-2 text-left text-sm text-slate-900 dark:text-slate-100 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+                                aria-expanded="false" aria-haspopup="listbox" aria-controls="industryFilterPanel"
+                                title="Open industry filter">
                                 <span
-                                    class="block text-[10px] font-mono uppercase tracking-wide text-slate-500 dark:text-slate-400">Industry</span>
-                                <span id="industryFilterSummary"
-                                    class="block truncate font-medium leading-tight">All industries</span>
-                            </span>
-                            <span id="industryFilterChevron"
-                                class="material-symbols-outlined pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 text-xl transition-transform duration-150">expand_more</span>
-                        </button>
-                        <div id="industryFilterPanel"
-                            class="agtj-filter-panel hidden absolute left-0 right-0 z-50 mt-1.5 max-h-60 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 py-1.5 shadow-xl ring-1 ring-black/5 dark:ring-white/10"
-                            role="listbox" aria-multiselectable="true">
-                            {% for ind in industries_for_dropdown %}
-                            <label
-                                class="flex cursor-pointer items-start gap-2 px-3 py-2 text-sm text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/90">
-                                <input type="checkbox" class="industry-filter-cb mt-0.5 shrink-0 rounded border-slate-300 dark:border-slate-600"
-                                    value="{{ ind }}" />
-                                <span class="leading-snug">{{ ind }}</span>
-                            </label>
-                            {% endfor %}
+                                    class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-lg">category</span>
+                                <span class="min-w-0 flex-1">
+                                    <span
+                                        class="block text-[10px] font-mono uppercase tracking-wide text-slate-500 dark:text-slate-400">Industry</span>
+                                    <span id="industryFilterSummary"
+                                        class="block truncate font-medium leading-tight">All industries</span>
+                                </span>
+                                <span id="industryFilterChevron"
+                                    class="material-symbols-outlined pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 text-xl transition-transform duration-150">expand_more</span>
+                            </button>
+                            <div id="industryFilterPanel"
+                                class="agtj-filter-panel hidden absolute left-0 right-0 z-50 mt-1.5 max-h-60 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 py-1.5 shadow-xl ring-1 ring-black/5 dark:ring-white/10"
+                                role="listbox" aria-multiselectable="true">
+                                {% for ind in industries_for_dropdown %}
+                                <label
+                                    class="flex cursor-pointer items-start gap-2 px-3 py-2 text-sm text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/90">
+                                    <input type="checkbox"
+                                        class="industry-filter-cb mt-0.5 shrink-0 rounded border-slate-300 dark:border-slate-600"
+                                        value="{{ ind }}" />
+                                    <span class="leading-snug">{{ ind }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div id="locationFilterWrap" class="relative min-w-0 flex-1 sm:min-w-[12rem]">
+                            <button type="button" id="locationFilterToggle"
+                                class="relative w-full min-h-[2.75rem] flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900/80 pl-10 pr-10 py-2 text-left text-sm text-slate-900 dark:text-slate-100 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+                                aria-expanded="false" aria-haspopup="listbox" aria-controls="locationFilterPanel"
+                                title="Open location filter">
+                                <span
+                                    class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-lg">location_on</span>
+                                <span class="min-w-0 flex-1">
+                                    <span
+                                        class="block text-[10px] font-mono uppercase tracking-wide text-slate-500 dark:text-slate-400">Location</span>
+                                    <span id="locationFilterSummary"
+                                        class="block truncate font-medium leading-tight">All locations</span>
+                                </span>
+                                <span id="locationFilterChevron"
+                                    class="material-symbols-outlined pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 text-xl transition-transform duration-150">expand_more</span>
+                            </button>
+                            <div id="locationFilterPanel"
+                                class="agtj-filter-panel hidden absolute left-0 right-0 z-50 mt-1.5 max-h-60 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 py-1.5 shadow-xl ring-1 ring-black/5 dark:ring-white/10"
+                                role="listbox" aria-multiselectable="true">
+                                {% for loc in locations %}
+                                <label
+                                    class="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm font-mono uppercase text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/90">
+                                    <input type="checkbox"
+                                        class="location-filter-cb rounded border-slate-300 dark:border-slate-600"
+                                        value="{{ loc }}" />
+                                    <span>{{ loc }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="flex sm:items-stretch sm:shrink-0">
+                            <button type="button" id="clearDropdownFiltersBtn"
+                                class="w-full sm:w-auto min-h-[2.75rem] sm:min-h-0 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50/90 dark:bg-slate-800/60 text-xs font-mono uppercase tracking-wide px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+                                title="Clear industry and location selections only">
+                                Clear industry &amp; location
+                            </button>
                         </div>
                     </div>
-                    <div id="locationFilterWrap" class="relative min-w-0 flex-1 sm:min-w-[12rem]">
-                        <button type="button" id="locationFilterToggle"
-                            class="relative w-full min-h-[2.75rem] flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900/80 pl-10 pr-10 py-2 text-left text-sm text-slate-900 dark:text-slate-100 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
-                            aria-expanded="false" aria-haspopup="listbox"
-                            aria-controls="locationFilterPanel" title="Open location filter">
-                            <span
-                                class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-lg">location_on</span>
-                            <span class="min-w-0 flex-1">
-                                <span
-                                    class="block text-[10px] font-mono uppercase tracking-wide text-slate-500 dark:text-slate-400">Location</span>
-                                <span id="locationFilterSummary"
-                                    class="block truncate font-medium leading-tight">All locations</span>
-                            </span>
-                            <span id="locationFilterChevron"
-                                class="material-symbols-outlined pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 text-xl transition-transform duration-150">expand_more</span>
-                        </button>
-                        <div id="locationFilterPanel"
-                            class="agtj-filter-panel hidden absolute left-0 right-0 z-50 mt-1.5 max-h-60 overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 py-1.5 shadow-xl ring-1 ring-black/5 dark:ring-white/10"
-                            role="listbox" aria-multiselectable="true">
-                            {% for loc in locations %}
-                            <label
-                                class="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm font-mono uppercase text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/90">
-                                <input type="checkbox" class="location-filter-cb rounded border-slate-300 dark:border-slate-600"
-                                    value="{{ loc }}" />
-                                <span>{{ loc }}</span>
-                            </label>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="flex sm:items-stretch sm:shrink-0">
-                        <button type="button" id="clearDropdownFiltersBtn"
-                            class="w-full sm:w-auto min-h-[2.75rem] sm:min-h-0 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50/90 dark:bg-slate-800/60 text-xs font-mono uppercase tracking-wide px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
-                            title="Clear industry and location selections only">
-                            Clear industry &amp; location
-                        </button>
-                    </div>
-                </div>
                 </div>
             </div>
         </section>
@@ -280,20 +284,21 @@
                                 class="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
                                 Sectors</p>
                             <div class="flex flex-wrap gap-1.5">
-                            {% for sector in company.sectors %}
-                            <button type="button"
-                                class="sector-filter text-[11px] sm:text-xs font-mono uppercase border border-slate-200 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/30 rounded-full px-2.5 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
-                                data-sector="{{ sector }}" aria-pressed="false" title="Filter by {{ sector }}">
-                                {{ sector }}
-                            </button>
-                            {% endfor %}
+                                {% for sector in company.sectors %}
+                                <button type="button"
+                                    class="sector-filter text-[11px] sm:text-xs font-mono uppercase border border-slate-200 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/30 rounded-full px-2.5 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+                                    data-sector="{{ sector }}" aria-pressed="false" title="Filter by {{ sector }}">
+                                    {{ sector }}
+                                </button>
+                                {% endfor %}
                             </div>
                         </div>
                         {% if company.office_locations %}
                         <div class="mt-4 flex flex-wrap items-start gap-2">
                             <p
                                 class="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 shrink-0 pt-0.5 inline-flex items-center gap-1">
-                                <span class="material-symbols-outlined text-sm opacity-80" aria-hidden="true">location_on</span>
+                                <span class="material-symbols-outlined text-sm opacity-80"
+                                    aria-hidden="true">location_on</span>
                                 Offices
                             </p>
                             <span class="inline-flex flex-wrap gap-1.5 items-center flex-1 min-w-0" role="list">
@@ -322,7 +327,8 @@
                         <a class="company-career-link border border-slate-200 dark:border-slate-600 rounded-xl px-3 py-2.5 inline-flex items-center gap-2 bg-white/80 dark:bg-slate-900/40 hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                             href="{{ company.career_url }}" target="_blank" rel="noopener noreferrer">
                             <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span>
-                            <span class="career-btn-label text-[11px] sm:text-xs font-mono uppercase tracking-wide">Careers</span>
+                            <span
+                                class="career-btn-label text-[11px] sm:text-xs font-mono uppercase tracking-wide">Careers</span>
                         </a>
                         {% if company.linkedin_company_id %}
                         <a class="border border-slate-200 dark:border-slate-600 rounded-xl px-3 py-2.5 inline-flex items-center bg-white/80 dark:bg-slate-900/40 hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
