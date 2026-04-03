@@ -669,7 +669,7 @@ function initWorkableJobCounts() {
         }
 
         const n = accounts[slug];
-        if (typeof n !== "number" || !Number.isFinite(n)) {
+        if (typeof n !== "number" || !Number.isFinite(n) || n <= 0) {
             if (badge) badge.remove();
             return;
         }
@@ -677,14 +677,6 @@ function initWorkableJobCounts() {
         row.dataset.workableOpenings = String(n);
         numericRows += 1;
         aggregateOpen += n;
-
-        if (n === 0) {
-            if (badge) {
-                badge.innerHTML =
-                    '<span class="text-[11px] sm:text-xs font-mono uppercase opacity-60">No openings</span>';
-            }
-            return;
-        }
 
         row.classList.add("company-row-has-openings");
         if (badge) badge.remove();
