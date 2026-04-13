@@ -14,13 +14,14 @@
         </p>
         <p class="mt-3 text-xs leading-relaxed text-slate-500 dark:text-slate-500 max-w-3xl">
             Generated from <span class="font-mono text-cyan-700 dark:text-cyan-400">_data/queries.yaml</span> and
-            <span class="font-mono text-cyan-700 dark:text-cyan-400">_data/cafe_resources.yaml</span> — run
-            <span class="font-mono">just generate</span> after edits.
+            <span class="font-mono text-cyan-700 dark:text-cyan-400">_data/open_greek_data.yaml</span> — run
+            <span class="font-mono">just generate</span> after edits. Laptop-friendly workspaces and cafés live on
+            <a href="workspaces.html" class="text-cyan-700 dark:text-cyan-400 underline hover:no-underline font-medium">Workspaces &amp; cafés</a>.
         </p>
     </div>
 </section>
 
-{% if query_sections or awesome_queries or remote_workspace_html %}
+{% if query_sections or awesome_queries or open_greek_data_queries %}
 <nav class="max-w-6xl mx-auto px-4 pb-6" aria-label="On this page">
     <div
         class="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-gradient-to-br from-white/95 to-cyan-50/30 dark:from-slate-900/80 dark:to-slate-900/50 px-4 py-4 sm:px-5 sm:py-4 shadow-sm">
@@ -38,10 +39,10 @@
                     class="inline-flex items-center rounded-lg border border-slate-200/90 bg-white/90 px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm hover:border-cyan-400/60 hover:text-cyan-800 dark:border-slate-600 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:border-cyan-600/50 dark:hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500">Awesome lists (GitHub)</a>
             </li>
             {% endif %}
-            {% if remote_workspace_html %}
+            {% if open_greek_data_queries %}
             <li>
-                <a href="#remote-cafe-heading"
-                    class="inline-flex items-center rounded-lg border border-slate-200/90 bg-white/90 px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm hover:border-cyan-400/60 hover:text-cyan-800 dark:border-slate-600 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:border-cyan-600/50 dark:hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500">Workspaces &amp; cafés</a>
+                <a href="#open-greek-data-heading"
+                    class="inline-flex items-center rounded-lg border border-slate-200/90 bg-white/90 px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm hover:border-cyan-400/60 hover:text-cyan-800 dark:border-slate-600 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:border-cyan-600/50 dark:hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500">Open Greek data</a>
             </li>
             {% endif %}
         </ul>
@@ -67,12 +68,10 @@
     {% endcall %}
     {% endif %}
 
-    {% if remote_workspace_html %}
-    {% call resource_details('remote-cafe-heading', 'Remote café & laptop-friendly workspaces', 'Laptop-friendly venues and directories — from the same YAML as the docs') %}
-    <div
-        class="page-md-content agtj-resource-md max-w-none text-slate-700 dark:text-slate-300 [&_a]:text-cyan-700 dark:[&_a]:text-cyan-400 [&_table]:text-sm">
-        {{ remote_workspace_html | safe }}
-    </div>
+    {% if open_greek_data_queries %}
+    {% call resource_details('open-greek-data-heading', 'Open Greek data & public knowledge', 'Datasets, indexes, and open reference material with a Greece focus', open_greek_data_queries|length ~ ' links') %}
+    {% set queries = open_greek_data_queries %}
+    {% include "_resource_query_cards.html" %}
     {% endcall %}
     {% endif %}
 

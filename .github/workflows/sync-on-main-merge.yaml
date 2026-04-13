@@ -75,7 +75,7 @@ jobs:
             WORK="$(mktemp -d)"
             cp -a "${GITHUB_WORKSPACE}/jekyll-pages/." "${WORK}/"
             uv run python -m greek_software_ecosystem.jekyll_url_config > "${WORK}/_url.yml"
-            for f in index.html employers.html job-search.html resources.html podcasts.html; do
+            for f in index.html employers.html job-search.html resources.html podcasts.html workspaces.html; do
               cp "${GITHUB_WORKSPACE}/${f}" "${WORK}/"
             done
             mkdir -p "${WORK}/assets/css" "${WORK}/assets/js"

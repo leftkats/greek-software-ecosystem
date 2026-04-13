@@ -1,0 +1,14 @@
+# Open data & public-knowledge resources with a Greek focus.
+# Renders a block on resources.html — run `just generate` after edits.
+entries:
+  - name: "Greek Law"
+    url: https://greeklaw.github.io/gr/
+    description: >
+      Greek-language legal index: civil, criminal, and procedural topics—practical
+      reference material from procedure and evidence to substantive law and out-of-court tools.
+
+  - name: "greek-datasets"
+    url: https://github.com/estamos/greek-datasets
+    description: >
+      Curated pointers to open datasets about Greece—government open data (e.g. data.gov.gr),
+      geodata, Greek Wikipedia dumps, and related sources for research and NLP.

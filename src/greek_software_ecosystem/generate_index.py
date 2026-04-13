@@ -13,8 +13,9 @@ Data flow
    ``python -m greek_software_ecosystem.fetch_workable_counts`` (server-side; avoids browser CORS).
    Embedded in the page for badges, header totals, sort, and hiring-only filter.
 4. ``templates/index_template.html`` → ``index.html`` (hub); ``page_job_search_combined.html`` →
-   ``job-search.html`` (directory + Workable); ``page_resources.html`` → ``resources.html``
-   (queries + café YAML); ``employers.html`` is a short redirect.
+   ``job-search.html`` (directory + Workable);    ``page_resources.html`` → ``resources.html``
+   (queries + open Greek data); ``page_workspaces.html`` → ``workspaces.html`` (café YAML);
+   ``employers.html`` is a short redirect.
 
 Run
 ---
@@ -66,10 +67,12 @@ OUTPUT_EMPLOYERS = "employers.html"
 OUTPUT_JOB_SEARCH = "job-search.html"
 OUTPUT_RESOURCES = "resources.html"
 OUTPUT_PODCASTS = "podcasts.html"
+OUTPUT_WORKSPACES = "workspaces.html"
 ITEMS_PER_PAGE = 50
 WORKABLE_SNAPSHOT_PATH = WORKABLE_COUNTS_YAML
 PODCASTS_YAML = Path("_data/podcasts.yaml")
 CAFE_RESOURCES_YAML = Path("_data/cafe_resources.yaml")
+OPEN_GREEK_DATA_YAML = Path("_data/open_greek_data.yaml")
 
 env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
 
@@ -314,6 +317,33 @@ def load_queries_split() -> tuple[list[dict], list[dict]]:
             if isinstance(q, list):
                 awesome_queries = [x for x in q if isinstance(x, dict)]
     return job_sections, awesome_queries
+
+
+def load_open_greek_data_entries() -> list[dict]:
+    """Rows for ``open_greek_data.yaml`` → resources page (name, url, description)."""
+    if not OPEN_GREEK_DATA_YAML.is_file():
+        return []
+    try:
+        with OPEN_GREEK_DATA_YAML.open(encoding="utf-8") as f:
+            data = yaml.safe_load(f) or {}
+    except (yaml.YAMLError, OSError):
+        return []
+    if not isinstance(data, dict):
+        return []
+    raw = data.get("entries") or []
+    if not isinstance(raw, list):
+        return []
+    out: list[dict] = []
+    for row in raw:
+        if not isinstance(row, dict):
+            continue
+        name = (row.get("name") or "").strip()
+        url = (row.get("url") or "").strip()
+        if not name or not url:
+            continue
+        desc = (row.get("description") or "").strip()
+        out.append({"name": name, "url": url, "description": desc})
+    return out
 
 
 def load_podcasts_page_data(github_repo_url: str = "") -> dict:
@@ -618,6 +648,7 @@ def run_generate_index() -> None:
 
     tagline, intro_blurb = load_readme_hero()
     job_sections, awesome_queries = load_queries_split()
+    open_greek_data_queries = load_open_greek_data_entries()
 
     template = env.get_template("index_template.html")
 
@@ -689,8 +720,9 @@ def run_generate_index() -> None:
     )
 
     res_desc = (
-        "Job boards and portals, curated GitHub awesome lists, and remote café / "
-        "laptop-friendly workspaces—driven by the same YAML as the repository docs."
+        "Job boards and portals, curated GitHub awesome lists, and open Greek data and "
+        "public-knowledge pointers—driven by YAML in the repository. "
+        "Laptop-friendly workspaces and cafés have their own page."
     )
     res_meta = meta_page(
         _meta,
@@ -708,9 +740,9 @@ def run_generate_index() -> None:
         env.get_template("page_resources.html").render(
             query_sections=job_sections,
             awesome_queries=awesome_queries,
-            remote_workspace_html=remote_html,
-            page_kicker="Resources · Lists & spaces",
-            page_title="Resources & workspaces",
+            open_greek_data_queries=open_greek_data_queries,
+            page_kicker="Resources · Lists & data",
+            page_title="Resources & curated links",
             page_subtitle=res_desc,
             current_page="resources",
             schema_json_ld=res_schema,
@@ -751,12 +783,40 @@ def run_generate_index() -> None:
         encoding="utf-8",
     )
 
+    ws_desc = (
+        "Laptop-friendly cafés and workspace directories for Greece—built from "
+        "_data/cafe_resources.yaml (same source as docs/remote-cafe-resources.md)."
+    )
+    ws_meta = meta_page(
+        _meta,
+        relpath=OUTPUT_WORKSPACES,
+        document_title=f"{site_name} | Workspaces & cafés",
+        og_description=ws_desc,
+    )
+    ws_schema = build_schema_subpage(
+        canonical_url=ws_meta["canonical_url"],
+        document_title=ws_meta["document_title"],
+        description=ws_meta["og_description"],
+    )
+    Path(OUTPUT_WORKSPACES).write_text(
+        env.get_template("page_workspaces.html").render(
+            current_page="workspaces",
+            remote_workspace_html=remote_html,
+            schema_json_ld=ws_schema,
+            page_kicker="Workspaces · Cafés & places",
+            page_title="Workspaces & laptop-friendly cafés",
+            page_subtitle=ws_desc,
+            **ws_meta,
+        ),
+        encoding="utf-8",
+    )
+
     write_sitemap_xml(_REPO_ROOT, _meta["site_origin"])
     write_robots_txt(_REPO_ROOT, _meta["site_origin"])
 
     print(
         f"Generated {OUTPUT_INDEX}, {OUTPUT_EMPLOYERS} (redirect), {OUTPUT_JOB_SEARCH}, "
-        f"{OUTPUT_RESOURCES}, {OUTPUT_PODCASTS}, sitemap.xml, robots.txt."
+        f"{OUTPUT_RESOURCES}, {OUTPUT_PODCASTS}, {OUTPUT_WORKSPACES}, sitemap.xml, robots.txt."
     )
 
 
@@ -764,9 +824,10 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description=(
             "Generate index.html (hub), job-search.html (directory), "
-            "employers.html (redirect), resources.html (queries + café YAML), podcasts.html, "
-            "sitemap.xml, and robots.txt from _data/companies/*.yaml, "
-            "_data/queries.yaml, _data/cafe_resources.yaml, _data/podcasts.yaml, and readme data."
+            "employers.html (redirect), resources.html (queries + open data), podcasts.html, "
+            "workspaces.html (café YAML), sitemap.xml, and robots.txt from "
+            "_data/companies/*.yaml, _data/queries.yaml, _data/cafe_resources.yaml, "
+            "_data/podcasts.yaml, and readme data."
         ),
     )
     parser.add_argument(

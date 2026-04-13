@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% from "_macros_resources.html" import resource_details %}
+{% block main %}
+<section class="max-w-6xl mx-auto px-4 pt-8 pb-4" aria-labelledby="ws-heading">
+    <div
+        class="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark p-6 sm:p-8">
+        <p class="text-[11px] font-mono uppercase tracking-widest text-cyan-700 dark:text-cyan-400">{{ page_kicker }}</p>
+        <h1 id="ws-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mt-2">
+            {{ page_title }}</h1>
+        <p class="mt-3 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300">{{ page_subtitle }}</p>
+        <p class="mt-3 text-xs leading-relaxed text-slate-500 dark:text-slate-500 max-w-3xl">
+            Generated from <span class="font-mono text-cyan-700 dark:text-cyan-400">_data/cafe_resources.yaml</span> — run
+            <span class="font-mono">just generate</span> after edits.
+        </p>
+    </div>
+</section>
+
+<div class="max-w-6xl mx-auto space-y-5 px-4 pb-14 sm:space-y-6">
+    {% if remote_workspace_html %}
+    {% call resource_details('workspaces-main', 'Venues & directories', 'Laptop-friendly cafés and workspace finders — same content as the repository docs', '') %}
+    <div
+        class="page-md-content agtj-resource-md max-w-none text-slate-700 dark:text-slate-300 [&_a]:text-cyan-700 dark:[&_a]:text-cyan-400 [&_table]:text-sm">
+        {{ remote_workspace_html | safe }}
+    </div>
+    {% endcall %}
+    {% else %}
+    <div
+        class="rounded-2xl border border-dashed border-slate-300 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-900/40 p-8 text-center text-sm text-slate-600 dark:text-slate-400">
+        No workspace entries are configured. Add data under <code class="font-mono text-cyan-700 dark:text-cyan-400">_data/cafe_resources.yaml</code>, then run <code class="font-mono">just generate</code>.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -12,6 +12,7 @@ _SITEMAP_ENTRIES: tuple[tuple[str, str], ...] = (
     ("job-search.html", "0.95"),
     ("resources.html", "0.85"),
     ("podcasts.html", "0.85"),
+    ("workspaces.html", "0.85"),
 )
 
 

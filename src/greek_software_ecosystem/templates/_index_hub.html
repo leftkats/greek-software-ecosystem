@@ -1,31 +1,33 @@
 <section class="max-w-6xl mx-auto px-4 pt-8 pb-4" aria-label="Introduction">
     <div
         class="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-gradient-to-br from-white/95 via-white/90 to-cyan-50/50 dark:from-slate-900/85 dark:via-slate-900/75 dark:to-slate-900/60 shadow-soft dark:shadow-soft-dark p-6 sm:p-8 ring-1 ring-slate-200/60 dark:ring-slate-700/50">
-        <p class="text-[11px] font-mono uppercase tracking-widest text-cyan-700 dark:text-cyan-400">Community · Open data ·
+        <p class="text-[11px] font-mono uppercase tracking-widest text-cyan-700 dark:text-cyan-400">Community · Open
+            data ·
             Greece</p>
-        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mt-2">Greek Software
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mt-2">Greek
+            Software
             Ecosystem</h1>
-        <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">{{ site_tagline }}
+        <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">{{
+            site_tagline }}
         </p>
         <p class="mt-2 text-xs text-slate-500 dark:text-slate-400 max-w-3xl leading-relaxed">{{ site_intro_blurb }}</p>
 
-        <div class="mt-6 grid gap-3 grid-cols-1 sm:grid-cols-3">
+        <div class="mt-6 grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
             <a href="job-search.html"
                 class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/50 p-4 hover:border-cyan-500/70 dark:hover:border-cyan-500/50 hover:shadow-md transition flex flex-col gap-2">
                 <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 text-2xl"
                     aria-hidden="true">work</span>
                 <span class="font-semibold text-slate-900 dark:text-white">Job search</span>
                 <span class="text-xs text-slate-500 dark:text-slate-400 leading-snug">Searchable employer directory:
-                    sectors, remote policy, and Workable role counts. Job boards and workspace links are on
-                    Resources.</span>
+                    sectors, remote policy, and Workable role counts. Job boards and links are on Resources.</span>
             </a>
             <a href="resources.html"
                 class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/50 p-4 hover:border-cyan-500/70 dark:hover:border-cyan-500/50 hover:shadow-md transition flex flex-col gap-2">
                 <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 text-2xl"
                     aria-hidden="true">library_books</span>
                 <span class="font-semibold text-slate-900 dark:text-white">Resources</span>
-                <span class="text-xs text-slate-500 dark:text-slate-400 leading-snug">Awesome lists & laptop-friendly
-                    cafés</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400 leading-snug">Job boards, awesome GitHub lists
+                    &amp; open Greek data</span>
             </a>
             <a href="podcasts.html"
                 class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/50 p-4 hover:border-cyan-500/70 dark:hover:border-cyan-500/50 hover:shadow-md transition flex flex-col gap-2">
@@ -33,6 +35,33 @@
                     aria-hidden="true">podcasts</span>
                 <span class="font-semibold text-slate-900 dark:text-white">Podcasts</span>
                 <span class="text-xs text-slate-500 dark:text-slate-400 leading-snug">Greek tech & startup shows</span>
+            </a>
+            <a href="{{ github_repo_url }}/blob/main/docs/open-source-projects.md" target="_blank"
+                rel="noopener noreferrer"
+                class="group relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/50 p-4 hover:border-cyan-500/70 dark:hover:border-cyan-500/50 hover:shadow-md transition flex flex-col gap-2">
+                <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 text-2xl"
+                    aria-hidden="true">code</span>
+                <span class="font-semibold text-slate-900 dark:text-white">Open source projects</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400 leading-snug">Curated Greek-related repos—APIs
+                    for public services, translations, and tooling. Opens the list in GitHub.</span>
+            </a>
+            <div class="relative rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-900/40 p-4 flex flex-col gap-2 cursor-not-allowed select-none opacity-95"
+                role="group" aria-label="Community meetups — coming soon (not a link)">
+                <span
+                    class="absolute top-3 right-3 text-[10px] font-mono uppercase tracking-wider text-amber-800/90 dark:text-amber-300/90 border border-amber-400/45 dark:border-amber-500/35 rounded px-1.5 py-0.5 bg-amber-50/90 dark:bg-amber-950/50">Soon</span>
+                <span class="material-symbols-outlined text-slate-500 dark:text-slate-500 text-2xl"
+                    aria-hidden="true">groups</span>
+                <span class="font-semibold text-slate-700 dark:text-slate-200">Community meetups</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400 leading-snug">User groups, meetups, and local
+                    tech gatherings—we’re assembling a directory.</span>
+            </div>
+            <a href="workspaces.html"
+                class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/50 p-4 hover:border-cyan-500/70 dark:hover:border-cyan-500/50 hover:shadow-md transition flex flex-col gap-2">
+                <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 text-2xl"
+                    aria-hidden="true">local_cafe</span>
+                <span class="font-semibold text-slate-900 dark:text-white">Workspaces &amp; cafés</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400 leading-snug">Laptop-friendly venues and
+                    directories—same YAML as the repository docs.</span>
             </a>
         </div>
     </div>
