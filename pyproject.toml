@@ -1,7 +1,11 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "awesome-greek-tech-jobs"
+name = "awesome-greek-software-engineering"
 version = "0.0.0"
-description = "Generator tooling for the Awesome Greek Tech Jobs directory"
+description = "Generator tooling for the Awesome Greek Software Engineering directory"
 readme = "readme.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -10,7 +14,8 @@ dependencies = [
     "requests>=2.28",
 ]
 
-# Application-style project: install deps only (no local wheel build in CI).
-# `uv run` still adds the repo root so `python -m scripts.*` works.
-[tool.uv]
-package = false
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+awesome_greek_software_engineering = ["py.typed"]

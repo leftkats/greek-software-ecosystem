@@ -74,7 +74,7 @@ jobs:
             LIVE_MSG="$1"
             WORK="$(mktemp -d)"
             cp -a "${GITHUB_WORKSPACE}/jekyll-pages/." "${WORK}/"
-            uv run python "${GITHUB_WORKSPACE}/scripts/jekyll_url_config.py" > "${WORK}/_url.yml"
+            uv run python -m awesome_greek_software_engineering.jekyll_url_config > "${WORK}/_url.yml"
             cp "${GITHUB_WORKSPACE}/index.html" "${WORK}/"
             mkdir -p "${WORK}/assets/css" "${WORK}/assets/js"
             cp "${GITHUB_WORKSPACE}/assets/css/index.css" "${WORK}/assets/css/"

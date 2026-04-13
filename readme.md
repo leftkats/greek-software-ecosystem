@@ -1,27 +1,27 @@
 <p align="center">
   <br>
-  <img alt="AWGJ" src="assets/vectorized.svg" width="180" />
+  <img alt="AGSE" src="assets/vectorized.svg" width="180" />
   <br>
   <br>
 </p>
 
 <p align="center">
-  The open-source pulse on who hires in technology across Greece<br>
-  <a href="https://leftkats.github.io/awesome-greek-tech-jobs/"><strong>Open the interactive directory</strong></a><br>
+  The open-source pulse on who hires in software engineering across Greece<br>
+  <a href="https://leftkats.github.io/awesome-greek-software-engineering/"><strong>Open the interactive directory</strong></a><br>
   <br>
   <br>
 </p>
 
 <p align="center">
-  <a href="https://leftkats.github.io/awesome-greek-tech-jobs/"><img src="https://img.shields.io/badge/Companies-252-2563eb?style=for-the-badge" alt="Companies" /></a>
-  <a href="https://leftkats.github.io/awesome-greek-tech-jobs/?hire=1"><img src="https://img.shields.io/badge/Open%20Roles-1265-f59e0b?style=for-the-badge" alt="Open Roles" /></a>
-  <a href="https://leftkats.github.io/awesome-greek-tech-jobs/?pol=remote"><img src="https://img.shields.io/badge/Remote-50-16a34a?style=for-the-badge" alt="Remote" /></a>
-  <a href="https://leftkats.github.io/awesome-greek-tech-jobs/?pol=hybrid"><img src="https://img.shields.io/badge/Hybrid-123-ca8a04?style=for-the-badge" alt="Hybrid" /></a>
+  <a href="https://leftkats.github.io/awesome-greek-software-engineering/"><img src="https://img.shields.io/badge/Companies-252-2563eb?style=for-the-badge" alt="Companies" /></a>
+  <a href="https://leftkats.github.io/awesome-greek-software-engineering/?hire=1"><img src="https://img.shields.io/badge/Open%20Roles-1265-f59e0b?style=for-the-badge" alt="Open Roles" /></a>
+  <a href="https://leftkats.github.io/awesome-greek-software-engineering/?pol=remote"><img src="https://img.shields.io/badge/Remote-50-16a34a?style=for-the-badge" alt="Remote" /></a>
+  <a href="https://leftkats.github.io/awesome-greek-software-engineering/?pol=hybrid"><img src="https://img.shields.io/badge/Hybrid-123-ca8a04?style=for-the-badge" alt="Hybrid" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/leftkats/awesome-greek-tech-jobs/blob/main/LICENSE"><img src="https://img.shields.io/github/license/leftkats/awesome-greek-tech-jobs?logo=github&label=License" alt="License" /></a>
-  <img src="https://img.shields.io/github/last-commit/leftkats/awesome-greek-tech-jobs?logo=github&label=Last%20Commit" alt="Last Commit" />
+  <a href="https://github.com/leftkats/awesome-greek-software-engineering/blob/main/LICENSE"><img src="https://img.shields.io/github/license/leftkats/awesome-greek-software-engineering?logo=github&label=License" alt="License" /></a>
+  <img src="https://img.shields.io/github/last-commit/leftkats/awesome-greek-software-engineering?logo=github&label=Last%20Commit" alt="Last Commit" />
 </p>
 
 ## Overview
@@ -39,7 +39,7 @@ The sortable employer table is in **[engineering-hubs.md](engineering-hubs.md)**
 
 ## Contributors
 
-[![Contributors](https://contrib.rocks/image?repo=leftkats/awesome-greek-tech-jobs)](https://github.com/leftkats/awesome-greek-tech-jobs/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=leftkats/awesome-greek-software-engineering)](https://github.com/leftkats/awesome-greek-software-engineering/graphs/contributors)
 
 Built with ❤️ by the community. PRs welcome!
 

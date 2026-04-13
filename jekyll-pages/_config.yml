@@ -1,6 +1,6 @@
 # Jekyll builds `sitemap.xml` (jekyll-sitemap) and `robots.txt` (Liquid below).
 # `url` and `baseurl` are injected at CI time from readme.yaml → _url.yml.
 
-title: Awesome Greek Tech Jobs
+title: Awesome Greek Software Engineering
 plugins:
   - jekyll-sitemap

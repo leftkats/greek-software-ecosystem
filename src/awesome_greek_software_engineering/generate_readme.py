@@ -11,7 +11,7 @@ from html import escape
 
 import yaml
 
-from scripts.load_companies import (
+from awesome_greek_software_engineering.load_companies import (
     QUERIES_YAML,
     WORKABLE_COUNTS_YAML,
     load_companies,
@@ -269,12 +269,12 @@ def generate() -> None:
     top_sectors = sector_counts.most_common(5)
 
     repo = readme_data.get(
-        "repo", "leftkats/awesome-greek-tech-jobs"
+        "repo", "leftkats/awesome-greek-software-engineering"
     )
     live_url = readme_data.get("live_url", "")
     branding = readme_data.get("branding", {}) or {}
     logo_cfg = branding.get("logo", {}) or {}
-    logo_alt = logo_cfg.get("alt", "AWGJ")
+    logo_alt = logo_cfg.get("alt", "AGSE")
     logo_light = logo_cfg.get("src_light", "assets/awgj.svg")
     logo_dark = logo_cfg.get("src_dark", logo_light)
     logo_width = int(logo_cfg.get("width", 180))

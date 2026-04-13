@@ -2,7 +2,7 @@
 
 Curated organizations, focus sectors, work policy, and talent links.
 
-**Disclaimer:** This list is community-maintained. Information may be incomplete, outdated, or incorrect. If you notice an error or want an update, please [open a GitHub issue](https://github.com/leftkats/awesome-greek-tech-jobs/issues/new/choose) (pick the template that fits).
+**Disclaimer:** This list is community-maintained. Information may be incomplete, outdated, or incorrect. If you notice an error or want an update, please [open a GitHub issue](https://github.com/leftkats/awesome-greek-software-engineering/issues/new/choose) (pick the template that fits).
 
 | # | Organization | Focus Sectors | Policy | Talent Portals |
 | :--- | :--- | :--- | :--- | :--- |

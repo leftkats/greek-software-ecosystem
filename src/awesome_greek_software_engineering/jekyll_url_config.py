@@ -1,6 +1,7 @@
-"""Emit a small Jekyll config fragment: url + baseurl from readme.yaml (live_url).
+"""Emit a small Jekyll config fragment: url + baseurl from readme.yaml.
 
-Used as: ``jekyll build --config _config.yml,_url.yml``
+Reads ``live_url`` from ``readme.yaml``. Used as:
+``jekyll build --config _config.yml,_url.yml``
 """
 
 from __future__ import annotations
@@ -11,13 +12,13 @@ from urllib.parse import urlparse
 
 import yaml
 
-ROOT = Path(__file__).resolve().parent.parent
-README_YAML = ROOT / "readme.yaml"
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+README_YAML = _REPO_ROOT / "readme.yaml"
 
 
 def main() -> int:
     url = "https://leftkats.github.io"
-    baseurl = "/awesome-greek-tech-jobs"
+    baseurl = "/awesome-greek-software-engineering"
     if README_YAML.is_file():
         try:
             with README_YAML.open(encoding="utf-8") as f:
