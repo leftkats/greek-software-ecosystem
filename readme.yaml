@@ -98,7 +98,8 @@ development:
     [just](https://github.com/casey/just) for short commands. Each block below is a
     fenced shell snippet you can copy into your terminal.
     `just index` writes `index.html`, `employers.html`, `job-search.html`, `resources.html`, and `podcasts.html`
-    (plus shared `assets/`) for the static site.
+    (plus shared `assets/`) for the static site. Those HTML files are gitignored on **`main`**; only branch **`live`**
+    (GitHub Pages) holds the built pages after CI.
   blocks:
     - title: "Install or refresh dependencies"
       commands:

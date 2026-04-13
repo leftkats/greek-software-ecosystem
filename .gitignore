@@ -186,8 +186,12 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# Generated static bundle (not committed on `main`; CI deploys it to branch `live`)
+# Generated static site HTML at repo root (not committed on `main`; CI builds and deploys to branch `live`)
 /index.html
+/employers.html
+/job-search.html
+/resources.html
+/podcasts.html
 /sitemap.xml
 /robots.txt
 

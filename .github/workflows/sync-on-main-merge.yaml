@@ -1,4 +1,4 @@
-# Regenerates readme / engineering-hubs / search-queries / development on `main`, builds `index.html` with Python,
+# Regenerates readme / engineering-hubs / search-queries / development on `main`, builds static HTML with Python,
 # runs **Jekyll** (`jekyll-pages/`: `jekyll-sitemap` + Liquid `robots.txt`), then
 # force-pushes `_site/` (+ `.nojekyll`) to branch `live` for GitHub Pages.
 #

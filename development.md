@@ -2,7 +2,7 @@
 
 ← [readme.md](readme.md)
 
-Use [uv](https://github.com/astral-sh/uv) for Python and [just](https://github.com/casey/just) for short commands. Each block below is a fenced shell snippet you can copy into your terminal. `just index` writes `index.html`, `employers.html`, `job-search.html`, `resources.html`, and `podcasts.html` (plus shared `assets/`) for the static site.
+Use [uv](https://github.com/astral-sh/uv) for Python and [just](https://github.com/casey/just) for short commands. Each block below is a fenced shell snippet you can copy into your terminal. `just index` writes `index.html`, `employers.html`, `job-search.html`, `resources.html`, and `podcasts.html` (plus shared `assets/`) for the static site. Those HTML files are gitignored on **`main`**; only branch **`live`** (GitHub Pages) holds the built pages after CI.
 
 ## Install or refresh dependencies
 
