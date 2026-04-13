@@ -1,6 +1,6 @@
 # Search queries & resources
 
-← [readme.md](readme.md)
+← [README.md](README.md)
 
 Hand-picked links for Greek (and broader remote) job hunting. Each entry includes a short note on what you’ll find there. For **laptop-friendly cafés and remote workspaces**, see **[remote-cafe-resources.md](../remote-cafe-resources.md)**.
 
