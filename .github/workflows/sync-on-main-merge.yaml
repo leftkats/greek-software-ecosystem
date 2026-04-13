@@ -49,7 +49,7 @@ jobs:
       - name: Install Python and dependencies
         run: just sync --frozen
 
-      - name: Set up Ruby (Jekyll for sitemap.xml and robots.txt)
+      - name: Set up Ruby (Jekyll site build)
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"

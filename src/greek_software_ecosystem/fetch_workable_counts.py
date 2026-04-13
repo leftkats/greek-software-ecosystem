@@ -4,6 +4,10 @@ Primary source is ``/count`` (fast). If ``/count`` appears geo-biased (for
 example ``total > 0`` but ``incountry = 0``) or otherwise unusable, this
 script falls back to Workable's public v3 jobs endpoint filtered by
 ``location.countryCode = GR``.
+
+HTTP ``User-Agent`` (and robots.txt ``can_fetch`` checks) use the ``repo`` value
+in ``_data/readme.yaml`` (``owner/name`` → ``https://github.com/owner/name``),
+with a fallback if the file is missing.
 """
 
 from __future__ import annotations
@@ -43,9 +47,31 @@ _ROBOTS_ENDPOINT_PROBES = (
     "https://apply.workable.com/api/v3/accounts/example/jobs",
 )
 
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_README_YAML = _REPO_ROOT / "_data" / "readme.yaml"
+_FALLBACK_REPO_SLUG = "leftkats/greek-software-ecosystem"
+
+
+def _repo_slug_for_requests() -> str:
+    """``owner/repo`` from ``_data/readme.yaml`` — same source as the published site."""
+    if _README_YAML.is_file():
+        try:
+            with _README_YAML.open(encoding="utf-8") as f:
+                data = yaml.safe_load(f) or {}
+            rs = data.get("repo")
+            if isinstance(rs, str):
+                s = rs.strip()
+                if s and "/" in s:
+                    return s
+        except (yaml.YAMLError, OSError):
+            pass
+    return _FALLBACK_REPO_SLUG
+
+
+_REPO_SLUG = _repo_slug_for_requests()
 _USER_AGENT = (
-    "greek-software-ecosystem/1.0 "
-    "(+https://github.com/leftkats/greek-software-ecosystem; "
+    f"{_REPO_SLUG.split('/')[-1]}/1.0 "
+    f"(+https://github.com/{_REPO_SLUG}; "
     "python-requests; Greece job board snapshot)"
 )
 _VERBOSE = os.getenv("WORKABLE_VERBOSE", "").strip().lower() in {

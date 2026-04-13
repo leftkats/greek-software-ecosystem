@@ -188,6 +188,8 @@ cython_debug/
 
 # Generated static site HTML + SEO at repo root: not committed on `main` (local `just index` output).
 # CI builds these and force-pushes the assembled `_site/` to branch `live` only (GitHub Pages).
+# `sitemap.xml` / `robots.txt` are emitted by Python (`greek_software_site.sitemap_robots`); they must
+# never be tracked on `main`—only present in the `live` branch deploy bundle.
 /index.html
 /employers.html
 /job-search.html

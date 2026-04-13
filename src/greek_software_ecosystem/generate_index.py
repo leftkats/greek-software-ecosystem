@@ -23,8 +23,9 @@ Run
 CI: ``.github/workflows/sync-on-main-merge.yaml`` runs on ``main`` (push, weekly,
 manual): refreshes ``_data/workable_counts.yaml`` on schedule, regenerates readme /
 engineering-hubs, runs this script, then **force-pushes** only the static bundle
-(HTML and page assets) to branch ``live``; ``sitemap.xml`` / ``robots.txt`` are built by Jekyll for
-GitHub Pages. Paths align with ``greek_software_ecosystem.fetch_workable_counts``.
+(HTML and page assets) to branch ``live``; ``sitemap.xml`` / ``robots.txt`` are written here
+(``greek_software_site.sitemap_robots``), gitignored on ``main``, and copied into ``_site/`` by CI.
+Paths align with ``greek_software_ecosystem.fetch_workable_counts``.
 """
 
 from __future__ import annotations

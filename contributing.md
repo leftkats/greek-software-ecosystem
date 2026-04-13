@@ -65,7 +65,7 @@ If you want to work on an open issue, follow this simple flow:
 2. **Comment on the issue**: Leave a short message like "I can work on this" to avoid duplicate work.
 3. **Create a branch**: Use a clear branch name, for example `fix/workable-count-summary` or `docs/uv-quickstart`.
 4. **Implement and test locally** (install [uv](https://github.com/astral-sh/uv) and [just](https://github.com/casey/just)):
-   - Use **[generated/development.md](generated/development.md)** for copy-paste shell blocks: installing dependencies, `just generate`, `just all`, `just check`, and the optional Jekyll build that mirrors CI. Regeneration writes the static HTML files in the repo root (`index.html`, `employers.html`, `job-search.html`, `resources.html`, `podcasts.html`); they are **not committed** on **`main`** (see `.gitignore`). CI builds the site and deploys it to branch **`live`**. **`sitemap.xml`** and **`robots.txt`** come from **Jekyll** during that deploy; a local Jekyll build outputs to `jekyll-pages/_site/`.
+   - Use **[generated/development.md](generated/development.md)** for copy-paste shell blocks: installing dependencies, `just generate`, `just all`, `just check`, and the optional Jekyll build that mirrors CI. Regeneration writes the static HTML files in the repo root (`index.html`, `employers.html`, `job-search.html`, `resources.html`, `podcasts.html`), plus **`sitemap.xml`** and **`robots.txt`** (from Python via `just index`). Those outputs are **not committed** on **`main`** (see `.gitignore`). CI runs Jekyll, then copies `sitemap.xml` / `robots.txt` into `_site/` and deploys branch **`live`**; a local Jekyll build outputs to `jekyll-pages/_site/`.
    - Equivalent `uv` commands still work, for example `uv sync --frozen`, `uv run python -m greek_software_ecosystem.generate_readme`, and `uv run python -m greek_software_ecosystem.generate_index`.
 5. **Open a PR linked to the issue**:
    - Include `Closes #<issue-number>` (or `Fixes #<issue-number>`) in the PR description so GitHub closes the issue automatically after merge.
@@ -81,7 +81,7 @@ If you want to work on an open issue, follow this simple flow:
 
 ## GitHub Pages
 
-**`main`** does not commit generated root HTML (`index.html`, `employers.html`, etc.); see **`.gitignore`**. Branch **`live`** holds **only** the built static site (HTML, **Jekyll-generated** `sitemap.xml` and `robots.txt`, page assets, and **`.nojekyll`** so GitHub Pages does not run Jekyll a second time on that branch). It is updated automatically on every push to **`main`**. Point **Settings → Pages** at **`live`** / **`/`**. Jekyll source for SEO files lives under **`jekyll-pages/`** on **`main`**.
+**`main`** does not commit generated root HTML (`index.html`, `employers.html`, etc.) or **`sitemap.xml`** / **`robots.txt`**; see **`.gitignore`**. Branch **`live`** holds **only** the built static site (HTML from Jekyll, **Python-generated** `sitemap.xml` and `robots.txt` copied into the deploy bundle, page assets, and **`.nojekyll`** so GitHub Pages does not run Jekyll a second time on that branch). It is updated automatically on every push to **`main`**. Point **Settings → Pages** at **`live`** / **`/`**. Jekyll source lives under **`jekyll-pages/`** on **`main`**.
 
 ## Workflow Automation
 
