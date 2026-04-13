@@ -4,26 +4,26 @@ Data flow
 ---------
 1. ``_data/companies/*.yaml`` — one file per company (sectors, locations, careers URLs, policies).
    Coarse **industries** (≤20, for the dropdown) are derived from ``sectors`` via
-   ``awesome_greek_tech_jobs.industry_clusters`` at build time. **Locations** are Greece-focused:
+   ``awesome_greek_software_engineering.industry_clusters`` at build time. **Locations** are Greece-focused:
    known non-Greek place names are dropped (see ``_NON_GREEK_LOCATIONS_CASEFOLD``),
    and common Greek spelling variants are canonicalised in ``normalize_location``.
 2. This module normalises rows and sets ``workable_slug`` for apply.workable.com URLs
-   (see ``awesome_greek_tech_jobs.workable_apply_slug``).
+   (see ``awesome_greek_software_engineering.workable_apply_slug``).
 3. ``_data/workable_counts.yaml`` — Greece ``incountry`` counts per slug, from
-   ``python -m awesome_greek_tech_jobs.fetch_workable_counts`` (server-side; avoids browser CORS).
+   ``python -m awesome_greek_software_engineering.fetch_workable_counts`` (server-side; avoids browser CORS).
    Embedded in the page for badges, header totals, sort, and hiring-only filter.
 4. ``templates/index_template.html`` → ``index.html``.
 
 Run
 ---
-* ``uv run python -m awesome_greek_tech_jobs.generate_index`` — render (use existing snapshot YAML if any).
-* ``uv run python -m awesome_greek_tech_jobs.generate_index --fetch-workable`` — fetch then render.
+* ``uv run python -m awesome_greek_software_engineering.generate_index`` — render (use existing snapshot YAML if any).
+* ``uv run python -m awesome_greek_software_engineering.generate_index --fetch-workable`` — fetch then render.
 
 CI: ``.github/workflows/sync-on-main-merge.yaml`` runs on ``main`` (push, weekly,
 manual): refreshes ``_data/workable_counts.yaml`` on schedule, regenerates readme /
 engineering-hubs, runs this script, then **force-pushes** only the static bundle
 (HTML and page assets) to branch ``live``; ``sitemap.xml`` / ``robots.txt`` are built by Jekyll for
-GitHub Pages. Paths align with ``awesome_greek_tech_jobs.fetch_workable_counts``.
+GitHub Pages. Paths align with ``awesome_greek_software_engineering.fetch_workable_counts``.
 """
 
 from __future__ import annotations
@@ -38,12 +38,12 @@ from collections import Counter
 
 from jinja2 import Environment, FileSystemLoader
 
-from awesome_greek_tech_jobs.industry_clusters import (
+from awesome_greek_software_engineering.industry_clusters import (
     industries_for_sectors,
     sort_industries_for_filter,
 )
-from awesome_greek_tech_jobs.load_companies import WORKABLE_COUNTS_YAML, load_companies
-from awesome_greek_tech_jobs.workable_apply_slug import extract_workable_apply_slug
+from awesome_greek_software_engineering.load_companies import WORKABLE_COUNTS_YAML, load_companies
+from awesome_greek_software_engineering.workable_apply_slug import extract_workable_apply_slug
 
 # --- Configuration (aligned with fetch_workable_counts.py) ---
 OUTPUT_PATH = "index.html"
@@ -57,13 +57,13 @@ _README_YAML = Path("readme.yaml")
 
 def load_site_meta() -> dict:
     """SEO, Open Graph / Twitter, canonical URL (aligned with readme.yaml)."""
-    origin = "https://leftkats.github.io/awesome-greek-tech-jobs"
-    title = "Awesome Greek Tech Jobs"
+    origin = "https://leftkats.github.io/awesome-greek-software-engineering"
+    title = "Awesome Greek Software Engineering"
     desc = (
         "A vibrant map of employers hiring for technology roles in Greece — "
         "sectors, work policies, careers, and weekly Workable snapshots."
     )
-    repo_slug = "leftkats/awesome-greek-tech-jobs"
+    repo_slug = "leftkats/awesome-greek-software-engineering"
     if _README_YAML.is_file():
         try:
             with _README_YAML.open(encoding="utf-8") as f:
@@ -71,6 +71,9 @@ def load_site_meta() -> dict:
         except (yaml.YAMLError, OSError):
             rd = {}
         else:
+            site_title = rd.get("title")
+            if isinstance(site_title, str) and site_title.strip():
+                title = site_title.strip()
             live = rd.get("live_url")
             if isinstance(live, str) and live.strip():
                 origin = live.strip().rstrip("/")
@@ -85,13 +88,13 @@ def load_site_meta() -> dict:
     og_image_url = f"{origin}/assets/og-image.png"
     canonical_url = f"{origin}/"
     github_repo_url = f"https://github.com/{repo_slug}"
-    document_title = f"{title} | Greece tech companies, jobs & careers"
+    document_title = f"{title} | Greece software engineering & careers"
     if len(document_title) > 60:
-        document_title = f"{title} | Greece tech jobs & careers"
+        document_title = f"{title} | Greek software engineering careers"
     seo_keywords = (
-        "Greece tech jobs, software engineer Greece, IT careers Athens, "
+        "Greece software engineering jobs, software engineer Greece, IT careers Athens, "
         "remote work Greece, tech startups Greece, developer jobs Greece, "
-        "engineering jobs Thessaloniki, tech hiring Greece"
+        "engineering jobs Thessaloniki, hiring Greece"
     )
     return {
         "canonical_url": canonical_url,
@@ -446,7 +449,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.fetch_workable:
-        from awesome_greek_tech_jobs.fetch_workable_counts import (
+        from awesome_greek_software_engineering.fetch_workable_counts import (
             main as fetch_workable_main,
         )
 

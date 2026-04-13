@@ -3,9 +3,9 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "awesome-greek-tech-jobs"
+name = "awesome-greek-software-engineering"
 version = "0.0.0"
-description = "Generator tooling for the Awesome Greek Tech Jobs directory"
+description = "Generator tooling for the Awesome Greek Software Engineering directory"
 readme = "readme.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -18,4 +18,4 @@ dependencies = [
 where = ["src"]
 
 [tool.setuptools.package-data]
-awesome_greek_tech_jobs = ["py.typed"]
+awesome_greek_software_engineering = ["py.typed"]

@@ -3,7 +3,7 @@ revision = 1
 requires-python = ">=3.10"
 
 [[package]]
-name = "awesome-greek-tech-jobs"
+name = "awesome-greek-software-engineering"
 version = "0.0.0"
 source = { editable = "." }
 dependencies = [

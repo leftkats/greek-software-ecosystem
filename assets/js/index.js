@@ -715,7 +715,7 @@ function initWorkableJobCounts() {
     if (sublineEl && explainerEl) {
         if (!generatedAt && numericRows === 0) {
             explainerEl.innerHTML =
-                'No snapshot found. Run <code class="font-mono text-[11px]">just fetch</code> then <code class="font-mono text-[11px]">just index</code> (or the equivalent <code class="font-mono text-[11px]">uv run python -m awesome_greek_tech_jobs.…</code>), or wait for CI.';
+                'No snapshot found. Run <code class="font-mono text-[11px]">just fetch</code> then <code class="font-mono text-[11px]">just index</code> (or the equivalent <code class="font-mono text-[11px]">uv run python -m awesome_greek_software_engineering.…</code>), or wait for CI.';
             sublineEl.textContent = "";
         } else if (generatedAt && numericRows === 0) {
             explainerEl.textContent =
