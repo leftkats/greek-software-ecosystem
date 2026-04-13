@@ -19,10 +19,10 @@ import yaml
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
+from scripts.load_companies import WORKABLE_COUNTS_YAML, load_companies
 from scripts.workable_apply_slug import extract_workable_apply_slug
 
-YAML_PATH = Path("data/companies.yaml")
-OUTPUT_PATH = Path("data/workable_counts.yaml")
+OUTPUT_PATH = WORKABLE_COUNTS_YAML
 
 DELAY_BETWEEN_SLUGS_SEC = 2.25
 TIMEOUT_SEC = (12, 30)
@@ -239,8 +239,7 @@ def main() -> int:
         print(f"Workable fetch aborted: {e}", file=sys.stderr)
         return 2
 
-    with YAML_PATH.open(encoding="utf-8") as f:
-        companies = yaml.safe_load(f)
+    companies = load_companies()
 
     slugs: list[str] = []
     seen: set[str] = set()

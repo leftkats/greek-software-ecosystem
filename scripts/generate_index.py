@@ -2,14 +2,14 @@
 
 Data flow
 ---------
-1. ``data/companies.yaml`` — companies, sectors, locations, careers URLs, policies.
+1. ``_data/companies/*.yaml`` — one file per company (sectors, locations, careers URLs, policies).
    Coarse **industries** (≤20, for the dropdown) are derived from ``sectors`` via
    ``scripts.industry_clusters`` at build time. **Locations** are Greece-focused:
    known non-Greek place names are dropped (see ``_NON_GREEK_LOCATIONS_CASEFOLD``),
    and common Greek spelling variants are canonicalised in ``normalize_location``.
 2. This module normalises rows and sets ``workable_slug`` for apply.workable.com URLs
    (see ``scripts.workable_apply_slug``).
-3. ``data/workable_counts.yaml`` — Greece ``incountry`` counts per slug, from
+3. ``_data/workable_counts.yaml`` — Greece ``incountry`` counts per slug, from
    ``python -m scripts.fetch_workable_counts`` (server-side; avoids browser CORS).
    Embedded in the page for badges, header totals, sort, and hiring-only filter.
 4. ``templates/index_template.html`` → ``index.html``.
@@ -20,7 +20,7 @@ Run
 * ``uv run python -m scripts.generate_index --fetch-workable`` — fetch then render.
 
 CI: ``.github/workflows/sync-on-main-merge.yaml`` runs on ``main`` (push, weekly,
-manual): refreshes ``data/workable_counts.yaml`` on schedule, regenerates readme /
+manual): refreshes ``_data/workable_counts.yaml`` on schedule, regenerates readme /
 engineering-hubs, runs this script, then **force-pushes** only the static bundle
 (HTML and page assets) to branch ``live``; ``sitemap.xml`` / ``robots.txt`` are built by Jekyll for
 GitHub Pages. Paths align with ``scripts.fetch_workable_counts``.
@@ -39,13 +39,13 @@ from collections import Counter
 from jinja2 import Environment, FileSystemLoader
 
 from scripts.industry_clusters import industries_for_sectors, sort_industries_for_filter
+from scripts.load_companies import WORKABLE_COUNTS_YAML, load_companies
 from scripts.workable_apply_slug import extract_workable_apply_slug
 
 # --- Configuration (aligned with scripts/fetch_workable_counts.py) ---
-YAML_PATH = "data/companies.yaml"
 OUTPUT_PATH = "index.html"
 ITEMS_PER_PAGE = 50
-WORKABLE_SNAPSHOT_PATH = Path("data/workable_counts.yaml")
+WORKABLE_SNAPSHOT_PATH = WORKABLE_COUNTS_YAML
 
 env = Environment(loader=FileSystemLoader("templates"))
 
@@ -270,7 +270,7 @@ def normalize_policy(value):
 
 
 def load_workable_snapshot():
-    """Load ``data/workable_counts.yaml`` for embedding in the HTML output."""
+    """Load ``_data/workable_counts.yaml`` for embedding in the HTML output."""
     if not WORKABLE_SNAPSHOT_PATH.is_file():
         return {"generated_at": None, "accounts": {}, "total_open": 0}
     try:
@@ -297,8 +297,7 @@ def load_workable_snapshot():
 def run_generate_index() -> None:
     """Load YAML, snapshot, render template, write ``index.html``."""
     try:
-        with open(YAML_PATH, "r", encoding="utf-8") as f:
-            companies_data = yaml.load(f, Loader=yaml.FullLoader)
+        companies_data = load_companies()
 
         if not companies_data:
             print("No companies found in source.")
@@ -392,8 +391,8 @@ def run_generate_index() -> None:
             ),
         }
 
-    except FileNotFoundError:
-        print(f"Error: {YAML_PATH} not found.", file=sys.stderr)
+    except FileNotFoundError as e:
+        print(f"Error loading companies: {e}", file=sys.stderr)
         raise SystemExit(1)
 
     template = env.get_template("index_template.html")
@@ -431,13 +430,13 @@ def run_generate_index() -> None:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Generate index.html from data/companies.yaml and templates.",
+        description="Generate index.html from _data/companies/*.yaml and templates.",
     )
     parser.add_argument(
         "--fetch-workable",
         action="store_true",
         help=(
-            "Run fetch_workable_counts first (writes data/workable_counts.yaml "
+            "Run fetch_workable_counts first (writes _data/workable_counts.yaml "
             "over the network)."
         ),
     )

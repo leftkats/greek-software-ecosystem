@@ -1,0 +1,14 @@
+name: Deloitte
+url: https://www.deloitte.com/gr/en.html
+sectors:
+- Consulting
+- Tech
+careers_url: https://deloittecm.avature.net/en_US/careers/SearchJobs
+linkedin_company_id: deloitte-greece
+locations:
+- Athens
+- Thessaloniki
+- Heraklion
+- Ioannina
+- Patras
+work_policy: hybrid

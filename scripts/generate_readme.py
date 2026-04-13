@@ -3,22 +3,26 @@
 from __future__ import annotations
 
 from collections import Counter
-from pathlib import Path
 
 import yaml
 
+from scripts.load_companies import (
+    QUERIES_YAML,
+    WORKABLE_COUNTS_YAML,
+    load_companies,
+)
+
 
 def generate() -> None:
-    with open("data/companies.yaml", "r", encoding="utf-8") as f:
-        companies_data = yaml.safe_load(f)
+    companies_data = load_companies()
 
     with open("readme.yaml", "r", encoding="utf-8") as f:
         readme_data = yaml.safe_load(f)
 
-    with open("data/queries.yaml", "r", encoding="utf-8") as f:
+    with QUERIES_YAML.open("r", encoding="utf-8") as f:
         queries_data = yaml.safe_load(f)
 
-    workable_counts_path = Path("data/workable_counts.yaml")
+    workable_counts_path = WORKABLE_COUNTS_YAML
     open_roles = 0
     if workable_counts_path.exists():
         with workable_counts_path.open("r", encoding="utf-8") as f:

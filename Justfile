@@ -15,7 +15,7 @@ setup *ARGS:
 sync *ARGS:
 	uv sync {{ARGS}}
 
-# Fetch Workable open-role counts into data/workable_counts.yaml (network).
+# Fetch Workable open-role counts into _data/workable_counts.yaml (network).
 fetch:
 	uv run python -m scripts.fetch_workable_counts
 

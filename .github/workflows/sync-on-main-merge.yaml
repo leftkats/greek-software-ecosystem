@@ -130,7 +130,7 @@ jobs:
 
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
             git config --local user.name "github-actions[bot]"
-            git add readme.md engineering-hubs.md data/workable_counts.yaml
+            git add readme.md engineering-hubs.md _data/workable_counts.yaml
             MAIN_CHANGED=0
             if git diff --staged --quiet; then
               echo "No main-branch changes to commit."
