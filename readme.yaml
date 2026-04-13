@@ -11,7 +11,8 @@ live_directory_cta: "Open the interactive directory"
 repo: "leftkats/awesome-greek-tech-jobs"
 
 # Prose for Markdown files produced by scripts/generate_readme.py (do not edit those .md files by hand).
-# Use {issue_chooser_url} in engineering_hubs.disclaimer — it is replaced when generating engineering-hubs.md.
+# Use {issue_chooser_url} in engineering_hubs.disclaimer — replaced when generating engineering-hubs.md.
+# Omit disclaimer or leave it empty to use the built-in default (disclaimer is always emitted).
 generated_markdown:
   search_queries:
     intro: >

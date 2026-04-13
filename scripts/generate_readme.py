@@ -49,6 +49,26 @@ _DEFAULT_README_DEV_BLURB = (
 )
 
 
+def _engineering_hubs_disclaimer_text(
+    readme_data: dict, issue_chooser: str
+) -> str:
+    """Non-empty disclaimer paragraph for ``engineering-hubs.md`` (always written on each run)."""
+    gm_eh = (readme_data.get("generated_markdown") or {}).get(
+        "engineering_hubs"
+    ) or {}
+    raw = gm_eh.get("disclaimer")
+    if raw is None or not str(raw).strip():
+        tmpl = _DEFAULT_EH_DISCLAIMER
+    else:
+        tmpl = str(raw).strip()
+    out = tmpl.replace("{issue_chooser_url}", issue_chooser).strip()
+    if not out:
+        out = _DEFAULT_EH_DISCLAIMER.replace(
+            "{issue_chooser_url}", issue_chooser
+        ).strip()
+    return out
+
+
 def _iter_tips_note_bullets(notes: list) -> list[tuple[str, str]]:
     """(display title, body) pairs matching readme Tips & Notes rules."""
     pairs: list[tuple[str, str]] = []
@@ -435,8 +455,9 @@ def generate() -> None:
     gm_eh = (readme_data.get("generated_markdown") or {}).get("engineering_hubs") or {}
     eh_title = (gm_eh.get("title") or _DEFAULT_EH_TITLE).strip()
     eh_intro = (gm_eh.get("intro") or _DEFAULT_EH_INTRO).strip()
-    eh_disc_tmpl = (gm_eh.get("disclaimer") or _DEFAULT_EH_DISCLAIMER).strip()
-    eh_disclaimer = eh_disc_tmpl.replace("{issue_chooser_url}", issue_chooser)
+    eh_disclaimer = _engineering_hubs_disclaimer_text(
+        readme_data, issue_chooser
+    )
     hubs: list[str] = [
         f"# {eh_title}\n",
         "\n",
