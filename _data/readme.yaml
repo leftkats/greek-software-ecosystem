@@ -62,6 +62,17 @@ badges:
     show_license: true
     show_last_commit: true
 
+# Discord badge and “Community” section in the generated README.
+# `invite` is the code only (after https://discord.gg/ ). Set to null to hide both.
+community:
+  discord:
+    invite: "TywcYPMs"
+    badge_label: "Community"
+    color: "5865F2"
+    # Optional. Use {url} for the invite link, or omit for the default sentence.
+    # description: |
+    #   **[Our Discord]({url})** — your text here.
+
 disclaimer: >
   This project is for **community and educational purposes only**.
   All data is aggregated from publicly available sources (company

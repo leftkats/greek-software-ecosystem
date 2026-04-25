@@ -13,7 +13,7 @@ from __future__ import annotations
 from collections import Counter
 from html import escape
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 import yaml
 
@@ -81,6 +81,10 @@ _DEFAULT_README_DEV_BLURB = (
     "Setup, regeneration commands, and CI checks are documented in "
     f"**[{DEVELOPMENT_MD}]({DEVELOPMENT_MD})** "
     "(copy-paste shell blocks)."
+)
+_DEFAULT_README_COMMUNITY_DISCORD = (
+    "**[Join the project Discord]({url})** to ask questions about the directory, "
+    "coordinate contributions, and chat with other people using this list."
 )
 
 
@@ -694,6 +698,31 @@ def generate() -> None:
         f"<a href=\"{podcasts_href}\">"
         f"<img src=\"https://img.shields.io/badge/Podcasts-{podcast_count}-{podcasts_color}?style={stats_style}\" alt=\"Podcasts\" /></a>"
     )
+    community_cfg = (readme_data.get("community") or {}).get("discord") or {}
+    raw_inv = community_cfg.get("invite")
+    discord_invite = str(raw_inv).strip() if raw_inv is not None else ""
+    discord_href = ""
+    if discord_invite:
+        discord_badge_lbl = str(
+            community_cfg.get("badge_label") or "Community"
+        ).strip() or "Community"
+        d_right = discord_badge_lbl.replace(" ", "%20")
+        discord_color = str(community_cfg.get("color") or "5865F2").strip()
+        # Static “Discord” label + configurable second segment (e.g. Community) + blurple.
+        discord_badge_url = (
+            f"https://img.shields.io/badge/Discord-{d_right}-{discord_color}?"
+            f"style={stats_style}&logo=discord&logoColor=white"
+        )
+        # Discord invite slugs are unreserved path chars; keep e.g. "_" unencoded.
+        enc_inv = quote(discord_invite, safe="-._~")
+        discord_href = f"https://discord.gg/{enc_inv}"
+        lines.append("  <!-- Set community.discord in _data/readme.yaml -->")
+        lines.append(
+            "  "
+            f"<a href=\"{escape(discord_href, quote=True)}\">"
+            f"<img src=\"{escape(discord_badge_url, quote=True)}\" "
+            f"alt=\"Join us on Discord\" /></a>"
+        )
     lines.append("</p>")
     lines.append("")
 
@@ -758,6 +787,17 @@ def generate() -> None:
     if footer.get("description"):
         lines.append(f"{footer['description']}\n")
     lines.append("")
+
+    if discord_href:
+        lines.append("---\n")
+        lines.append("## Community\n")
+        raw_cdesc = community_cfg.get("description")
+        if raw_cdesc is not None and str(raw_cdesc).strip():
+            comm_body = str(raw_cdesc).strip().replace("{url}", discord_href)
+        else:
+            comm_body = _DEFAULT_README_COMMUNITY_DISCORD.format(url=discord_href)
+        lines.append(comm_body + "\n")
+        lines.append("")
 
     if dev_md_body:
         lines.append("---\n")

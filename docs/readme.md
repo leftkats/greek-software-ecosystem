@@ -11,6 +11,8 @@
   <a href="https://leftkats.github.io/greek-software-ecosystem/?pol=remote"><img src="https://img.shields.io/badge/Remote-50-16a34a?style=for-the-badge" alt="Remote" /></a>
   <a href="https://leftkats.github.io/greek-software-ecosystem/?pol=hybrid"><img src="https://img.shields.io/badge/Hybrid-123-ca8a04?style=for-the-badge" alt="Hybrid" /></a>
   <a href="https://leftkats.github.io/greek-software-ecosystem/podcasts.html"><img src="https://img.shields.io/badge/Podcasts-11-9333ea?style=for-the-badge" alt="Podcasts" /></a>
+  <!-- Set community.discord in _data/readme.yaml -->
+  <a href="https://discord.gg/TywcYPMs"><img src="https://img.shields.io/badge/Discord-Community-5865F2?style=for-the-badge&amp;logo=discord&amp;logoColor=white" alt="Join us on Discord" /></a>
 </p>
 
 <p align="center">
@@ -42,6 +44,13 @@ Currently tracking **252** companies, with **Athens** as the leading hub (171 of
 [![Contributors](https://contrib.rocks/image?repo=leftkats/greek-software-ecosystem)](https://github.com/leftkats/greek-software-ecosystem/graphs/contributors)
 
 Built with ❤️ by the community. PRs welcome!
+
+
+---
+
+## Community
+
+**[Join the project Discord](https://discord.gg/TywcYPMs)** to ask questions about the directory, coordinate contributions, and chat with other people using this list.
 
 
 ---
