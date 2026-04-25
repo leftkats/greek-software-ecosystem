@@ -56,6 +56,10 @@ Built with ❤️ by the community. PRs welcome!
 **[Join the project Discord](https://discord.gg/TywcYPMs)** to ask questions about the directory, coordinate contributions, and chat with other people using this list.
 
 
+<p align="center">
+  <a href="https://star-history.com/#leftkats/greek-software-ecosystem&amp;Date"><img src="https://api.star-history.com/svg?repos=leftkats/greek-software-ecosystem&amp;type=Date" alt="Star history chart" /></a>
+</p>
+
 ---
 
 ## Development
