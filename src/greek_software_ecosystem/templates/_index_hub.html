@@ -18,7 +18,7 @@
                 <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 text-2xl"
                     aria-hidden="true">work</span>
                 <span class="font-semibold text-slate-900 dark:text-white">Job search</span>
-                <span class="text-xs text-slate-500 dark:text-slate-400 leading-snug">Remote-first Greek employers: sector &amp; location filters; Workable Greece counts. Boards &amp; links on Resources.</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400 leading-snug">{% if show_workable_job_counts %}Remote-first Greek employers: sector &amp; location filters; Workable Greece counts. Boards &amp; links on Resources.{% else %}Remote-first Greek employers: sector &amp; location filters. Boards &amp; links on Resources.{% endif %}</span>
             </a>
             <a href="{{ nav.resources }}"
                 class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/50 p-4 hover:border-cyan-500/70 dark:hover:border-cyan-500/50 hover:shadow-md transition flex flex-col gap-2">

@@ -1,6 +1,7 @@
 (function initAgtjConfigFromDom() {
     const el = document.getElementById("agtj-config");
     let itemsPerPage = 20;
+    let showWorkableJobCounts = true;
     if (el?.textContent?.trim()) {
         try {
             const c = JSON.parse(el.textContent);
@@ -8,11 +9,14 @@
             if (typeof n === "number" && Number.isFinite(n) && n > 0) {
                 itemsPerPage = n;
             }
+            if (typeof c?.showWorkableJobCounts === "boolean") {
+                showWorkableJobCounts = c.showWorkableJobCounts;
+            }
         } catch (_) {
             /* keep default */
         }
     }
-    window.AGTJ_CONFIG = { itemsPerPage };
+    window.AGTJ_CONFIG = { itemsPerPage, showWorkableJobCounts };
 })();
 
 let currentPage = 1;
@@ -601,6 +605,9 @@ if (statWorkableHiringBtn) {
 }
 
 function initWorkableJobCounts() {
+    if (window.AGTJ_CONFIG?.showWorkableJobCounts === false) {
+        return;
+    }
     const wBtn = document.getElementById("statWorkableHiringBtn");
     const rows = Array.from(document.querySelectorAll(".company-row[data-workable-slug]"));
     if (!rows.length) {

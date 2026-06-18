@@ -2,6 +2,7 @@
 # runs **Jekyll** (`jekyll-pages/`), copies **Python-generated** `sitemap.xml` / `robots.txt`, then
 # force-pushes `_site/` (+ `.nojekyll`) to branch `live` for GitHub Pages.
 #
+# **Currently disabled** — the `deploy` job uses `if: false`. Remove that guard to re-enable.
 # Skips when the triggering push was the bot follow-up (`[skip ci]` in the message).
 # **Settings → Pages → Branch `live`, folder `/`.**
 
@@ -11,8 +12,6 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: "0 5 * * 1"
   workflow_dispatch:
 
 permissions:
@@ -24,13 +23,12 @@ concurrency:
 
 jobs:
   deploy:
-    # workflow_dispatch / schedule: do not use head_commit (often unset → job was skipped).
-    # push: skip bot follow-up commits with [skip ci].
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      github.event_name == 'schedule' ||
-      (github.event_name == 'push' &&
-       !contains(github.event.head_commit.message, '[skip ci]'))
+    # Disabled — delete the next line and uncomment the block below to re-enable.
+    if: false
+    # if: >-
+    #   github.event_name == 'workflow_dispatch' ||
+    #   (github.event_name == 'push' &&
+    #    !contains(github.event.head_commit.message, '[skip ci]'))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -103,7 +101,7 @@ jobs:
             rm -rf "${WORK}"
           }
 
-          if [ "$EVENT_NAME" = "push" ]; then
+          if [ "$EVENT_NAME" = "push" ] || [ "$EVENT_NAME" = "workflow_dispatch" ]; then
             just readme
             run_gen_index
 
@@ -115,38 +113,15 @@ jobs:
             if git diff --staged --quiet; then
               echo "No main-branch doc changes to commit."
             else
-              git commit -m "chore(📚): auto-update docs with fresh content [skip ci]"
-              MAIN_CHANGED=1
-            fi
-
-            deploy_live "chore: deploy static site from main [skip ci]"
-
-            if [ "$MAIN_CHANGED" -eq 1 ]; then
-              git push origin main
-            fi
-          fi
-
-          if [ "$EVENT_NAME" = "schedule" ] || [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            just fetch
-            just readme
-            run_gen_index
-
-            git config --local user.email "github-actions[bot]@users.noreply.github.com"
-            git config --local user.name "github-actions[bot]"
-            git add README.md docs/*.md _data/readme.yaml _data/open_source_projects.yaml _data/workable_counts.yaml
-            MAIN_CHANGED=0
-            if git diff --staged --quiet; then
-              echo "No main-branch changes to commit."
-            else
-              if [ "$EVENT_NAME" = "schedule" ]; then
-                git commit -m "chore: refresh Workable job counts (weekly schedule) [skip ci]"
+              if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+                git commit -m "chore: regenerate docs and site (manual) [skip ci]"
               else
-                git commit -m "chore: refresh Workable job counts (manual) [skip ci]"
+                git commit -m "chore(📚): auto-update docs with fresh content [skip ci]"
               fi
               MAIN_CHANGED=1
             fi
 
-            deploy_live "chore: deploy static site after Workable refresh [skip ci]"
+            deploy_live "chore: deploy static site from main [skip ci]"
 
             if [ "$MAIN_CHANGED" -eq 1 ]; then
               git push origin main

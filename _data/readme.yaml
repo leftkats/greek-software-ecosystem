@@ -55,6 +55,11 @@ branding:
   # Second line under the tagline; set to null to hide.
   intro_line_2: null
 
+# Site and README: Workable open-role counts (badge, per-company counts, sort/filter).
+features:
+  workable_job_counts:
+    enabled: false
+
 badges:
   stats:
     style: "for-the-badge"

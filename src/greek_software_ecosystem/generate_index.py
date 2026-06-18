@@ -500,6 +500,22 @@ def _logo_image_object(origin: str) -> dict:
     }
 
 
+def load_workable_job_counts_enabled() -> bool:
+    """Whether Workable open-role counts are shown on the site and README."""
+    if not _README_YAML.is_file():
+        return True
+    try:
+        with _README_YAML.open(encoding="utf-8") as f:
+            rd = yaml.safe_load(f) or {}
+    except (yaml.YAMLError, OSError):
+        return True
+    feat = rd.get("features") or {}
+    wjc = feat.get("workable_job_counts") or {}
+    if "enabled" in wjc:
+        return bool(wjc["enabled"])
+    return True
+
+
 def load_readme_hero() -> tuple[str, str]:
     """Tagline and short intro for the home hub (from ``_data/readme.yaml``)."""
     default_tag = "The open-source pulse on remote-first IT and software jobs in Greece"
@@ -1156,6 +1172,9 @@ def run_generate_index(
         raise SystemExit(1)
 
     tagline, intro_blurb = load_readme_hero()
+    show_workable_job_counts = load_workable_job_counts_enabled()
+    if not show_workable_job_counts:
+        stats["workable_companies_count"] = 0
     job_sections, awesome_queries = load_queries_split()
     open_greek_data_queries = load_open_greek_data_entries()
 
@@ -1175,6 +1194,7 @@ def run_generate_index(
         schema_json_ld=_home_schema,
         site_tagline=tagline,
         site_intro_blurb=intro_blurb,
+        show_workable_job_counts=show_workable_job_counts,
         current_page="home",
         **_meta,
     )
@@ -1211,10 +1231,15 @@ def run_generate_index(
             locations=sorted_locations,
             industries_for_dropdown=industries_for_dropdown,
             agtj_config_json=json.dumps(
-                {"itemsPerPage": ITEMS_PER_PAGE}, ensure_ascii=False
+                {
+                    "itemsPerPage": ITEMS_PER_PAGE,
+                    "showWorkableJobCounts": show_workable_job_counts,
+                },
+                ensure_ascii=False,
             ),
             get_style=get_policy_style,
             stats=stats,
+            show_workable_job_counts=show_workable_job_counts,
             workable_snapshot=_workable_snapshot,
             workable_snapshot_json=json.dumps(_workable_snapshot, ensure_ascii=False),
             schema_json_ld=job_schema_combined,

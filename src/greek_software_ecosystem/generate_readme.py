@@ -611,6 +611,11 @@ def generate() -> None:
 
     repo = readme_data.get("repo", "leftkats/greek-software-ecosystem")
     live_url = readme_data.get("live_url", "")
+    show_workable_job_counts = bool(
+        ((readme_data.get("features") or {}).get("workable_job_counts") or {}).get(
+            "enabled", True
+        )
+    )
     branding = readme_data.get("branding", {}) or {}
     _default_intro_line_2 = (
         "Community-curated directory with weekly open roles count updates."
@@ -678,11 +683,12 @@ def generate() -> None:
         f'<a href="{companies_href}">'
         f'<img src="https://img.shields.io/badge/Companies-{total}-{companies_color}?style={stats_style}" alt="Companies" /></a>'
     )
-    lines.append(
-        "  "
-        f'<a href="{open_roles_href}">'
-        f'<img src="https://img.shields.io/badge/Open%20Roles-{open_roles}-{open_roles_color}?style={stats_style}" alt="Open Roles" /></a>'
-    )
+    if show_workable_job_counts:
+        lines.append(
+            "  "
+            f'<a href="{open_roles_href}">'
+            f'<img src="https://img.shields.io/badge/Open%20Roles-{open_roles}-{open_roles_color}?style={stats_style}" alt="Open Roles" /></a>'
+        )
     lines.append(
         "  "
         f'<a href="{remote_href}">'

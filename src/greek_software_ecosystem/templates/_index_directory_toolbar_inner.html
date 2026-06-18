@@ -10,11 +10,13 @@
             autocomplete="off" spellcheck="false">
     </div>
     <div class="flex items-center gap-2">
+        {% if show_workable_job_counts %}
         <button id="sortOpenRolesBtn" type="button"
             class="w-full sm:w-auto min-h-[2.75rem] sm:min-h-0 inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50/80 dark:bg-slate-800/50 text-[10px] sm:text-xs font-mono uppercase tracking-wide px-3 py-2 sm:py-2 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
             aria-pressed="false" title="Sort companies by open Workable roles">
             Sort Open Roles: High-Low
         </button>
+        {% endif %}
     </div>
 </div>
     <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-stretch sm:gap-2">

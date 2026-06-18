@@ -7,7 +7,6 @@
 
 <p align="center">
   <a href="https://leftkats.github.io/greek-software-ecosystem/job-search/#employers"><img src="https://img.shields.io/badge/Companies-50-2563eb?style=for-the-badge" alt="Companies" /></a>
-  <a href="https://leftkats.github.io/greek-software-ecosystem/job-search/?hire=1"><img src="https://img.shields.io/badge/Open%20Roles-1028-f59e0b?style=for-the-badge" alt="Open Roles" /></a>
   <a href="https://leftkats.github.io/greek-software-ecosystem/job-search/?pol=remote"><img src="https://img.shields.io/badge/Remote-50-16a34a?style=for-the-badge" alt="Remote" /></a>
   <a href="https://leftkats.github.io/greek-software-ecosystem/podcasts/"><img src="https://img.shields.io/badge/Podcasts-12-9333ea?style=for-the-badge" alt="Podcasts" /></a>
   <!-- Set community.discord in _data/readme.yaml -->

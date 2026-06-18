@@ -8,7 +8,7 @@
         data-industries-list="{{ company.industries|join('||') }}"
         data-locations="{{ company.office_locations|join(' ') }}"
         data-locations-list="{{ company.office_locations|join('||') }}"
-        data-linkedin="{{ company.linkedin_company_id or '' }}" {% if company.workable_slug
+        data-linkedin="{{ company.linkedin_company_id or '' }}" {% if show_workable_job_counts and company.workable_slug
         %}data-workable-slug="{{ company.workable_slug }}" {% endif %}>
         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div class="min-w-0">
@@ -61,7 +61,7 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-2 sm:justify-end sm:pt-0.5">
-                {% if company.workable_slug %}
+                {% if show_workable_job_counts and company.workable_slug %}
                 <span
                     class="workable-job-badge border border-slate-200 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/20 rounded-xl px-3 py-2 min-w-[8.25rem] text-center"
                     role="status" aria-live="polite">
