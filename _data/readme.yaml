@@ -1,18 +1,18 @@
 title: "Greek Software Ecosystem"
-tagline: "The open-source pulse on IT and software jobs across Greece"
+tagline: "The open-source pulse on remote-first IT and software jobs in Greece"
 description: >
-  **Greek Software Ecosystem** is a community-maintained collection for
-  people exploring software and technology careers in Greece. Among other things,
-  this repository holds a **sortable employer directory** (with weekly
-  **Workable** open-role snapshots where applicable), **curated job-search links**
-  and tips, pointers to **Greek tech podcasts**, and a short list of **remote
-  café / laptop-friendly workspace** resources—linked from the overview below.
+  **Greek Software Ecosystem** is a community-maintained collection for people exploring
+  software and technology careers in Greece. This repository contains a list of
+  **remote-first companies** — a **sortable employer directory** (with weekly **Workable**
+  open-role snapshots where applicable), **curated job-search links** and tips, pointers to
+  **Greek tech podcasts**, and a short list of **remote café / laptop-friendly workspace**
+  resources—linked from the overview below.
 
 # Shown on the README overview, the site home hero, and the job-search page (Markdown; ``generate_index`` renders HTML).
 work_policy_notice: >
-  **Note:** Work policy labels (remote, hybrid, on-site) are community-maintained and may
-  be incorrect or outdated. Always verify roles, locations, and policies on each employer's
-  official website using the company and careers URLs in the directory.
+  **Note:** Work policy labels are community-maintained and may be incorrect or outdated.
+  Always verify roles, locations, and policies on each employer's official website using the
+  company and careers URLs in the directory.
 
 live_url: "https://leftkats.github.io/greek-software-ecosystem/"
 # Shown as the centered link under the badges (readme header).
@@ -27,23 +27,23 @@ generated_markdown:
   search_queries:
     intro: >
       Hand-picked links for Greek (and broader remote) job hunting.
-      Each entry includes a short note on what you’ll find there.
+      Each entry includes a short note on what you'll find there.
       For **laptop-friendly cafés and remote workspaces**, see **[remote-cafe-resources.md](remote-cafe-resources.md)**.
   engineering_hubs:
-    title: "Engineering Hubs & Career Portals"
+    title: "Remote-first Employers & Career Portals"
     intro: >
-      Curated organizations, focus sectors, work policy, and talent links.
+      Curated remote-first organizations, focus sectors, and talent links.
     disclaimer: >
-      **Disclaimer:** This list is community-maintained. Information may be
-      incomplete, outdated, or incorrect—including **work policy** tags (remote, hybrid, on-site),
+      **Disclaimer:** This list is community-maintained and includes **remote-first companies only**.
+      Information may be incomplete, outdated, or incorrect—including **work policy** tags,
       which are not verified with employers. Always confirm policies and openings on each
       company's official site. If you notice an error or want an update, please
       [open a GitHub issue]({issue_chooser_url}) (pick the template that fits).
   readme:
     overview_links_paragraph: |
-      **What’s in this repository**
+      **What's in this repository**
 
-      - **[engineering-hubs.md](engineering-hubs.md)** — the sortable employer table: sectors, work policy, and talent portals.
+      - **[engineering-hubs.md](engineering-hubs.md)** — the sortable remote-first employer table: sectors, work policy, and talent portals.
       - **[search-queries-and-resources.md](search-queries-and-resources.md)** — job search links, curated lists, and tips & notes.
       - **[greek-tech-podcasts.md](greek-tech-podcasts.md)** — Greek tech & startup podcasts (video and audio).
       - **[open-source-projects.md](open-source-projects.md)** — open source Greek tech projects on GitHub you can contribute to.
@@ -70,7 +70,7 @@ badges:
     show_license: true
     show_last_commit: true
 
-# Discord badge and “Community” section in the generated README.
+# Discord badge and "Community" section in the generated README.
 # `invite` is the code only (after https://discord.gg/ ). Set to null to hide both.
 community:
   discord:
@@ -102,8 +102,8 @@ disclaimer: >
 
   * **Accuracy:** Information is gathered from public sources.  Company
     policies and openings change frequently — always verify on the
-    official company website. **Work policy** labels (remote, hybrid, on-site)
-    may be wrong; rely on each employer's own careers pages and URLs.
+    official company website. **Work policy** labels may be wrong;
+    rely on each employer's own careers pages and URLs.
 
   * **Contributions:** Spotted an error?  PRs and issues are welcome.
 
@@ -156,8 +156,8 @@ footer:
   description: "Built with ❤️ by the community. PRs welcome!"
   # Tips & Notes appear in search-queries-and-resources.md only (not the main readme).
   notes:
-    - title: "Remote vs. Hybrid"
-      content: "Many Athens-based companies are moving to 1-2 days in office."
+    - title: "Remote-first employers"
+      content: "This list includes companies tagged as remote-first. Some may still list Greek office locations for legal or tax purposes."
     - title: "Salary Insight"
       content: >
         Remote roles for international companies (via B2B) usually pay

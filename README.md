@@ -1,15 +1,14 @@
 <p align="center">
-  The open-source pulse on IT and software jobs across Greece<br><br>
+  The open-source pulse on remote-first IT and software jobs in Greece<br><br>
   <a href="https://leftkats.github.io/greek-software-ecosystem/"><strong>Open the interactive directory</strong></a><br>
   <br>
   <br>
 </p>
 
 <p align="center">
-  <a href="https://leftkats.github.io/greek-software-ecosystem/job-search/#employers"><img src="https://img.shields.io/badge/Companies-234-2563eb?style=for-the-badge" alt="Companies" /></a>
+  <a href="https://leftkats.github.io/greek-software-ecosystem/job-search/#employers"><img src="https://img.shields.io/badge/Companies-50-2563eb?style=for-the-badge" alt="Companies" /></a>
   <a href="https://leftkats.github.io/greek-software-ecosystem/job-search/?hire=1"><img src="https://img.shields.io/badge/Open%20Roles-1343-f59e0b?style=for-the-badge" alt="Open Roles" /></a>
   <a href="https://leftkats.github.io/greek-software-ecosystem/job-search/?pol=remote"><img src="https://img.shields.io/badge/Remote-50-16a34a?style=for-the-badge" alt="Remote" /></a>
-  <a href="https://leftkats.github.io/greek-software-ecosystem/job-search/?pol=hybrid"><img src="https://img.shields.io/badge/Hybrid-113-ca8a04?style=for-the-badge" alt="Hybrid" /></a>
   <a href="https://leftkats.github.io/greek-software-ecosystem/podcasts/"><img src="https://img.shields.io/badge/Podcasts-12-9333ea?style=for-the-badge" alt="Podcasts" /></a>
   <!-- Set community.discord in _data/readme.yaml -->
   <a href="https://discord.gg/TywcYPMs"><img src="https://img.shields.io/badge/Discord-Community-5865F2?style=for-the-badge&amp;logo=discord&amp;logoColor=white" alt="Join us on Discord" /></a>
@@ -22,18 +21,18 @@
 
 ## Overview
 
-**Greek Software Ecosystem** is a community-maintained collection for people exploring software and technology careers in Greece. Among other things, this repository holds a **sortable employer directory** (with weekly **Workable** open-role snapshots where applicable), **curated job-search links** and tips, pointers to **Greek tech podcasts**, and a short list of **remote café / laptop-friendly workspace** resources—linked from the overview below.
+**Greek Software Ecosystem** is a community-maintained collection for people exploring software and technology careers in Greece. This repository contains a list of **remote-first companies** — a **sortable employer directory** (with weekly **Workable** open-role snapshots where applicable), **curated job-search links** and tips, pointers to **Greek tech podcasts**, and a short list of **remote café / laptop-friendly workspace** resources—linked from the overview below.
 
 
-Currently tracking **234** companies, with **Athens** as the leading hub (159 offices). **50** teams are fully remote, **113** hybrid, and **33** on-site. The most common sectors are **IT Services** (51), **AI** (34), **Software Development** (31), **IT Consulting** (21), **Consulting** (21).
+Currently tracking **50** remote-first companies. The most common sectors are **AI** (9), **Software Development** (7), **IT Services** (5), **Consulting** (4), **Data** (3).
 
 
-**Note:** Work policy labels (remote, hybrid, on-site) are community-maintained and may be incorrect or outdated. Always verify roles, locations, and policies on each employer's official website using the company and careers URLs in the directory.
+**Note:** Work policy labels are community-maintained and may be incorrect or outdated. Always verify roles, locations, and policies on each employer's official website using the company and careers URLs in the directory.
 
 
-**What’s in this repository**
+**What's in this repository**
 
-- **[engineering-hubs.md](docs/engineering-hubs.md)** — the sortable employer table: sectors, work policy, and talent portals.
+- **[engineering-hubs.md](docs/engineering-hubs.md)** — the sortable remote-first employer table: sectors, work policy, and talent portals.
 - **[search-queries-and-resources.md](docs/search-queries-and-resources.md)** — job search links, curated lists, and tips & notes.
 - **[greek-tech-podcasts.md](docs/greek-tech-podcasts.md)** — Greek tech & startup podcasts (video and audio).
 - **[open-source-projects.md](docs/open-source-projects.md)** — open source Greek tech projects on GitHub you can contribute to.
@@ -85,8 +84,8 @@ This project is for **community and educational purposes only**. All data is agg
 
 * **Accuracy:** Information is gathered from public sources.  Company
   policies and openings change frequently — always verify on the
-  official company website. **Work policy** labels (remote, hybrid, on-site)
-  may be wrong; rely on each employer's own careers pages and URLs.
+  official company website. **Work policy** labels may be wrong;
+  rely on each employer's own careers pages and URLs.
 
 * **Contributions:** Spotted an error?  PRs and issues are welcome.
 * **Liability:** As per the [MIT License](LICENSE), this information

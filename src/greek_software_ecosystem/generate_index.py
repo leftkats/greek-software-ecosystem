@@ -214,8 +214,8 @@ def load_site_meta() -> dict:
     origin = "https://leftkats.github.io/greek-software-ecosystem"
     title = "Greek Software Ecosystem"
     desc = (
-        "A vibrant map of employers hiring for technology roles in Greece — "
-        "sectors, work policies, careers, and weekly Workable snapshots."
+        "A community-maintained list of remote-first employers hiring for technology roles in Greece — "
+        "sectors, careers, and weekly Workable snapshots."
     )
     repo_slug = "leftkats/greek-software-ecosystem"
     if _README_YAML.is_file():
@@ -502,9 +502,9 @@ def _logo_image_object(origin: str) -> dict:
 
 def load_readme_hero() -> tuple[str, str]:
     """Tagline and short intro for the home hub (from ``_data/readme.yaml``)."""
-    default_tag = "The open-source pulse on IT and software jobs across Greece"
+    default_tag = "The open-source pulse on remote-first IT and software jobs in Greece"
     default_intro = (
-        "Browse employers, job boards, curated lists, remote café guides, and "
+        "Browse remote-first employers, job boards, curated lists, remote café guides, and "
         "podcasts—aligned with the GitHub repository."
     )
     if not _README_YAML.is_file():
@@ -1184,7 +1184,7 @@ def run_generate_index(
     site_name = _meta["og_site_name"]
 
     job_combined_desc = _truncate_first_card_description(
-        "Searchable Greek tech employers: sectors, locations, work policy, and Workable Greece role counts."
+        "Searchable remote-first Greek tech employers: sectors, locations, and Workable Greece role counts."
     )
     job_meta = meta_page(
         _meta,

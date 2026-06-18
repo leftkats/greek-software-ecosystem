@@ -1,5 +1,5 @@
 name: Add a company
-description: Suggest a tech employer in Greece that is missing from the list
+description: Suggest a remote-first tech employer in Greece that is missing from the list
 title: "[Add company] "
 labels:
   - add-company
@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        New entries must be **tech-focused** (software, data, IT services, etc.) and include working public links.
+        New entries must be **tech-focused** (software, data, IT services, etc.), **remote-first**, and include working public links.
         See `contributing.md` for the YAML format.
 
   - type: input
@@ -46,12 +46,10 @@ body:
   - type: dropdown
     id: policy
     attributes:
-      label: Work policy (best guess)
+      label: Work policy
+      description: This list is remote-first only. Select remote unless the company is not remote-first.
       options:
         - remote
-        - hybrid
-        - onsite
-        - n/a
     validations:
       required: true
 

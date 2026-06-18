@@ -2,7 +2,7 @@
 
 ← [README.md](../README.md)
 
-Hand-picked links for Greek (and broader remote) job hunting. Each entry includes a short note on what you’ll find there. For **laptop-friendly cafés and remote workspaces**, see **[remote-cafe-resources.md](remote-cafe-resources.md)**.
+Hand-picked links for Greek (and broader remote) job hunting. Each entry includes a short note on what you'll find there. For **laptop-friendly cafés and remote workspaces**, see **[remote-cafe-resources.md](remote-cafe-resources.md)**.
 
 ## Job boards, portals & search
 
@@ -27,7 +27,7 @@ Hand-picked links for Greek (and broader remote) job hunting. Each entry include
 
 ## Tips & Notes
 
-- **Remote vs. Hybrid:** Many Athens-based companies are moving to 1-2 days in office.
+- **Remote-first employers:** This list includes companies tagged as remote-first. Some may still list Greek office locations for legal or tax purposes.
 - **Salary Insight:** Remote roles for international companies (via B2B) usually pay higher than local Greek contracts.  Weigh the trade-offs when the latter includes private health coverage.
 - **Interview Prep:** Focus on System Design for Senior roles and LeetCode (Medium) for mid-level.
 - **Job Counts (Experimental):** Workable counts are fetched weekly via CI from the public API and may be inaccurate due to timing, geography filters, or API behavior.

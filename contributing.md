@@ -74,7 +74,8 @@ If you want to work on an open issue, follow this simple flow:
 
 ## Contribution Rules
 
-* **Tech Focus Only**: Please only add companies, roles, or resources relevant to Computer/Software Engineering, Data, or Tech-Business roles. No mechanical, civil, or non-tech engineering.
+* **Remote-first only**: Please only add companies with a **remote** work policy.
+* **Tech Focus Only**: Please only add companies, or resources relevant to Computer/Software Engineering, Data, or Tech-Business roles. No mechanical, civil, or non-tech engineering.
 * **Working Links**: Ensure all URLs provided are active and correct.
 * **YAML Validation**: Make sure the YAML files are properly formatted and valid.
 * **Descriptive Entries**: Provide clear and concise descriptions for roles and resources.

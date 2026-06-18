@@ -23,21 +23,27 @@
                     data-policy="remote" aria-pressed="false" title="Show only remote companies">
                     Remote {{ stats.policy_counts.get('remote', 0) }}
                 </button>
+                {% if stats.policy_counts.get('hybrid', 0) %}
                 <span aria-hidden="true">·</span>
                 <button type="button" class="stat-header-policy hover:text-slate-900 dark:hover:text-slate-100"
                     data-policy="hybrid" aria-pressed="false" title="Show only hybrid companies">
                     Hybrid {{ stats.policy_counts.get('hybrid', 0) }}
                 </button>
+                {% endif %}
+                {% if stats.policy_counts.get('on-site', 0) %}
                 <span aria-hidden="true">·</span>
                 <button type="button" class="stat-header-policy hover:text-slate-900 dark:hover:text-slate-100"
                     data-policy="on-site" aria-pressed="false" title="Show only on-site companies">
                     On-site {{ stats.policy_counts.get('on-site', 0) }}
                 </button>
+                {% endif %}
+                {% if stats.policy_counts.get('n/a', 0) %}
                 <span aria-hidden="true">·</span>
                 <button type="button" class="stat-header-policy hover:text-slate-900 dark:hover:text-slate-100"
                     data-policy="n/a" aria-pressed="false" title="Show only N/A policy companies">
                     N/A {{ stats.policy_counts.get('n/a', 0) }}
                 </button>
+                {% endif %}
                 {% if stats.workable_companies_count %}
                 <span aria-hidden="true">·</span>
                 <button type="button" id="statWorkableHiringBtn"

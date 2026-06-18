@@ -688,11 +688,12 @@ def generate() -> None:
         f'<a href="{remote_href}">'
         f'<img src="https://img.shields.io/badge/Remote-{remote}-{remote_color}?style={stats_style}" alt="Remote" /></a>'
     )
-    lines.append(
-        "  "
-        f'<a href="{hybrid_href}">'
-        f'<img src="https://img.shields.io/badge/Hybrid-{hybrid}-{hybrid_color}?style={stats_style}" alt="Hybrid" /></a>'
-    )
+    if hybrid > 0:
+        lines.append(
+            "  "
+            f'<a href="{hybrid_href}">'
+            f'<img src="https://img.shields.io/badge/Hybrid-{hybrid}-{hybrid_color}?style={stats_style}" alt="Hybrid" /></a>'
+        )
     lines.append(
         "  "
         f'<a href="{podcasts_href}">'
@@ -759,15 +760,21 @@ def generate() -> None:
         parts = [f"**{s}** ({n})" for s, n in top_sectors]
         sec_str = f" The most common sectors are {', '.join(parts)}."
 
-    lines.append(
-        f"Currently tracking **{total}** companies, "
-        f"with **{top_loc}** as the leading hub "
-        f"({top_n} offices). "
-        f"**{remote}** teams are fully remote, "
-        f"**{hybrid}** hybrid, and "
-        f"**{onsite}** on-site."
-        f"{sec_str}\n"
-    )
+    if hybrid == 0 and onsite == 0:
+        lines.append(
+            f"Currently tracking **{total}** remote-first companies."
+            f"{sec_str}\n"
+        )
+    else:
+        lines.append(
+            f"Currently tracking **{total}** companies, "
+            f"with **{top_loc}** as the leading hub "
+            f"({top_n} offices). "
+            f"**{remote}** teams are fully remote, "
+            f"**{hybrid}** hybrid, and "
+            f"**{onsite}** on-site."
+            f"{sec_str}\n"
+        )
     lines.append("")
     wpn = (
         readme_data.get("work_policy_notice") or ""
