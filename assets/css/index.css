@@ -1,0 +1,314 @@
+/* Top-of-page hero cards: markup uses Tailwind + class ``agtj-hero-card`` for compact padding (p-4 sm:p-5). */
+
+/* Horizontal padding that never clips under iPhone notches / rounded corners */
+.agtj-site-px {
+    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+}
+
+@media (min-width: 640px) {
+    .agtj-site-px {
+        padding-left: max(1rem, env(safe-area-inset-left, 0px));
+        padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    }
+}
+
+/* Mobile primary nav: single row of pills, swipe without a bulky scrollbar */
+.agtj-nav-pills-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+}
+
+.agtj-nav-pills-scroll::-webkit-scrollbar {
+    display: none;
+    height: 0;
+}
+
+.hidden-row {
+    display: none !important;
+}
+
+.agtj-consent-banner:not([hidden]) {
+    animation: agtj-consent-in 0.4s ease-out;
+}
+
+@keyframes agtj-consent-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.75rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.agtj-filter-panel {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(148 163 184 / 0.7) transparent;
+}
+
+.agtj-filter-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.agtj-filter-panel::-webkit-scrollbar-thumb {
+    background-color: rgb(148 163 184 / 0.6);
+    border-radius: 999px;
+}
+
+.dark .agtj-filter-panel {
+    scrollbar-color: rgb(71 85 105 / 0.8) transparent;
+}
+
+.dark .agtj-filter-panel::-webkit-scrollbar-thumb {
+    background-color: rgb(71 85 105 / 0.7);
+}
+
+/* Long open-source table: defer off-screen row painting where supported (hundreds of rows). */
+.agtj-open-source-scroll tbody tr.agtj-osp-row {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 4rem;
+}
+
+/* Long open-source table: subtle scrollbars inside max-height region */
+.agtj-open-source-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(148 163 184 / 0.65) transparent;
+}
+
+.agtj-open-source-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.agtj-open-source-scroll::-webkit-scrollbar-thumb {
+    background-color: rgb(148 163 184 / 0.55);
+    border-radius: 999px;
+}
+
+.dark .agtj-open-source-scroll {
+    scrollbar-color: rgb(71 85 105 / 0.75) transparent;
+}
+
+.dark .agtj-open-source-scroll::-webkit-scrollbar-thumb {
+    background-color: rgb(71 85 105 / 0.65);
+}
+
+.policy-filter:focus-visible {
+    outline: 2px solid rgb(6 182 212);
+    outline-offset: 2px;
+}
+
+.policy-filter,
+.sector-filter,
+.company-location-tag,
+.stat-header-policy,
+.stat-workable-hiring {
+    transition: all 150ms ease;
+}
+
+.policy-filter.active-filter,
+.sector-filter.active-filter,
+.company-location-tag.active-filter {
+    box-shadow: inset 0 0 0 1px currentColor;
+    opacity: 1;
+}
+
+.policy-filter:not(.active-filter),
+.sector-filter:not(.active-filter),
+.company-location-tag:not(.active-filter) {
+    opacity: 0.7;
+}
+
+body.has-policy-filters .policy-filter:not(.active-filter),
+body.has-sector-filters .sector-filter:not(.active-filter),
+body.has-location-filters .company-location-tag:not(.active-filter) {
+    opacity: 0.3;
+}
+
+.company-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.company-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.stat-header-policy,
+.stat-workable-hiring {
+    border: none;
+    background: transparent;
+    padding: 0.1rem 0;
+    cursor: pointer;
+    text-underline-offset: 2px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.stat-header-policy:disabled,
+.stat-workable-hiring:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.stat-header-policy:focus-visible,
+.stat-workable-hiring:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+.stat-header-active {
+    text-decoration: underline;
+    opacity: 1;
+}
+
+.company-row-has-openings {
+    border-color: rgb(16 185 129 / 0.4);
+    background: linear-gradient(180deg, rgb(236 253 245 / 0.8), rgb(255 255 255 / 1));
+}
+
+.dark .company-row-has-openings {
+    background: linear-gradient(180deg, rgb(16 185 129 / 0.1), rgb(15 23 42 / 0.9));
+    border-color: rgb(52 211 153 / 0.4);
+}
+
+.company-career-link-has-roles {
+    border-color: rgb(16 185 129 / 0.8);
+}
+
+/* Podcast cards (page_podcasts.html): keep body copy compact vs. article titles */
+.podcast-card-body.page-md-content p {
+    margin: 0.5rem 0;
+}
+
+.podcast-card-body.page-md-content p:first-child {
+    margin-top: 0;
+}
+
+/* Markdown bodies on static subpages (podcasts, resources) */
+.page-md-content {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: rgb(51 65 85);
+}
+
+.dark .page-md-content {
+    color: rgb(203 213 225);
+}
+
+.page-md-content h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: rgb(15 23 42);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.dark .page-md-content h1 {
+    color: rgb(248 250 252);
+}
+
+.page-md-content h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid rgb(226 232 240);
+    color: rgb(15 23 42);
+}
+
+.dark .page-md-content h2 {
+    border-color: rgb(51 65 85);
+    color: rgb(248 250 252);
+}
+
+.page-md-content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.page-md-content p {
+    margin: 0.75rem 0;
+}
+
+.page-md-content a {
+    color: rgb(8 145 178);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.page-md-content a:hover {
+    color: rgb(14 116 144);
+}
+
+.dark .page-md-content a {
+    color: rgb(34 211 238);
+}
+
+.page-md-content hr {
+    margin: 1.5rem 0;
+    border: 0;
+    border-top: 1px solid rgb(226 232 240);
+}
+
+.dark .page-md-content hr {
+    border-top-color: rgb(51 65 85);
+}
+
+.page-md-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    margin: 1rem 0;
+}
+
+.page-md-content th,
+.page-md-content td {
+    border: 1px solid rgb(226 232 240);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+}
+
+.dark .page-md-content th,
+.dark .page-md-content td {
+    border-color: rgb(51 65 85);
+}
+
+.page-md-content ul {
+    margin: 0.5rem 0 0.75rem 1.1rem;
+    list-style: disc;
+}
+
+/* Resources page: native <details> panels (page_resources.html) */
+.agtj-resource-details .agtj-resource-summary {
+    list-style: none;
+}
+
+.agtj-resource-details .agtj-resource-summary::marker,
+.agtj-resource-details .agtj-resource-summary::-webkit-details-marker {
+    display: none;
+}
+
+.agtj-resource-details[open] .agtj-resource-chevron {
+    transform: rotate(180deg);
+}
+
+/* Slightly roomier markdown inside resource panels */
+.agtj-resource-md.page-md-content {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.agtj-resource-md.page-md-content h1:first-child {
+    margin-top: 0;
+}
