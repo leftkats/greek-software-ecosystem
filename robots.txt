@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://leftkats.github.io/greek-software-ecosystem/sitemap.xml
