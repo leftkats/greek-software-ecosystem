@@ -1,0 +1,605 @@
+/* Top-of-page hero cards: markup uses Tailwind + class ``agtj-hero-card`` for compact padding (p-4 sm:p-5). */
+
+/* Horizontal padding that never clips under iPhone notches / rounded corners */
+.agtj-site-px {
+    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+}
+
+@media (min-width: 640px) {
+    .agtj-site-px {
+        padding-left: max(1rem, env(safe-area-inset-left, 0px));
+        padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    }
+}
+
+/* Mobile primary nav: single row of pills, swipe without a bulky scrollbar */
+.agtj-nav-pills-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+}
+
+.agtj-nav-pills-scroll::-webkit-scrollbar {
+    display: none;
+    height: 0;
+}
+
+.hidden-row {
+    display: none !important;
+}
+
+.agtj-consent-banner:not([hidden]) {
+    animation: agtj-consent-in 0.4s ease-out;
+}
+
+@keyframes agtj-consent-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.75rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.agtj-filter-panel {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(148 163 184 / 0.7) transparent;
+}
+
+.agtj-filter-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.agtj-filter-panel::-webkit-scrollbar-thumb {
+    background-color: rgb(148 163 184 / 0.6);
+    border-radius: 999px;
+}
+
+.dark .agtj-filter-panel {
+    scrollbar-color: rgb(71 85 105 / 0.8) transparent;
+}
+
+.dark .agtj-filter-panel::-webkit-scrollbar-thumb {
+    background-color: rgb(71 85 105 / 0.7);
+}
+
+/* Long open-source table: defer off-screen row painting where supported (hundreds of rows). */
+.agtj-open-source-scroll tbody tr.agtj-osp-row {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 4rem;
+}
+
+/* Long open-source table: subtle scrollbars inside max-height region */
+.agtj-open-source-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(148 163 184 / 0.65) transparent;
+}
+
+.agtj-open-source-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.agtj-open-source-scroll::-webkit-scrollbar-thumb {
+    background-color: rgb(148 163 184 / 0.55);
+    border-radius: 999px;
+}
+
+.dark .agtj-open-source-scroll {
+    scrollbar-color: rgb(71 85 105 / 0.75) transparent;
+}
+
+.dark .agtj-open-source-scroll::-webkit-scrollbar-thumb {
+    background-color: rgb(71 85 105 / 0.65);
+}
+
+.agtj-osp-archived-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    border-radius: 9999px;
+    border: 1px solid rgb(251 191 36 / 0.55);
+    background: rgb(254 243 199 / 0.85);
+    padding: 0.1rem 0.45rem 0.1rem 0.35rem;
+    font-size: 0.625rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgb(146 64 14);
+    white-space: nowrap;
+}
+
+.dark .agtj-osp-archived-badge {
+    border-color: rgb(180 83 9 / 0.45);
+    background: rgb(69 26 3 / 0.55);
+    color: rgb(253 230 138);
+}
+
+.agtj-osp-archived-badge--inline {
+    vertical-align: middle;
+    padding: 0.05rem 0.35rem 0.05rem 0.25rem;
+}
+
+.agtj-osp-row--archived {
+    opacity: 0.88;
+}
+
+.dark .agtj-osp-row--archived {
+    opacity: 0.92;
+}
+
+.policy-filter:focus-visible {
+    outline: 2px solid rgb(6 182 212);
+    outline-offset: 2px;
+}
+
+.policy-filter,
+.sector-filter,
+.company-location-tag,
+.stat-header-policy,
+.stat-workable-hiring {
+    transition: all 150ms ease;
+}
+
+.policy-filter.active-filter,
+.sector-filter.active-filter,
+.company-location-tag.active-filter {
+    box-shadow: inset 0 0 0 1px currentColor;
+    opacity: 1;
+}
+
+.policy-filter:not(.active-filter),
+.sector-filter:not(.active-filter),
+.company-location-tag:not(.active-filter) {
+    opacity: 0.7;
+}
+
+body.has-policy-filters .policy-filter:not(.active-filter),
+body.has-sector-filters .sector-filter:not(.active-filter),
+body.has-location-filters .company-location-tag:not(.active-filter) {
+    opacity: 0.3;
+}
+
+.company-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.company-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.stat-header-policy,
+.stat-workable-hiring {
+    border: none;
+    background: transparent;
+    padding: 0.1rem 0;
+    cursor: pointer;
+    text-underline-offset: 2px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.stat-header-policy:disabled,
+.stat-workable-hiring:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.stat-header-policy:focus-visible,
+.stat-workable-hiring:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+.stat-header-active {
+    text-decoration: underline;
+    opacity: 1;
+}
+
+.company-row-has-openings {
+    border-color: rgb(16 185 129 / 0.4);
+    background: linear-gradient(180deg, rgb(236 253 245 / 0.8), rgb(255 255 255 / 1));
+}
+
+.dark .company-row-has-openings {
+    background: linear-gradient(180deg, rgb(16 185 129 / 0.1), rgb(15 23 42 / 0.9));
+    border-color: rgb(52 211 153 / 0.4);
+}
+
+.company-career-link-has-roles {
+    border-color: rgb(16 185 129 / 0.8);
+}
+
+/* Podcast cards (page_podcasts.html): keep body copy compact vs. article titles */
+.podcast-card-body.page-md-content p {
+    margin: 0.5rem 0;
+}
+
+.podcast-card-body.page-md-content p:first-child {
+    margin-top: 0;
+}
+
+/* Markdown bodies on static subpages (podcasts, resources) */
+.page-md-content {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: rgb(51 65 85);
+}
+
+.dark .page-md-content {
+    color: rgb(203 213 225);
+}
+
+.page-md-content h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: rgb(15 23 42);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.dark .page-md-content h1 {
+    color: rgb(248 250 252);
+}
+
+.page-md-content h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid rgb(226 232 240);
+    color: rgb(15 23 42);
+}
+
+.dark .page-md-content h2 {
+    border-color: rgb(51 65 85);
+    color: rgb(248 250 252);
+}
+
+.page-md-content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.page-md-content p {
+    margin: 0.75rem 0;
+}
+
+.page-md-content a {
+    color: rgb(8 145 178);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.page-md-content a:hover {
+    color: rgb(14 116 144);
+}
+
+.dark .page-md-content a {
+    color: rgb(34 211 238);
+}
+
+.page-md-content hr {
+    margin: 1.5rem 0;
+    border: 0;
+    border-top: 1px solid rgb(226 232 240);
+}
+
+.dark .page-md-content hr {
+    border-top-color: rgb(51 65 85);
+}
+
+.page-md-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    margin: 1rem 0;
+}
+
+.page-md-content th,
+.page-md-content td {
+    border: 1px solid rgb(226 232 240);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+}
+
+.dark .page-md-content th,
+.dark .page-md-content td {
+    border-color: rgb(51 65 85);
+}
+
+.page-md-content ul {
+    margin: 0.5rem 0 0.75rem 1.1rem;
+    list-style: disc;
+}
+
+/* Resources page: native <details> panels (page_resources.html) */
+.agtj-resource-details .agtj-resource-summary {
+    list-style: none;
+}
+
+.agtj-resource-details .agtj-resource-summary::marker,
+.agtj-resource-details .agtj-resource-summary::-webkit-details-marker {
+    display: none;
+}
+
+.agtj-resource-details[open] .agtj-resource-chevron {
+    transform: rotate(180deg);
+}
+
+/* Slightly roomier markdown inside resource panels */
+.agtj-resource-md.page-md-content {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.agtj-resource-md.page-md-content h1:first-child {
+    margin-top: 0;
+}
+
+/* Workspaces: table/map toggle + Leaflet map */
+.ws-view-toggle {
+    display: inline-flex;
+    flex-shrink: 0;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(226 232 240);
+    background: rgb(248 250 252);
+    padding: 0.2rem;
+    gap: 0.15rem;
+}
+
+.dark .ws-view-toggle {
+    border-color: rgb(51 65 85);
+    background: rgb(15 23 42 / 0.65);
+}
+
+.ws-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 0.55rem;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.75rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: rgb(71 85 105);
+    transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+.ws-view-btn-icon {
+    font-size: 1rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.ws-view-btn-text {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.1rem;
+    white-space: nowrap;
+}
+
+.ws-view-btn-meta {
+    font-size: 0.6875rem;
+    letter-spacing: 0;
+    opacity: 0.85;
+}
+
+.dark .ws-view-btn {
+    color: rgb(148 163 184);
+}
+
+.ws-view-btn.ws-view-active {
+    background: rgb(255 255 255);
+    color: rgb(14 116 144);
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.08);
+}
+
+.dark .ws-view-btn.ws-view-active {
+    background: rgb(30 41 59);
+    color: rgb(34 211 238);
+    box-shadow: inset 0 0 0 1px rgb(8 145 178 / 0.35);
+}
+
+#ws-map {
+    height: min(75vh, 48rem);
+    min-height: 20rem;
+    width: 100%;
+    z-index: 0;
+    background: rgb(236 240 243);
+}
+
+.dark #ws-map {
+    background: rgb(30 41 59);
+}
+
+/* Muted basemap — pins stay the focal point */
+#ws-map .leaflet-tile-pane {
+    filter: saturate(0.35) contrast(0.92);
+}
+
+.dark #ws-map .leaflet-tile-pane {
+    filter: saturate(0.25) brightness(0.88) contrast(0.95);
+}
+
+#ws-map .leaflet-control-attribution {
+    font-size: 0.625rem;
+    background: rgb(255 255 255 / 0.82) !important;
+    color: rgb(100 116 139) !important;
+}
+
+.dark #ws-map .leaflet-control-attribution {
+    background: rgb(15 23 42 / 0.82) !important;
+    color: rgb(148 163 184) !important;
+}
+
+#ws-map .leaflet-control-attribution a {
+    color: rgb(71 85 105) !important;
+}
+
+.dark #ws-map .leaflet-control-attribution a {
+    color: rgb(148 163 184) !important;
+}
+
+.ws-map-marker-icon {
+    background: transparent;
+    border: none;
+}
+
+.ws-map-marker-pin {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 9999px;
+    border: 3px solid rgb(255 255 255);
+    box-shadow:
+        0 0 0 2px var(--ws-pin-ring),
+        0 4px 14px rgb(15 23 42 / 0.45);
+}
+
+.ws-map-marker-pin__core {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: var(--ws-pin-core);
+}
+
+.ws-map-marker-pin--cafe {
+    --ws-pin-ring: rgb(234 88 12);
+    --ws-pin-core: rgb(234 88 12);
+    background: rgb(255 237 213 / 0.95);
+}
+
+.ws-map-marker-pin--remote_hub {
+    --ws-pin-ring: rgb(8 145 178);
+    --ws-pin-core: rgb(8 145 178);
+    background: rgb(207 250 254 / 0.95);
+}
+
+.ws-map-marker-pin--directory {
+    --ws-pin-ring: rgb(124 58 237);
+    --ws-pin-core: rgb(124 58 237);
+    background: rgb(237 233 254 / 0.95);
+}
+
+.ws-map-marker-pin--default {
+    --ws-pin-ring: rgb(15 118 110);
+    --ws-pin-core: rgb(15 118 110);
+    background: rgb(204 251 241 / 0.95);
+}
+
+.ws-map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.6875rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: rgb(100 116 139);
+}
+
+.dark .ws-map-legend {
+    color: rgb(148 163 184);
+}
+
+.ws-map-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.ws-map-legend-item::before {
+    content: "";
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 9999px;
+    border: 2px solid rgb(255 255 255);
+    box-shadow: 0 0 0 1px var(--ws-legend-ring), 0 1px 4px rgb(15 23 42 / 0.25);
+    background: var(--ws-legend-fill);
+}
+
+.ws-map-legend-item--cafe {
+    --ws-legend-ring: rgb(234 88 12);
+    --ws-legend-fill: rgb(234 88 12);
+}
+
+.ws-map-legend-item--hub {
+    --ws-legend-ring: rgb(8 145 178);
+    --ws-legend-fill: rgb(8 145 178);
+}
+
+.ws-map-marker-dot {
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    border: 2px solid rgb(255 255 255);
+    box-shadow: 0 1px 4px rgb(15 23 42 / 0.35);
+}
+
+.ws-map-popup {
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+}
+
+.ws-map-popup-type {
+    margin: 0 0 0.25rem;
+    font-family: ui-monospace, monospace;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgb(100 116 139);
+}
+
+.ws-map-popup-title {
+    margin: 0 0 0.35rem;
+    font-weight: 700;
+    font-size: 0.9375rem;
+}
+
+.ws-map-popup-title a {
+    color: rgb(14 116 144);
+    text-decoration: none;
+}
+
+.ws-map-popup-title a:hover {
+    text-decoration: underline;
+}
+
+.ws-map-popup-loc {
+    margin: 0 0 0.35rem;
+    color: rgb(71 85 105);
+}
+
+.ws-map-popup-maps {
+    margin: 0;
+    font-size: 0.75rem;
+}
+
+.ws-map-popup-maps a {
+    color: rgb(5 150 105);
+}
