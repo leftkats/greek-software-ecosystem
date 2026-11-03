@@ -601,5 +601,6 @@ Repositories are **sorted by GitHub stars** (highest first). **Star** and **fork
 | [jbook](https://github.com/chrismitsdev/jbook) | — | — | jBook cli, local-api & local-client monorepo · From [committers.top Greece](https://committers.top/greece.html) (maintainer **chrismitsdev**). |
 | [AstroEmbedAutoimportError](https://github.com/VisualEhrmanntraut/AstroEmbedAutoimportError) | — | — | No description on GitHub—see the repository README. · From [committers.top Greece](https://committers.top/greece.html) (maintainer **VisualEhrmanntraut**). |
 | [rickychilcott.github.io](https://github.com/rickychilcott/rickychilcott.github.io) | — | — | rickychilcott.com · From [committers.top Greece](https://committers.top/greece.html) (maintainer **rickychilcott**). |
+| [BestPrice MCP](https://github.com/TheBestCo/bestprice-mcp) | — | — | Official **BestPrice.gr** MCP server and agent plugin (Claude, Codex, Gemini CLI, Cursor): read-only product search, current offers from Greek shops with delivered totals, and price history over a keyless remote endpoint. Apache-2.0. |
 
 *Each description is one line in the table; open the repository for the full README, licence, and contribution guidelines.*

@@ -2953,3 +2953,9 @@ projects:
     description: >
       Generator of random examination documents based on random categorized topics · From [committers.top Greece](https://committers.top/greece.html) (maintainer **tsadimas**).
 
+
+  - title: BestPrice MCP
+    url: https://github.com/TheBestCo/bestprice-mcp
+    description: >
+      Official **BestPrice.gr** MCP server and agent plugin (Claude, Codex, Gemini CLI, Cursor): read-only product search,
+      current offers from Greek shops with delivered totals, and price history over a keyless remote endpoint. Apache-2.0.
