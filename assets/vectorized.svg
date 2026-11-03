@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-labelledby="hub-icon-title">
+  <title id="hub-icon-title">Greek Software Ecosystem</title>
+  <defs>
+    <linearGradient id="hub-stroke" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="hub-fill" x1="20" y1="12" x2="44" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded tile reads clearly as a favicon on any tab background -->
+  <rect width="64" height="64" rx="14" fill="#0f172a"/>
+  <!-- Hex ring: network / hub motif -->
+  <path
+    d="M32 13 L47.98 22.25 L47.98 40.75 L32 50 L16.02 40.75 L16.02 22.25 Z"
+    stroke="url(#hub-stroke)"
+    stroke-width="1.75"
+    stroke-linejoin="round"
+    opacity="0.55"/>
+  <!-- Spokes from center -->
+  <g stroke="url(#hub-stroke)" stroke-width="1.85" stroke-linecap="round" opacity="0.9">
+    <line x1="32" y1="32" x2="32" y2="15"/>
+    <line x1="32" y1="32" x2="47.98" y2="22.25"/>
+    <line x1="32" y1="32" x2="47.98" y2="40.75"/>
+    <line x1="32" y1="32" x2="32" y2="49"/>
+    <line x1="32" y1="32" x2="16.02" y2="40.75"/>
+    <line x1="32" y1="32" x2="16.02" y2="22.25"/>
+  </g>
+  <!-- Outer nodes -->
+  <circle cx="32" cy="15" r="3.25" fill="url(#hub-fill)"/>
+  <circle cx="47.98" cy="22.25" r="2.75" fill="#a5f3fc" opacity="0.95"/>
+  <circle cx="47.98" cy="40.75" r="2.75" fill="#a5f3fc" opacity="0.95"/>
+  <circle cx="32" cy="49" r="3.25" fill="url(#hub-fill)" opacity="0.9"/>
+  <circle cx="16.02" cy="40.75" r="2.75" fill="#a5f3fc" opacity="0.95"/>
+  <circle cx="16.02" cy="22.25" r="2.75" fill="#a5f3fc" opacity="0.95"/>
+  <!-- Central hub -->
+  <circle cx="32" cy="32" r="5.5" fill="url(#hub-fill)" stroke="#cffafe" stroke-width="1" opacity="0.98"/>
+</svg>
