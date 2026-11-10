@@ -173,3 +173,14 @@ entries:
     description: |
       **THE NXT CITY** operates move-in-ready **premium private offices** across central Athens (multiple buildings; contact for availability). Furnished team spaces rather than hot-desk coworking.
 
+
+  - kind: remote_hub
+    title: M97 Workspace
+    url: https://m97.gr/
+    google_maps_url: https://maps.app.goo.gl/sbyAotYtwRcBghyi7
+    lat: 40.51770668169637
+    lng: 21.268354910310673
+    location: Kastoria, Mitropoleos 97
+    tags: [coworking, meeting-rooms, offsites]
+    description: |
+      Modern private **coworking space** in the centre of Kastoria for focused work, private meetings, and team offsites—about 1h 45m from Thessaloniki.

@@ -182,6 +182,22 @@ Co-working and advocacy hub at Sokratous 29 (Omonia) with desks, meeting rooms, 
 
 ---
 
+## M97 Workspace
+
+**Website:** [https://m97.gr/](https://m97.gr/)
+
+**Google Maps:** [Open in Maps](https://maps.app.goo.gl/sbyAotYtwRcBghyi7)
+
+*Location:* Kastoria, Mitropoleos 97
+
+*Coordinates:* `40.51770668169637`, `21.268354910310673` (for the Workspaces map)
+
+**Tags:** `coworking`, `meeting-rooms`, `offsites`
+
+Modern private **coworking space** in the centre of Kastoria for focused work, private meetings, and team offsites—about 1h 45m from Thessaloniki.
+
+---
+
 To add a café or remote hub, see **[contributing.md](../contributing.md)** (*How to Contribute via Pull Request*).
 
 ---
