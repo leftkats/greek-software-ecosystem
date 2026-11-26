@@ -38,22 +38,6 @@
             } catch (e) { }
         })();
     </script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag("consent", "default", {
-            analytics_storage: "denied",
-            ad_storage: "denied",
-            ad_user_data: "denied",
-            ad_personalization: "denied",
-            wait_for_update: 500,
-        });
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R41TD0DEQB"></script>
-    <script>
-        gtag("js", new Date());
-        gtag("config", "G-R41TD0DEQB");
-    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{% block document_title %}{{ document_title }}{% endblock %}</title>
@@ -132,47 +116,7 @@
         {% endblock %}
     </div>
 
-    <div id="agtj-consent-banner" class="agtj-consent-banner fixed bottom-0 left-0 right-0 z-[95] pointer-events-none"
-        hidden role="region" aria-label="Analytics and cookie consent" aria-labelledby="agtj-consent-title"
-        aria-describedby="agtj-consent-desc">
-        <div
-            class="pointer-events-auto w-full border-t border-slate-200/90 dark:border-slate-700/90 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-[0_-8px_32px_-8px_rgb(15_23_42_/_0.12)] dark:shadow-[0_-8px_32px_-8px_rgb(0_0_0_/_0.45)]">
-            <div
-                class="max-w-6xl mx-auto px-4 py-4 sm:px-6 sm:py-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-                <div class="flex gap-3 min-w-0 sm:flex-1">
-                    <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5"
-                        aria-hidden="true">privacy_tip</span>
-                    <div class="min-w-0 space-y-2">
-                        <h2 id="agtj-consent-title"
-                            class="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">
-                            Analytics cookies
-                        </h2>
-                        <p id="agtj-consent-desc"
-                            class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                            We use Google Analytics to see how this site is used. That may involve cookies. The site
-                            works without them — choose what you prefer. See
-                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer"
-                                class="text-cyan-600 dark:text-cyan-400 underline underline-offset-2 hover:no-underline">Google’s
-                                privacy policy</a>.
-                        </p>
-                    </div>
-                </div>
-                <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 sm:gap-3 shrink-0">
-                    <button type="button" id="agtj-consent-reject"
-                        class="min-h-[2.75rem] rounded-xl border border-slate-300 dark:border-slate-600 px-4 py-2.5 text-xs font-mono uppercase tracking-wide text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
-                        Decline
-                    </button>
-                    <button type="button" id="agtj-consent-accept"
-                        class="min-h-[2.75rem] rounded-xl bg-cyan-600 hover:bg-cyan-500 dark:bg-cyan-600 dark:hover:bg-cyan-500 text-white px-4 py-2.5 text-xs font-mono uppercase tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
-                        Accept analytics
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     {% block body_scripts %}
-    <script src="{{ assets_base }}/js/analytics-consent.js"></script>
     <script src="{{ assets_base }}/js/site-chrome.js"></script>
     {% endblock %}
 </body>

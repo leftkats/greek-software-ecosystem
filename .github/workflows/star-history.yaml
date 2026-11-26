@@ -13,7 +13,6 @@ on:
 
 permissions:
   contents: write
-  metadata: read
 
 concurrency:
   group: star-history-${{ github.repository }}

@@ -64,7 +64,7 @@ jobs:
             done
             mkdir -p "${WORK}/assets/css" "${WORK}/assets/js" "${WORK}/assets/vendor/leaflet"
             cp "${GITHUB_WORKSPACE}/assets/css/index.css" "${WORK}/assets/css/"
-            cp "${GITHUB_WORKSPACE}/assets/js/analytics-consent.js" "${GITHUB_WORKSPACE}/assets/js/index.js" "${GITHUB_WORKSPACE}/assets/js/open-source-search.js" "${GITHUB_WORKSPACE}/assets/js/resources-search.js" "${GITHUB_WORKSPACE}/assets/js/workspaces-page.js" "${GITHUB_WORKSPACE}/assets/js/site-chrome.js" "${GITHUB_WORKSPACE}/assets/js/tailwind-config.js" "${WORK}/assets/js/"
+            cp "${GITHUB_WORKSPACE}/assets/js/index.js" "${GITHUB_WORKSPACE}/assets/js/open-source-search.js" "${GITHUB_WORKSPACE}/assets/js/resources-search.js" "${GITHUB_WORKSPACE}/assets/js/workspaces-page.js" "${GITHUB_WORKSPACE}/assets/js/site-chrome.js" "${GITHUB_WORKSPACE}/assets/js/tailwind-config.js" "${WORK}/assets/js/"
             cp -R "${GITHUB_WORKSPACE}/assets/vendor/leaflet/." "${WORK}/assets/vendor/leaflet/"
             cp "${GITHUB_WORKSPACE}/assets/og-image.png" "${GITHUB_WORKSPACE}/assets/hub-icon.svg" "${GITHUB_WORKSPACE}/assets/vectorized.svg" "${WORK}/assets/"
             (

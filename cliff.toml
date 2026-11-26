@@ -4,12 +4,13 @@
 [changelog]
 header = ""
 body = """
-{% for group, commits in commits | group_by(attribute="group") %}\
+{% for group, commits in commits | group_by(attribute="group") %}
 ### {{ group }}
-{% for commit in commits %}\
+
+{% for commit in commits %}
 - {{ commit.message | split(pat="\n") | first | trim }} ([`{{ commit.id | truncate(length=7, end="") }}`](https://github.com/leftkats/greek-software-ecosystem/commit/{{ commit.id }}))
-{%- endfor %}
-{% endfor %}\
+{% endfor %}
+{% endfor %}
 """
 trim = true
 

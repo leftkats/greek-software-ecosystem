@@ -29,22 +29,6 @@
     display: none !important;
 }
 
-.agtj-consent-banner:not([hidden]) {
-    animation: agtj-consent-in 0.4s ease-out;
-}
-
-@keyframes agtj-consent-in {
-    from {
-        opacity: 0;
-        transform: translateY(0.75rem);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .agtj-filter-panel {
     scrollbar-width: thin;
     scrollbar-color: rgb(148 163 184 / 0.7) transparent;
