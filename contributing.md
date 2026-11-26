@@ -2,6 +2,30 @@
 
 Thank you for wanting to improve this list! We love community contributions. To keep the repository organized, please follow these simple steps to add or update content.
 
+## Repository rules (read this first)
+
+**Edit YAML (or company files under `_data/`), not generated Markdown.** The site and `docs/*.md` files are built from `_data/`. If you only change a generated file (for example `docs/search-queries-and-resources.md`), the next `just readme`, `just generate`, or CI doc refresh will **drop your change** unless the matching YAML was updated.
+
+| You want to change… | Edit this (source) | Regenerate with | Also updates |
+| :--- | :--- | :--- | :--- |
+| Job boards / resource links | **`_data/queries.yaml`** | `just readme` or `just generate` | `docs/search-queries-and-resources.md`, **resources.html** |
+| Employers directory | **`_data/companies/*.yaml`** | `just generate` | `docs/engineering-hubs.md`, **job-search.html** |
+| Podcasts | **`_data/podcasts.yaml`** | `just readme` or `just generate` | `docs/greek-tech-podcasts.md`, **podcasts.html** |
+| Open source list | **`_data/open_source_projects.yaml`** | `just readme` | `docs/open-source-projects.md`, **open-source.html** |
+| Workspaces / cafés | **`_data/cafe_resources.yaml`** | `just generate` | `docs/remote-cafe-resources.md`, **workspaces.html** |
+| Readme prose, badges, development commands | **`_data/readme.yaml`** | `just readme` | **`README.md`**, `docs/development.md`, and other generated docs as applicable |
+
+**Do not edit by hand:** `README.md`, `docs/*.md` listed in [Generated Markdown](#generated-markdown-do-not-edit-by-hand) below, `_data/open_source_github_stats.yaml`, `_data/workable_counts.yaml` (unless you know the fetch workflow).
+
+**PR checklist for content changes**
+
+1. Change the **source** file under `_data/` (or add a company YAML).
+2. Run **`just readme`** and/or **`just generate`** locally when you can.
+3. Include **both** the YAML and the regenerated outputs in the same PR when outputs change (maintainers can regenerate if you cannot).
+4. Never commit **only** a generated `.md` change with no `_data/` update — that pattern breaks on the next build (see [commit 8e82ef6](https://github.com/leftkats/greek-software-ecosystem/commit/8e82ef63f7be2ff08f36483036dce886632eb244) for a job-board link added only in Markdown).
+
+**Validation:** PRs that touch `_data/**` run **`just check`** in CI (`.github/workflows/pr-validation.yaml`).
+
 ## Repository Structure
 
 This repository organizes its data under the `_data` directory. Below is a description of the files you can contribute to:

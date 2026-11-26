@@ -9,6 +9,8 @@ body:
       value: |
         For problems with the **live directory**, **readme**, **docs/development.md**, search-queries page, or build tooling.
 
+        **Contributing content?** Edit **`_data/`** YAML (e.g. **`queries.yaml`** for job boards), then run **`just readme`** / **`just generate`** — do not hand-edit generated **`docs/*.md`** only. See [contributing.md](https://github.com/leftkats/greek-software-ecosystem/blob/main/contributing.md#repository-rules-read-this-first).
+
   - type: dropdown
     id: area
     attributes:

@@ -1,6 +1,11 @@
+# SOURCE DATA — do not add job boards by editing docs/search-queries-and-resources.md
+# (that file is overwritten by generate_readme; changes without this YAML are lost on the next build).
+#
 # Sections render as ## headings in docs/search-queries-and-resources.md (generate_readme)
 # and as blocks on resources.html (generate_index).
 # Tips & Notes on that page come from _data/readme.yaml → footer.notes (same source as the readme).
+#
+# After editing: just readme  (or just generate)
 sections:
   - title: "Job boards, portals & search"
     queries:

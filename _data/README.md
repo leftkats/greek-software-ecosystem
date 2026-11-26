@@ -1,6 +1,12 @@
 # `_data`
 
-This directory holds **structured source data** for the Greek Software Ecosystem project. The static site, Markdown under **`docs/`**, and badges are built from these YAML files (plus the repo root `readme.yaml`).
+This directory holds **structured source data** for the Greek Software Ecosystem project. The static site, Markdown under **`docs/`**, and badges are built from these YAML files (plus **`readme.yaml`** in this folder).
+
+## Rules
+
+- **Always edit files here first** — not `docs/*.md` or root `README.md` (those are generated).
+- After YAML changes, run **`just readme`** and/or **`just generate`** and commit regenerated files in the same PR when possible.
+- See **[contributing.md → Repository rules](../contributing.md#repository-rules-read-this-first)** for the full source → output map.
 
 | Path | Purpose |
 | :--- | :--- |
