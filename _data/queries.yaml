@@ -43,6 +43,9 @@ sections:
       - name: "Jobs in Greece: Data Scientist jobs"
         url: https://www.jobs-greece.gr/JobAds/Data-Scientist-Jobs/all/EN/jobs-in-greece
         description: "Jobs in Greece — example category search for data scientist roles."
+      - name: "EuroJobs.ai: IT Jobs in Greece"
+        url: https://eurojobs.ai/jobs/countries/greece
+        description: "28,000+ IT jobs across Europe aggregated hourly from employers' own career pages (Greenhouse, Lever, Ashby, Workable, Personio and others). Filters for visa sponsorship, English-speaking teams, remote, and salary. Greece is one of the 22+ countries covered."
 
   - title: "Curated awesome lists (GitHub)"
     queries:

@@ -19,6 +19,7 @@ Hand-picked links for Greek (and broader remote) job hunting. Each entry include
 - [Glassdoor: Data Engineer jobs in Greece](https://www.glassdoor.com/Job/greece-data-engineer-jobs-SRCH_IL.0,6_IN100_KO7,20.htm) — Glassdoor listings for data engineers in Greece (reviews and salaries alongside listings).
 - [Elevate Greece: Startup job positions](https://elevategreece.gov.gr/el/theseis-ergasias/) — Official Elevate Greece portal — startup and innovation ecosystem job postings.
 - [Jobs in Greece: Data Scientist jobs](https://www.jobs-greece.gr/JobAds/Data-Scientist-Jobs/all/EN/jobs-in-greece) — Jobs in Greece — example category search for data scientist roles.
+- [EuroJobs.ai: IT Jobs in Greece](https://eurojobs.ai/jobs/countries/greece) — 28,000+ IT jobs across Europe aggregated hourly from employers' own career pages (Greenhouse, Lever, Ashby, Workable, Personio and others). Filters for visa sponsorship, English-speaking teams, remote, and salary. Greece is one of the 22+ countries covered.
 
 ## Curated awesome lists (GitHub)
 
