@@ -1,5 +1,6 @@
 # Regenerates README star-history charts via rust-star-history and commits them to assets/.
-# Requires repository secret STAR_HISTORY_TOKEN (fine-grained PAT: read-only Contents + Metadata).
+# Uses GITHUB_TOKEN by default. Optional secret STAR_HISTORY_TOKEN (PAT with repo read) if rate limits bite.
+# GitHub's stargazers API requires authentication (2026+); unauthenticated runs will not update charts.
 #
 # Schedule: 05:00 UTC daily. Manual: Actions → Star History → Run workflow.
 
@@ -12,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  metadata: read
 
 concurrency:
   group: star-history-${{ github.repository }}
@@ -26,9 +28,8 @@ jobs:
 
       - uses: Flux159/rust-star-history@v1.1.1
         id: chart
-        continue-on-error: true
         with:
-          token: ${{ secrets.STAR_HISTORY_TOKEN }}
+          token: ${{ secrets.STAR_HISTORY_TOKEN || github.token }}
           push: false
 
       - name: Publish charts to assets/
@@ -49,8 +50,3 @@ jobs:
             git commit -m "chore: update star history charts [skip ci]"
             git push
           fi
-
-      - name: Warn instead of failing
-        if: steps.chart.outcome == 'failure'
-        run: |
-          echo "::warning::Star history chart update failed (check STAR_HISTORY_TOKEN or transient GitHub rate limit); charts were not refreshed this run"

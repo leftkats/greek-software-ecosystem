@@ -39,7 +39,7 @@ CI runs this automatically on the 1st of each month (`.github/workflows/open-sou
 gh workflow run star-history.yaml
 ```
 
-Updates `assets/star-history.svg` and `assets/star-history-dark.svg` via [rust-star-history](https://github.com/Flux159/rust-star-history) (`.github/workflows/star-history.yaml`). Requires repository secret `STAR_HISTORY_TOKEN` (fine-grained PAT with read-only Contents + Metadata). Scheduled daily at 05:00 UTC; use **Actions → Star History → Run workflow** (or the command above) to refresh manually.
+Updates `assets/star-history.svg` and `assets/star-history-dark.svg` via [rust-star-history](https://github.com/Flux159/rust-star-history) (`.github/workflows/star-history.yaml`). Uses `GITHUB_TOKEN` in Actions; optional secret `STAR_HISTORY_TOKEN` (fine-grained PAT with read-only repo metadata) if you hit rate limits. Scheduled daily at 05:00 UTC; use **Actions → Star History → Run workflow** (or the command above) to refresh manually.
 
 ## Same checks as pull request validation
 
